@@ -1,0 +1,78 @@
+.align-center { text-align: center; }
+
+/*
+ * Containers
+ */
+
+div.split {
+  display: table; width: 100%;
+  >.left, >.right { display: table-cell; width: 50%; vertical-align: top; }
+  >.left { padding-right: 10px; }
+}
+
+div.split-70-30 {
+  @extend div.split;
+  >.left { width: 70%; }
+  >.right { width: 30%; }
+}
+
+div.split-250-side {
+  @extend div.split;
+  >.left { width: auto; }
+  >.right { width: 250px; }
+}
+
+#content div.split > div > :first-child { &, >* { margin-top: 0px; } }
+#content div.split > div > :last-child { &, >* { margin-bottom: 0px; } }
+
+div.slim { margin: 0 auto; min-width: 500px; width: 70%; }
+div.slim.fixed { margin: 0 auto; width: 500px; }
+div.micro { margin: 0 auto; width: 350px; }
+div.dialog {
+  margin: 40px auto; width: 500px; padding: 40px 10px;
+  background: white; @include border-radius(4px); text-align: center; 
+  @include gradient(#fff, #f0f0f0); font-size: 11pt;
+  @include shadow(0 0 4px $shadow10, 0 -2px 2px $blue-glow-10, 0 2px 2px $blue-glow-10);
+
+  #content & p.submit {
+    @include shadow(none);
+    background: transparent; text-align: center;
+    border: 0;
+  }
+}
+
+img.icon, span.icon {
+  vertical-align: middle; 
+  display: inline-block; width: 16px; height: 16px; margin-right: 5px;  
+}
+
+button, a.button {
+  @include button; @include button-metal;
+  &.black { @include button-black; }
+  &.blue { @include button-blue; }
+  &.small { @include button-small; }
+  &.micro { @include button-micro; }
+}
+
+/* Table */
+section.items table,
+section.table table {
+  width: 100%;
+
+  tr:last-child td { padding-bottom: 0; }
+  tr:first-child td { border-top: 0; padding-top: 0; }
+  td { padding: 10px 5px; border-top: dotted 1px #ddd; }
+  td:first-child { padding-left: 0; }
+  td:last-child { padding-right: 0; }
+  td.actions { width: 150px; text-align: right; }
+}
+
+td ul.actions { list-style-type: none; margin: 0; padding: 0; float: right; font-size: 8pt; line-height: 16px;
+  li { margin: 0; padding: 0; float: left; }
+  a { background: #ddd; color: #333; display: block; float: left; padding: 1px 9px; }
+  a { text-shadow: 1px 1px 0 $hilite30; @include shadow(1px 1px 0 $shadow20); }
+  a { border-left: solid 1px $hilite40; border-right: solid 1px $shadow10; }
+  li:first-child a { @include border-left-radius(8px); border-left: 0; }
+  li:last-child a { @include border-right-radius(8px); border-right: 0; }
+  a:hover { text-decoration: none; background: #888; color: white; text-shadow: 1px 1px 0 $shadow20; }
+}

@@ -1,0 +1,14 @@
+- content_for :title do
+  %h1
+    = model.title
+
+- content_for :toolbar do
+  %li
+    %a{:href => model.path(:new)}= "Create new"
+
+- content_for :body do
+  .slim
+    %section.items
+      %table
+        - model.each do |item|
+          != partial model.templates_for('list_item'), :item => item

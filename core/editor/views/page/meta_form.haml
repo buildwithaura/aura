@@ -1,0 +1,22 @@
+%section
+  -# if item.try(:renderable?)
+  -# %dl
+  -#   %dt
+  -#     URL:
+  -#   %dd
+  -#     %span.line= item.path
+  -#     - unless item.new?
+  -#       %br
+  -#       %a.ext.button.micro{:href => item.path} Visit
+  - if item.class.try(:subtyped?)
+    %dl
+      %dt Type:
+      %dd
+        %select#subtype_select.neutral{:name => 'editor[subtype]'}
+          != select_options(item.class.subtypes, item.subtype, :_id)
+    %dl
+      %dt
+        %dt Show:
+        %dd
+          != labeled_checkbox("Show in menus", 'editor[shown_in_menu]', item.shown_in_menu)
+

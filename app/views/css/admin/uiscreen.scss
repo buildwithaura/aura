@@ -1,0 +1,22 @@
+html { background-image: url(/images/admin/uiscreen-loader.gif); }
+html { background-image: none; }
+
+/* UIscreen */
+.uiscreen {
+  position: relative; background: transparent;
+  cursor: wait;
+}
+
+$height: 60px;
+
+.uiscreen#uiscreen-for-area {
+  background: fade-out(white, 0.5);
+  .uiscreen-spinner {
+    @include border-radius($height / 2);
+    @include shadow(0 0 10px $blue-glow-70, inset 0 0 2px $blue);
+    width: $height; height: $height;
+    background: #111 url(/images/admin/uiscreen-loader.gif) center center no-repeat;
+    position: absolute; top: 45%; left: 45%;
+    text-decoration: none;
+  }
+}

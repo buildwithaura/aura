@@ -1,0 +1,33 @@
+!!! 5
+%html{:class => browser.body_class}
+  %head
+    %meta(charset='UTF-8')
+    %title!= title ? "#{title} &mdash; Aura" : "Aura"
+    %link(rel='stylesheet' media='screen' type='text/css' href='/css/theme/reset.css')
+    %link(rel='stylesheet' media='screen' type='text/css' href='/css/theme/style.css')
+
+    - if @item.try(:meta_keywords)
+      %meta{:name => 'keywords', :value => @item.meta_keywords}
+    - if @item.try(:meta_description)
+      %meta{:name => 'description', :value => @item.meta_description}
+
+  %body{:class => body_class}
+
+    %header#top
+      %h3
+        %strong This is my site
+        %small Yes it is, and it's very very nice
+
+      %nav
+        %ul
+          - Aura.menu.each do |p|
+            - next unless p.try(:renderable?)
+            %li{:class => ('active' if !@item.nil? and @item.crumbs.include?(p))}
+              %a{:href => p.path}= p.menu_title
+
+    #all
+      - if content_for?(:content)
+        != yield_content(:content)
+      != yield
+
+    != admin_watermark

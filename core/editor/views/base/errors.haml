@@ -1,0 +1,10 @@
+- errors ||= []
+- if errors.any? and params[:no_save].nil?
+  .flash.validation-errors
+    %h3 Can't continue:
+    %ul
+      - errors.each do |field, errs|
+        - errs.each do |err|
+          %li
+            = field
+            = err

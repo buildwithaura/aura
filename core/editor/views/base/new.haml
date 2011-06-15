@@ -1,0 +1,36 @@
+- body_class 'form'
+
+- content_for :tabs do
+  != partial item.templates_for('tabs'), :item => nil, :model => model
+
+- content_for :nav do
+  - if parent.nil?
+    != yield_content_of 'admin/dashboard', :nav
+  - else
+    != yield_content_of item.templates_for('edit'), :nav, { :item => parent }
+
+
+- content_for :title do
+  %h1= "New %s" % [item.class.title]
+
+- content_for :toolbar do
+  %li
+    %a.black{:href => '#submit'} Save
+
+- content_for :body do
+  != partial item.templates_for('crumbs'), :item => parent, :new => true
+
+  != partial item.templates_for(:errors), :errors => item.errors
+
+  .slim
+    - unless parent.nil?
+      .message
+        This new page will be created under
+        %a{:href => parent.path(:edit)}<= parent
+        %span>= "."
+
+    %form{:action => action, :method => 'post' }
+      != partial item.templates_for(:form), :item => item
+      %p.submit
+        %button{:type => 'submit'}
+          %span Save

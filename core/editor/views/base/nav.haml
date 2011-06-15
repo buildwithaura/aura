@@ -1,0 +1,29 @@
+- items  ||= []
+
+-# Either parent or model will be given
+- parent ||= nil
+- model  ||= nil
+
+%nav
+  - unless model.nil?
+    %h3= model.title_plural
+
+  %ul
+    - items.each do |item|
+      %li{ :class => ('browse' if item.children.any?) }
+        != link_to(item.path(:edit)) do
+          != admin_icon('page')
+          = item.to_s
+
+        - if item.path(:new) == request.fullpath
+          %ul
+            %li.add
+              != link_to item.path(:new) do
+                != admin_icon('add')
+                = "New #{item.class.title.downcase}"
+
+    - unless model.nil?
+      %li.add
+        != link_to model.path(:new) do
+          != admin_icon('add')
+          = "New #{model.title.downcase}"

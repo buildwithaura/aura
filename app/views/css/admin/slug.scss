@@ -1,0 +1,78 @@
+section.crumbs {
+  .url .components {
+    padding: 0 10px;
+    strong { margin-right: 10px; display: inline-block; }
+    span { display: inline-block; color: #999; }
+    span.protocol { padding: 0 3px 0 0; }
+    span.slash { padding: 0 3px; color: #bbb; }
+    .this { color: $grey; font-weight: bold; }
+  }
+
+  // Black!
+  .url:hover .components,
+  .url.edit  .components {
+    * { color: #ddd; text-shadow: 1px 1px 0 #333; }
+    .this { color: white; font-weight: bold; }
+  }
+
+  // URL thing
+  .url {
+    @include ellipsis;
+    position: absolute; top: 0; right: -10px; z-index: 2;
+    font-size: 8pt;
+    color: $grey; text-shadow: 1px 1px 0 $hilite20;
+    margin-right: 10px;
+
+    input { display: none; }
+
+    cursor: pointer !important;
+  }
+
+  .url .actions {
+    @include non-list;
+    @include clearfix;
+    & { display: none; }
+    & { padding-bottom: 0px; padding-top: 0px; margin-top: 1px; }
+    li { display: inline; }
+    border-top: solid 1px $shadow20;
+    @include shadow(inset 0 1px 0 $hilite10);
+    a {
+      padding: 2px 15px 0 15px; text-shadow: 0 0 4px $shadow20;
+      line-height: 20px;
+      color: $blue;
+      border-left: solid 1px $hilite10; display: block; float: right;
+      &:hover {
+        @include gradient($blue, $blue * 0.8);
+        @include shadow(0 0 8px $blue-glow-70);
+        text-decoration: none; color: #eee; text-shadow: 1px 1px 0 $shadow20;
+      }
+    }
+    li:last-child a { border-left: 0; }
+  }
+
+  .url:hover, .url.edit {
+    @include border-radius(4px);
+    @include gradient(#444, #333);
+    @include shadow(0 0 4px $blue-glow-70);
+    @include border-top-radius(0);
+    border: solid 2px #333;
+    right: -12px; top: -2px;
+    text-align: right;
+    height: auto;
+    .actions { display: block; }
+  }
+
+  .url.edit {
+    .components { font-size: 9pt; }
+    .components span { color: #aaa; }
+    .actions, .this { display: none; }
+    input {
+      font-weight: bold; color: white;
+      display: inline-block;
+      border: 0; padding: 0; line-height: $height - 6px;
+      width: 150px; margin: 0;
+      &:focus { outline: 0; }
+      background: transparent;
+    }
+  }
+}

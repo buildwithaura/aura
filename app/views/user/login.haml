@@ -1,0 +1,33 @@
+- layout nil
+
+!!! 5
+%html(lang='en')
+  %head
+    %meta(charset='UTF-8')
+    %title Login
+    %link(rel='stylesheet' media='screen' type='text/css' href='/css/reset.css')
+    %link(rel='stylesheet' media='screen' type='text/css' href='/css/login.css')
+  %body
+    %h1 Login
+    %form{:method => 'post'}
+      - if flash_errors?
+        .flash.errors
+          %ul
+            - flash_errors.each do |msg|
+              %li= msg
+
+      - if flash_messages?
+        .flash.messages
+          %ul
+            - flash_messages.each do |msg|
+              %li= msg
+
+      %p
+        %label{:for => 'email'} Login:
+        %input#email{:type => 'text', :name => 'username', :value => (params[:email]||'')}/
+      %p
+        %label{:for => 'password'} Password:
+        %input#password{:type => 'password', :name => 'password', :value => (params[:password]||'')}/
+      %p.submit
+        %button{:type => 'submit'}
+          %span Login

@@ -1,0 +1,12 @@
+-# Parameters:
+-# item [nil or Model]
+-# model [Model class]
+
+- unless item.nil?
+  %ul
+    %li
+      != link_to item.path(:edit), "Editor"
+
+    - if item.try(:renderable?)
+      %li
+        != link_to item.path(:preview), "Preview"

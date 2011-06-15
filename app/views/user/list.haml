@@ -1,0 +1,11 @@
+!= extends :'admin/settings'
+
+- content_for! :title do
+  %h1
+    Users
+
+- content_for! :toolbar do
+  != yield_content_of :'base/list', :toolbar, { :model => model }
+
+- content_for! :body do
+  != yield_content_of :'base/list', :body, { :model => model }

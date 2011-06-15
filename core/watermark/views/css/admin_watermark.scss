@@ -1,0 +1,23 @@
+@import "compass/css3";
+@import "utilities";
+
+#admin_watermark {
+  @include border-top-radius(4px);
+
+  background: rgba(0,0,0,0.8); padding: 0; position: fixed; bottom: 0; left: 20px;
+  color: #aaa;
+  font-size: 8pt; line-height: 22pt; margin: 0; 
+  strong { font-weight: normal; }
+  ul, ul li { list-style-type: none; margin: 0; padding: 0; }
+  li { display: block; float: left; border-right: solid 1px $hilite10; }
+  li:last-child { border-right: 0; }
+  li a {
+    padding: 0; margin: 0; color: #7bd; font-weight: bold; display: block;
+    &:hover { background: $hilite10; }
+    text-decoration: none; 
+  }
+  li>span, li>a { padding-left: 8px; padding-right: 8px; }
+
+  opacity: 0.95;
+  &:hover { opacity: 1; }
+}

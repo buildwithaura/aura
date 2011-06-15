@@ -1,0 +1,13 @@
+@import "compass/css3";
+@import "admin/settings";
+
+body { font: 11pt/1.6 arial, sans-serif; background: white; color: #888; }
+#message { padding: 20px; width: 400px; margin: 80px auto 40px auto; text-align: center; }
+h1 { color: #333; text-align: center; line-height: 1.3; }
+h1, p { margin: 20px 0; }
+a.button {
+  @include button;
+  @include button-black;
+}
+p.action { margin: 30px 0; }
+

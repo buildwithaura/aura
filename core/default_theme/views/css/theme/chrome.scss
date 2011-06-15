@@ -1,0 +1,66 @@
+body { background: #7bd * 0.8; color: #eee; text-shadow: 1px 1px 0 $shadow10; }
+
+#top,
+#content { width: 760px; margin: 0 auto; }
+
+#top {
+  border-bottom: solid 1px $hilite20; padding: 20px 0 10px 0; overflow: hidden; 
+
+  h3 { margin: 0; padding: 0; float: left; }
+  h3 strong { display: block; color: #d8a; text-shadow: 1px 1px 0 $hilite20; }
+  h3 small { font-weight: normal; display: block; color: #cde; font-size: 8pt; }
+
+  nav {
+    float: right; margin-top: 10px;
+    ul { @include horiz-list; }
+    a {
+      display: block; margin-left: 12px; color: #adf * 1.2; padding: 1px 8px;
+      background: $hilite10;
+      @include border-radius(4px); @include shadow(1px 1px 0 $shadow10);
+    }
+    li.active a,
+    a:hover { background: #ddd; color: #333; text-shadow: 1px 1px 0 $shadow20; text-decoration: none; }
+    li a:hover { background: #eee; }
+  }
+}
+
+#content {
+  @include clearfix;
+
+  p { border-top: solid 1px $hilite20; padding-top: 10px; }
+  .back { width: 15%; float: left; }
+  .body { width: 50%; float: left; }
+  .nav { width: 30%; float: right; }
+  h1 { font-size: 23pt; margin: 50px 0 10px 0; }
+  h1.level-1 { font-size: 40pt; margin: 100px 0 30px 0; }
+}
+
+#content .back {
+  border-top: solid 1px $hilite20;
+  padding: 10px 0;
+  margin-top: 12px; 
+  margin-right: 15px;
+
+  a {
+    color: #adf * 1.2; font-weight: normal; 
+    span { display: block; font-size: 2em; margin: -3px 0 5px 0; }
+    &:hover { text-decoration: none; }
+  }
+}
+
+#content .crumbs {
+  border-bottom: solid 1px $hilite20;
+
+  ul { @include horiz-list; }
+  ul li:after { content: ' > '; float: left; display: block; padding: 10px 0; color: #7bd; }
+  a { padding: 10px; display: block; color: #adf * 1.2; float: left; font-weight: normal; }
+  ul li:first-child a { padding-left: 0; }
+  ul li:last-child:after { content: ''; }
+  ul li.active a { color: white; font-weight: bold; }
+}
+
+#content .nav {
+  ul { @include non-list; margin-top: 12px; }
+  a { border-top: solid 1px $hilite20; padding: 10px 0; color: #adf * 1.2; display: block; text-align: left; }
+}
+

@@ -1,0 +1,52 @@
+-# This view is used for a user's settings, editing users, and the welcome page.
+
+- action ||= ''
+- first  ||= false  # True if this is the user's first time.
+- options  = { :item => item, :action => action, :first => first }
+
+- if first
+  - area_class 'no-sidebar'
+
+- content_for :title do
+  - if first
+    %h1= "Welcome!"
+  - elsif current_user == @item
+    %h1= "User settings"
+  - else
+    %h1= "User settings for #{@item}"
+
+- content_for :tabs do
+  - unless first
+    != yield_content_of :'admin/settings', :tabs
+
+- content_for :nav do
+  - unless first
+    != yield_content_of :'admin/settings', :nav
+
+- content_for :toolbar do
+  - unless first
+    != yield_content_of :'base/edit', :toolbar, options
+
+- content_for :body do
+  != partial item.templates_for('errors'), :errors => item.errors
+
+  .slim.fixed
+
+    %form.ext{:action => action, :method => 'post' }
+      != partial item.templates_for(:form), options
+
+      %input{:type => 'hidden', :name => 'next', :value => R(:admin)}
+
+      - unless first
+        %p.align-center
+          You may also
+          %a{:href => item.path(:delete)} delete your account
+          if you need to.
+
+      %p.align-center
+        %br
+        %button.black{:type => 'submit'}
+          - if first
+            %span Continue
+          - else
+            %span Save

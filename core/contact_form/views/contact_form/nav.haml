@@ -1,0 +1,42 @@
+-# Either parent or model will be given
+- parent ||= nil
+- model  ||= nil
+- items  ||= nil
+
+-# If home page
+- unless items.nil?
+  %nav
+    %h3
+    %ul
+      - model.all.each do |item|
+        %li.browse
+          != link_to item.path(:responses) do
+            != admin_icon 'contact'
+            = item.to_s
+
+      %li.add
+        != link_to model.path(:new) do
+          != admin_icon('add')
+          = "New #{model.title.downcase}"
+
+- else
+
+  != admin_back_to_dashboard
+
+  %nav.crumbs
+    != link_to parent.path(:responses) do
+      != admin_icon 'contact'
+      = parent.to_s
+
+  %nav
+    %ul
+      %li
+        != link_to parent.path(:edit) do
+          != admin_icon 'generic'
+          = "Options"
+
+  %nav
+    %h3 Recent responses
+    %ul
+      %li.blank
+        No responses yet.

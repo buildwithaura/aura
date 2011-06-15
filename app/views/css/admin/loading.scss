@@ -1,0 +1,18 @@
+// The "loading..." message.
+#top #loader {
+  @include border-left-radius(2px);
+  @include shadow(-5px 0 20px #333, 0 0 2px $blue, inset -3px 0 3px $hilite20);
+  position: absolute; right: 0px; top: 7px;
+  background: $blue url(/images/admin/top-loader.gif) 85px center no-repeat;
+  opacity: 0.98;
+  padding: 7px 30px 7px 10px;
+  width: 70px; text-align: left;
+  color: white; text-shadow: 1px 1px 0 $shadow20;
+  line-height: $small; font-size: $small;
+
+  :hover { display: none; }
+}
+
+body.loading {
+  &, * { cursor: wait !important; cursor: wait; }
+}

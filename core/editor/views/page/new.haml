@@ -1,0 +1,26 @@
+- options = { :item => item, :parent => parent, :model => model }
+!= extends :'base/new', options
+
+- title "New: %s" % [ item.to_s ]
+
+- content_for! :body do
+  != partial item.templates_for('crumbs'), :item => parent, :model => model, :new => true
+  != partial item.templates_for('errors'), :errors => item.errors
+
+  %form{:action => action, :method => 'post' }
+    .split-250-side.meta
+      .left
+        - unless parent.nil?
+          .message
+            This new page will be created under
+            %a{:href => parent.path(:edit)}<= parent
+            %span>= "."
+
+        != partial item.templates_for(:form), options
+
+        %p.submit
+          %button{:type => 'submit'}
+            %span Save
+
+      .right
+        != partial item.templates_for(:meta_form), options

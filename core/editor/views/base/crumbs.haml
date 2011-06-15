@@ -1,0 +1,50 @@
+- model ||= nil
+- new ||= false
+
+%section.crumbs
+  %ul
+    - unless item.nil?
+      - item.crumbs.each do |crumb|
+        %li
+          %span!= "&rsaquo;"
+          - if crumb.try(:editable?)
+            %a{:href => crumb.path(:edit)}= crumb.to_s
+          - else
+            %strong= crumb.to_s
+
+    - if new
+      %li.new
+        %span!= "&rsaquo;"
+        %strong (Here)
+
+  - if item.try(:sluggable?) || model.try(:sluggable?)
+
+    .url
+      .components
+        %span.protocol http://
+        %span.host<>= request.env['HTTP_HOST']
+
+        - if item.try(:parent?)
+          - path = item.parent.path
+          - path.split('/').reject { |s| s.empty? }.each do |segment|
+            %span.slash<>= "/"
+            %span.path<>= segment
+
+        %span.slash<>= "/"
+        - if item
+          %span.this<>= (item.slug  if item)
+        - else
+          %span.this<>= "..."
+        %input{:type => 'text', :name => 'slug', :value => (item.slug  if item)}
+      %ul.actions.js
+        %li
+          %a.edit{:href => '#edit'} Edit
+        - if item.try(:renderable?)
+          %li
+            %a.ext{:href => item.path} Visit
+        - if item.try(:parent?) == false
+          %li
+            %a{:href => '#set-as-homepage'} Set as homepage
+
+
+

@@ -1,0 +1,42 @@
+- content_for :nav do
+  != yield_content_of :'admin/settings', :nav
+- content_for :tabs do
+  != yield_content_of :'admin/settings', :tabs
+
+- content_for :title do
+  %h1
+    Database
+
+- content_for :body do
+  .slim.fixed
+
+    %section
+      %h3 Load sample data
+      %p.align-center
+        Get started easily with sample data.
+        - if !Aura.site_empty?
+          Warning: this will delete all content in your site!
+
+      %form.ext{:method => 'post', :action => R(:admin, :settings, :database, :seed)}
+        %p.align-center
+          %button.small{:type => 'submit'} Load sample data
+
+    %section
+      %h3 Backup data
+      %p.align-center
+        You can download a latest backup of your data here.
+
+      %p.align-center
+        %a.button.small.ext{:href => '/admin/settings/database/backup.yml'} Download latest backup
+
+    %section
+      %h3 Reset data
+      %p.align-center
+        This will clear the database and everything on this site.
+        %a.ext{:href => 'javascript:$("#nuke").show();'} Click here
+        to do this.
+
+      %form.ext{:method => 'post', :action => R(:admin, :settings, :database, :flush)}
+        %p.align-center.hide#nuke
+          Are you sure you want to do this?
+          %button.black.small{:type => 'submit'} Nuke everything

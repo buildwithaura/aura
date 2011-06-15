@@ -1,0 +1,11 @@
+- unless item.class.form.nil?
+
+  -# Default field
+  - fieldset = item.class.form.fieldset(:default)
+  !~ fieldset.to_html(item)
+
+  -# Extra fields
+  - item.class.form.fieldsets.each do |fieldset|
+    - next if fieldset.default?
+    !~ fieldset.to_html(item)
+

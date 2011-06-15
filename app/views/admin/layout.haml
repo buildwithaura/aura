@@ -1,0 +1,76 @@
+!!! 5
+%html{:class => browser.body_class}
+  - unless request.xhr?
+    %head
+      %meta(charset='UTF-8')
+      %title!= title || "Aura"
+      != jquery
+
+      - admin_css.each do |css|
+        %link{:rel => 'stylesheet', :media => css[:media], :type => 'text/css', :href => css[:href]}
+
+  %body{:class => body_class}
+
+    - unless request.xhr?
+      %script{:type => 'text/javascript'}
+        :plain
+          document.body.className += 'js-on';
+          document.body.style.display = 'none';
+
+      %header#top
+        %h3
+          %a{:href => R(:admin)}
+            Aura
+          %a.view.ext{:href => '/', :target => 'preview'}
+            view site
+
+        - unless current_user.nil?
+          %nav#aux
+            %h4
+              Hello,
+              %a{:href => R(:user, :me, :edit)}= current_user.email
+            %ul
+              %li
+                %a{:href => R(:logout)} Logout
+
+    %nav#tabs
+      - if has_content?(:tabs)
+        != yield_content :tabs
+
+    %header#title
+      - if has_content?(:title)
+        .title-c
+          != yield_content :title
+
+      - if has_content?(:toolbar)
+        %nav#toolbar
+          %ul
+            != yield_content :toolbar
+
+    #area{:class => area_class}
+      - if flash_messages? or flash_errors?
+        #flash
+          %div
+            %ul
+              - flash_messages.each do |msg|
+                %li.success= msg
+              - flash_errors.each do |msg|
+                %li.error= msg
+
+
+      #content
+        - if has_content?(:body)
+          != yield_content :body
+        != yield
+
+    %aside#nav
+      .nav-c
+        != yield_content :nav
+
+    - unless request.xhr?
+      != jquery_ui
+      - if (settings.production? or params[:compress]) and params[:no_compress].nil?
+        %script{:type => 'text/javascript', :src => '/admin/script.js?%s' % [settings.admin_js.mtime.to_i]}
+      - else
+        != settings.admin_js.to_html
+

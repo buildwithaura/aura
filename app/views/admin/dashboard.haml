@@ -1,0 +1,46 @@
+-# content_for :title do
+  %h1 Welcome!
+
+- content_for(:nav) do
+  %nav.back
+  %nav.crumbs
+    != link_to R(:admin) do
+      = "Dashboard"
+
+  - Aura::Editor.roots.each do |model, items|
+    - next unless model.try(:show_on_sidebar?)
+    != partial model.templates_for('nav'), :items => items, :model => model
+
+  %nav
+    %h3 System
+    %ul
+      - Aura::Admin.menu.items.each do |item|
+        %li.browse
+          != link_to(item.href || '#') do
+            != admin_icon(item.icon || 'generic')
+            = item.name
+
+- content_for :body do
+  %center{:style => 'font-size: 20px; color: #aaa; padding: 30px 0;'}
+    Welcome!
+
+  - if Aura.site_empty?
+    .slim.fixed
+      %section.dialog
+        %h3 Let's get started!
+        %p
+          Dude, your site is empty. How about filling it up?
+          Here are some ways to do that:
+
+        %ul.actions
+          %li
+            %a.black.button{:href => R(:page, :new)} Create a new page
+            %form{:method => 'post', :action => R(:admin, :settings, :database, :seed)}
+              %button{:type => 'submit'} Load sample data
+
+
+
+
+  -# %a{:href => Aura::Models::Page.path(:list)} Manage pages
+  - 10.times do
+    %br

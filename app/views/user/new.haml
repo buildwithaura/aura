@@ -1,0 +1,25 @@
+- action ||= ''
+- options  = { :item => item, :action => action }
+
+!= extends :'admin/settings'
+
+- content_for! :title do
+  %h1 Create a new user
+
+- content_for! :toolbar do
+  != yield_content_of :'base/new', :toolbar, options
+
+- content_for! :body do
+  != partial item.templates_for('errors'), :errors => item.errors
+
+  .slim.fixed
+
+    %form.ext{:action => action, :method => 'post' }
+      != partial item.templates_for(:form), options
+
+      %input{:type => 'hidden', :name => 'next', :value => R(:admin)}
+
+      %p.align-center
+        %br
+        %button.black{:type => 'submit'}
+          %span Save

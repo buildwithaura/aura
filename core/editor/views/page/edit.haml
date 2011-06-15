@@ -1,0 +1,28 @@
+- area_class 'editable-title'
+- title "Edit: %s" % [ item.to_s ]
+- options = { :item => item }
+
+!= extends :'base/edit', options
+
+- content_for! :body do
+  != partial item.templates_for('crumbs'), :item => item
+
+  != partial item.templates_for('errors'), :errors => item.errors
+
+  %form{:action => action, :method => 'post' }
+    .split-250-side.meta
+      .left
+        != partial item.templates_for(:form), options
+
+        %p.submit
+          %span.right
+            %a{:href => item.path(:delete)} Delete this
+            - if item.try(:renderable?)
+              != "&nbsp; | &nbsp;"
+              %a{:href => item.path, :target => 'preview'} View this
+
+          %button{:type => 'submit'}
+            %span Save
+
+      .right
+        != partial item.templates_for(:meta_form), options

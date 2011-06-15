@@ -1,0 +1,22 @@
+html { background: white; }
+body { background: transparent; }
+html, body { height: 100%; }
+
+::selection, ::-moz-selection, ::-webkit-selection { background: $blue; color: white; }
+
+// .js-on is set when there's JavaScript support.
+// Hide the unneeded things when there's JS.
+//
+body:not(.js-on) #area .js { display: none; }
+body.js-on #area .no-js { display: none; }
+
+// Cursor
+* { cursor: default; }
+a, button { cursor: pointer; font-weight: bold; }
+
+// Firefox
+#nav, #tabs, #toolbar {
+  a:active, a:focus { outline: 0; }
+}
+
+.hide { display: none; }

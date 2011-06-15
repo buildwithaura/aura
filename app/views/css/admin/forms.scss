@@ -1,0 +1,309 @@
+/* Forms */
+form:not(.bypass) {
+
+  fieldset { margin: 10px 0 20px 0; border: 0; }
+
+  h3.legend {
+    @include border-radius(4px); 
+    @include gradient($slate-blue, saturate($slate-blue * 0.9, 10%));
+    @include shadow(0 1px 0 $shadow20, 0 0 1px $shadow40, inset 0 1px 0 $hilite20);
+    text-align: center;
+    padding: 5px 10px; margin: 10px 0;
+    font-size: 1.2em; color: $grey;
+    text-shadow: 1px 1px 0 $hilite40;
+  }
+
+  p.description {
+    color: $grey; text-shadow: 1px 1px 0 $hilite20; padding: 10px 10px;
+  }
+
+  p { margin: 10px 0; position: relative; }
+  p:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; border-bottom: 0; }
+
+  .label, label {
+    display: block; font-weight: bold;
+    line-height: 24px; color: #777;
+  }
+
+  .mock, textarea, input { @include input; @include box-sizing(border-box); width: 100%; }
+  textarea, .mock.textarea { height: 220px; }
+
+  // Mock controls for the form builder
+  .mock {
+    display: block;
+    background: $sidebar-color url(/images/admin/mock-bg.png);
+    &, &:hover { border: solid 1px #bbb !important; }
+  }
+  .mock:active {
+    background-color: $sidebar-color * 0.95;
+  }
+
+  p.long {
+    .mock.textarea,
+    textarea { height: 300px; }
+  }
+
+  /* "Hola! You are:" */
+  h2.greeting {
+    font-size: 13pt; text-align: center;
+    color: $slate; text-shadow: 1px 1px 0 $hilite20; 
+    margin: 0;
+  }
+
+  label.checkbox {
+    display: inline-block;
+    input { display: inline !important; width: auto !important; height: auto !important; }
+    span { display: inline; font-weight: normal; margin-left: 5px; }
+  }
+  p.submit {
+    @extend .message;
+    height: 35px; line-height: 35px; padding: 5px 15px 5px 10px;
+    margin: 20px 0;
+    & { text-align: left; @include clearfix; }
+    button { @include button; @include button-black; }
+    .right { float: right; }
+  }
+
+  /* Inline validation */
+  p.compact.error,
+  p.error {
+    input, &.focus input, input:focus {
+      border-color: $red;
+      @include shadow(0 0 3px $red,
+                      inset 0 0 5px fade-out($red, 0.6));
+    }
+  }
+
+  p .notice {
+    @include border-top-left-radius(8px);
+    height: 20px; line-height: 20px; overflow: hidden;
+    padding: 0 10px 0 24px; 
+    position: absolute; bottom: 0px; right: 0px;
+    color: white; text-shadow: 1px 1px 0 $shadow20;
+  }
+
+  p .notice {
+    @include shadow(0 0 3px $green);
+    background: $green url(/images/admin_icons/generic.png) 5px center no-repeat;
+  }
+
+  p.error .notice {
+    @include shadow(0 0 3px $red);
+    background: $red*0.8 url(/images/admin_icons/generic.png) 5px center no-repeat;
+  }
+
+  /* Overrides! :) */
+
+  /* No label */
+  p.no-label {
+    label { display: none; }
+  }
+
+  p.hide { display: none; }
+
+  p.center {
+    input, label { text-align: center; }
+  }
+
+  /* Title fields */
+  p.title {
+    input { font-size: 14pt; height: 45px; }
+  }
+
+  /* Compact fields: like slug, password, etc */
+  p.compact {
+    @include input;
+    @include clearfix;
+
+    height: auto;
+    min-height: $input-height;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 0; width: 100%;
+
+    label {
+      float: left; width: 30%;
+      @include box-sizing(border-box);
+      padding: 0 10px; overflow: hidden;
+      line-height: $input-height;
+    }
+
+    input, textarea {
+      &, &:hover, &:focus {
+        @include shadow(0); border: 0;
+        border-left: solid 1px #ddd;
+      }
+      float: left; width: 70%;
+    }
+
+    &.focus {
+      @include input-focus; background: #f6f6f6;
+      label {
+        text-shadow: 1px 1px 0 $hilite50;
+        background: fade-out($blue, 0.9); color: $blue * 0.7;
+      }
+    }
+  }
+
+  p.compact-top {
+    @extend p.compact;
+    margin-bottom: 0;
+    &, input {
+      @include border-bottom-radius(0);
+      @include border-top-radius(4px);
+    }
+  }
+
+  p.compact-bottom {
+    @extend p.compact;
+    margin-top: 0;
+    &, input {
+      border-top: 0;
+      @include border-top-radius(0);
+      @include border-bottom-radius(4px);
+    }
+  }
+
+  p.compact-middle {
+    @extend p.compact;
+    margin-top: 0; margin-bottom: 0;
+    &, input {
+      border-top: 0;
+      @include border-top-radius(0);
+      @include border-bottom-radius(0);
+    }
+  }
+}
+
+//
+// Wysiwyg
+//
+
+p.html textarea {
+  // Pseudo-hide it so that the 'flash of unstyled textareas' dont look so bad.
+  visibility: hidden;
+  margin-bottom: 24px;
+}
+
+div.wysiwyg {
+  @include input-base;
+  padding: 0;
+  overflow: hidden;
+  width: 100% !important;
+
+  // Edit HTML field
+  textarea {
+    visibility: visible;
+    margin-bottom: -8px;
+  }
+
+  ul.panel {
+    height: 20px; overflow: hidden;
+    background: white;
+    padding: 5px 4px 4px 4px;
+    border-bottom: solid 1px #e2e2e2;
+    @include gradient(#f7f7f7, #f4f4f4);
+    @include shadow(inset 0 1px 0 $hilite50);
+    @include border-top-radius(4px);
+
+    li { background: transparent; padding: 0 3px; }
+    li a.active,
+    li a { padding: 0; border: solid 1px transparent; background-color: transparent; }
+    li a:focus { outline: 0; }
+
+    // Fade
+    & { opacity: 0.9; }
+    li a { opacity: 0.2; }
+    a:not(.bold):not(.italic):not(.underline):not(.justifyLeft):not(.justifyCenter):not(.justifyRight):not(.justifyFull) { opacity: 0; }
+    li.separator { opacity: 0.0; }
+  }
+
+  iframe { margin: 0; width: 100% !important; }
+
+  textarea, textarea:focus, textarea:hover {
+    border: 0; @include shadow(none); background: transparent;
+  }
+}
+
+html:not(.webkit) p div.wysiwyg,
+p.focus div.wysiwyg {
+  background: white;
+
+  ul.panel { opacity: 1; border-color: #ddd; }
+  ul.panel li a { opacity: 0.9 !important; }
+  ul.panel li.separator { opacity: 0.5; }
+  &, li, a { @extend .animate-opacity; }
+}
+
+p.focus div.wysiwyg {
+  @include input-focus;
+}
+
+body.js-on #area.editable-title p.main-title { display: none; }
+
+
+.form-builder {
+  @include clearfix;
+  background: #f8f8f8;
+  border: solid 1px #ddd;
+  @include border-radius(4px);
+  padding: 0 10px;
+  h2 {
+    width: 27%; float: right; font-size: 1em;
+    margin-left: 3%;
+    color: $slate;
+    strong, em { display: block; }
+    strong { font-size: 10pt; }
+    em { color: #999; font-weight: normal; font-style: normal; font-size: $small; }
+  }
+  fieldset { width: 70%; float: left; }
+
+
+  p { position: relative; }
+  p .mock { cursor: move; }
+  p .toolbar {
+    position: absolute; bottom: 0px; right: 38%;
+    background: #333; padding: 2px;
+    @include border-top-radius(6px);
+    color: #ddd;
+    font-size: $small;
+    a { color: $blue; font-weight: normal; }
+    a:hover { text-decoration: none; }
+    span, a { padding: 0 5px; }
+
+    a.options, a.delete {
+      display: inline-block; width: 16px; text-indent: -9999px;
+      background: url(/images/admin_icons/settings.png) center -1px no-repeat;
+      &:hover { background-color: $blue; @include shadow(0 0 4px $blue-glow-70); }
+    }
+
+    a.delete {
+      background-image: url(/images/admin_icons/generic.png);
+      background-position: center 1px;
+    }
+  }
+
+  p .toolbar { display: none; }
+  p:hover .toolbar { display: block; }
+
+  input.label {
+    padding: 0 3px; height: 22px; background: transparent;
+    border: solid 1px transparent; @include shadow(none);
+    cursor: text;
+    margin-bottom: 3px;
+
+    &:hover {
+      @include shadow(none);
+    }
+    &:focus {
+      background: white; @include shadow(inset 0 2px 2px $shadow10);
+      border-color: #ccc;
+    }
+  }
+
+  p:hover input.label {
+    background: $hilite40;
+    border: solid 1px #ddd;
+    &:focus { background: white; border-color: #ccc; }
+  }
+}

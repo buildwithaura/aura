@@ -1,0 +1,16 @@
+!!! 5
+%style
+  != partial 'css/default_home_page', {}, { :view_formats => [ :scss ] }
+
+#message
+  %h1 Welcome!
+  %p
+    Your site is has no home page yet.
+    Let's fix that!
+    %br
+    Let's get started.
+
+  %p.action
+    - message = logged_in? ? "Go to admin" : "Login"
+    %a.button{:href => R(:login)}!= "#{message} &nbsp; &rsaquo;"
+  

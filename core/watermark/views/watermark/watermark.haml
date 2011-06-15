@@ -1,0 +1,16 @@
+%link(rel='stylesheet' media='screen' type='text/css' href='/css/admin_watermark.css')
+#admin_watermark
+  %ul
+    %li
+      %span
+        Hi there,
+        %strong>= current_user.email
+        !
+
+    %li
+      %a{:href => R(:admin), :target => '_top'} Admin
+
+    - unless @item.nil?
+      - if @item.try(:editable?)
+        %li
+          %a{:href => @item.path('edit'), :target => '_top'} Edit this page

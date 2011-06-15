@@ -1,0 +1,8 @@
+- unless item.nil?
+  %ul
+    %li
+      != link_to item.path(:responses), "Responses"
+    %li
+      != link_to item.path(:edit), "Options"
+    %li
+      != link_to item.path(:preview), "Preview"

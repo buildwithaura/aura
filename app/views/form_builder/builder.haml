@@ -1,0 +1,29 @@
+%input{:type => 'hidden', :name => name, :value => value}
+
+.form-builder
+  %h2
+    %strong The form
+    %em This is the form that will be presented to the visitors.
+
+  %fieldset
+    %p
+      %input.label{:value=>'Name'}
+      %span.mock.input{:type => 'text'}
+      %span.toolbar
+        %span.type Text field
+        %a.options Options
+        %a.delete Delete
+    %p
+      %input.label{:value=>'Email'}
+      %span.mock.input{:type => 'text'}
+      %span.toolbar
+        %span.type Text field
+        %a.options Options
+        %a.delete Delete
+    %p
+      %input.label{:value=>'Message'}
+      %span.mock.textarea
+      %span.toolbar
+        %span.type Text area
+        %a.options Options
+        %a.delete Delete

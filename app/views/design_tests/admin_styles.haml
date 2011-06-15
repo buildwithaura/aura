@@ -1,0 +1,58 @@
+- layout :'admin/layout'
+
+- content_for :title do
+  %h1 H1 Title
+
+.slim.fixed
+
+  / Section dialog
+  %section.dialog
+    %h3 Hello there
+    %p So and so
+
+    %ul.actions
+      %li
+        %a.button Do something
+        %a.button Something else
+
+
+.slim
+  %section
+    %h3 This is a section
+    %p with something.
+
+  %section.message
+    This page has a message here.
+
+.slim
+  %section.table
+    %table
+      - 5.times do
+        %tr
+          %td
+            Hi
+          %td.actions
+            %ul.actions
+              %li
+                %a Action one
+              %li
+                %a Two
+
+  / Buttons
+
+.slim.split
+  .left
+    %p
+      %a.button A button
+    %p
+      %a.black.button A black button
+    %p
+      %a.blue.button A blue button
+  .right
+    %p
+      %a.small.button A small button
+    %p
+      %a.small.black.button A small black button
+    %p
+      %a.small.blue.button A small blue button
+

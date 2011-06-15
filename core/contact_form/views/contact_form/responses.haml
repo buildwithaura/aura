@@ -1,0 +1,20 @@
+-# Inherit
+!= partial :'base/edit', :item => item, :action => ''
+
+- title "%s - Responses" % [ item.to_s ]
+
+- content_for! :nav do
+  != partial item.templates_for('nav'), :parent => item, :model => item.class
+
+- content_for! :title do
+  %h1
+    = item.to_s
+    %em Responses
+
+- content_for! :toolbar do
+  != ""
+
+- content_for! :body do
+  .fixed
+    %div.dialog
+      There are no responses yet.

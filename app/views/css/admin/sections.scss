@@ -1,0 +1,79 @@
+h3.bar {
+    margin: 0; padding: 2px 10px;
+    font-size: 9pt; 
+    line-height: 16pt; 
+    @include gradient(#eee, #ddd);
+    text-shadow: 1px 1px 0 $hilite20;
+    border: solid 1px #ccc;
+    @include border-radius(4px);
+    @include shadow(0 2px 0 $shadow10, inset 0 1px 0 $hilite50);
+}
+
+section {
+  margin: 20px 0;
+  &:first-child { &, :first-child { margin-top: 0; } }
+  h2, h3 { @extend h3.bar; }
+}
+
+.message {
+  @include border-radius(2px); @include shadow(0 0 2px #aaa);
+  margin: 10px 0; background: $slate-blue; padding: 5px 10px;
+  text-align: center;
+  text-shadow: 1px 1px 0 $hilite40;
+  color: #505863;
+}
+
+@mixin reset { background: transparent; @include shadow(none); border: 0; margin: 0; padding: 0; }
+
+section.dialog {
+  @extend .message;
+  padding: 30px;
+  h3, p { margin: 0; }
+  h3 { @include reset; font-size: 16pt; line-height: 1.5;  }
+  p { font-size: 11pt; }
+  p.action { margin: 10px 0; }
+  form { display: inline; }
+  ul.actions {
+    @include non-list;
+    & { display: block; margin-top: 30px; }
+    li { display: block; margin: 10px 0 0 0; }
+    .button, button { margin: 0 10px; }
+  }
+}
+
+section.crumbs {
+  $height: 26px;
+
+  #content & { margin: -10px 0px 10px 0px; }
+
+  @include gradient($sidebar-hicolor * 1.05, $sidebar-color * 1.05);
+  @include shadow(inset 0 1px 0 $hilite10);
+  @include border-bottom-radius(4px);
+
+  border: solid 1px #ccc; position: relative;
+  border-top: 0;
+  height: $height; @include clearfix;
+  line-height: $height;
+
+  // The actual crumbs
+  >ul {
+    @include horiz-list; float: left;
+
+    & {
+      padding-left: 35px;
+      background: url(/images/admin_icons/home-12.png) 10px center no-repeat;
+   }
+
+    li { overflow: hidden; }
+    a, strong {
+      padding: 0 10px;
+      color: $charcoal; text-shadow: 1px 1px 0 #eee;
+      font-size: $x-small;
+      float: left;
+    }
+    span { color: $charcoal * 1.4; font-size: 20px; float: left; line-height: $height; }
+    a:hover { text-decoration: none; color: $blue * 0.7; }
+
+    .new strong { font-weight: normal; }
+  }
+}

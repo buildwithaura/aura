@@ -1,0 +1,8 @@
+-# Inherit
+!= extends 'base/edit', :item => item, :action => action
+
+- area_class 'editable-title'
+
+- content_for! :nav do
+  != partial :'contact_form/nav', :parent => item
+

@@ -1,0 +1,29 @@
+- action ||= ''
+- first  ||= false  # True if this is the user's first time.
+- options  = { :item => item, :action => action, :first => first }
+
+- area_class 'no-sidebar'
+
+- content_for :title do
+  %h1= "Welcome!"
+
+- content_for :body do
+  .slim.fixed
+    %form.ext{:action => action, :method => 'post' }
+      != partial item.templates_for(:form), options
+
+      %input{:type => 'hidden', :name => 'next', :value => R(:admin)}
+
+      - unless first
+        %p.align-center
+          You may also
+          %a{:href => item.path(:delete)} delete your account
+          if you need to.
+
+      %p.align-center
+        %br
+        %button.black{:type => 'submit'}
+          - if first
+            %span Continue
+          - else
+            %span Save

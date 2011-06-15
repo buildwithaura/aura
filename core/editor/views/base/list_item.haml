@@ -1,0 +1,7 @@
+%tr
+  %td
+    %a{:href => item.path('edit')}
+      = item
+  %td.actions
+    %ul.actions
+      != partial item.templates_for('list_actions'), :item => item

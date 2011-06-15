@@ -1,0 +1,136 @@
+@import "compass/css3";
+@import "utilities";
+
+$blue: #3ea9df;
+$blue-glow: rgba(62, 169, 223, 0.4);
+$blue-glow-00: rgba(62, 169, 223, 0);
+$blue-glow-10: rgba(62, 169, 223, 0.1);
+$blue-glow-20: rgba(62, 169, 223, 0.2);
+$blue-glow-40: rgba(62, 169, 223, 0.4);
+$blue-glow-70: rgba(62, 169, 223, 0.7);
+
+$grey: #666;
+$red: #dd9099 * 1.1;
+$green: #597;
+
+$top-color: #292929;
+$top-hicolor: $top-color * 1.3;
+
+$slate: saturate(#e0e2e6 * 0.5, 20%);
+$slate-blue: #e0e2e6;
+
+// For dark backgrounds
+$charcoal: desaturate($slate, 17%);
+
+$sidebar-hicolor: #d9d9dd;
+$sidebar-color:   #cacbd0;
+
+/* Dimentions */
+
+$top-height: 40px;
+
+$tab-height: 26px;
+
+/* Title */
+$title-height: 40px;
+$tool-button-height: 30px;
+
+$x-small: 7.5pt;
+$small: 8.5pt;
+$medium: 9pt;
+
+@mixin glow {
+  @include shadow(0 0 4px $blue-glow, inset 0 0 2px $blue);
+}
+
+@mixin button {
+  @include border-radius($tool-button-height / 2);
+  display: inline-block; border: 0;
+  color: white; text-shadow: 1px 1px 0 $shadow10;
+  padding: 0 30px;
+  height: $tool-button-height; overflow: hidden; 
+  line-height: $tool-button-height + 1px;
+  font-size: $medium; 
+
+  &:hover { text-decoration: none; }
+}
+
+@mixin button-metal {
+  @include gradient(#eee, #d4d4d4);
+  @include shadow(inset 0 1px 0 $hilite10, 0 1px 1px $shadow20, 0 0 1px $shadow10);
+  color: #555; text-shadow: 1px 1px 0 $hilite20;
+
+  &:hover { @include glow; }
+}
+
+@mixin button-blue {
+  @include gradient($blue, $blue * 0.9);
+  color: white; text-shadow: 1px 1px 0 $shadow10;
+
+  &:hover {
+    @include gradient($blue * 0.98, $blue * 0.88);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+@mixin button-black {
+  @include gradient(#555, #333);
+  @include shadow(0 0 4px $blue, inset 0 0 4px $blue);
+  color: white; text-shadow: 1px 1px 0 $shadow20; 
+  font-weight: bold; text-decoration: none;
+
+  :hover {
+    @include gradient(#666, #333);
+    color: white;
+  }
+}
+
+@mixin button-small {
+  padding: 0 15px; line-height: 22px; height: 22px; font-size: 9pt;
+}
+
+@mixin button-micro {
+  padding: 0 35px; line-height: 16px; height: 16px; font-size: 7pt; text-transform: uppercase;
+}
+
+$input-height: 38px;
+
+@mixin input-focus {
+  outline: 0;
+  @include shadow(0 0 4px $blue-glow-20,
+                  0 0 2px $blue-glow-70,
+                  inset 0 0 12px $blue-glow-20);
+  border-color: $blue-glow * 0.7;
+  background: white;
+}
+
+@mixin input-hover {
+  border-color: $blue-glow * 1.1;
+  @include shadow(inset 0 0 1px $hilite50,
+                  inset 0 2px 2px $shadow05,
+                  0 0 3px $blue-glow-20);
+}
+
+@mixin input-base {
+  @include border-radius(2px);
+  @include shadow(inset 0 0 1px $hilite50,
+                  inset 0 2px 2px $shadow05);
+  @include box-sizing(border-box);
+  background: #fdfdfd;
+  border: solid 1px #ccc;
+}
+
+@mixin input {
+  @include input-base;
+  width: 488px; padding: 8px 8px;
+  height: $input-height;
+
+  &:hover { @include input-hover; }
+  &:focus { @include input-focus; }
+}
+
+.animate-opacity {
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+}

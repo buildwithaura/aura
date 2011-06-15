@@ -1,0 +1,43 @@
+- first ||= false
+
+%br
+%br
+
+%fieldset
+  - if item == current_user
+    %h2.greeting Hola! Your login email is:
+  - else
+    %h2.greeting Email:
+
+  %p{:class => 'title no-label center assert required'}
+    %input#field_email{:type => 'text', :name => 'editor[email]', :value => item.email}
+
+  - if first
+    %p.description.align-center
+      Feel free to change it if you wish. Now enter a good password below,
+      twice. We'll get you started with your site right after!
+
+  - elsif !item.new?
+    %p.description.align-center
+      If you would like to change your password, enter a new one below, twice.
+      Otherwise, leave these blank to leave your password as it is.
+
+  - else
+    %p.description.align-center
+      Enter the user's initial password below.
+
+  - if item.new?
+    %p{:class => "compact assert required", :'data-min-length' => 5 }
+      %label{:for => 'field_password'} Password:
+      %input#field_password{:type => 'text', :name => 'editor[password]'}
+
+  - else
+    - required = ('present'  if @first)
+
+    %p{:class => "compact assert matches-next #{required}", :'data-min-length' => 5 }
+      %label{:for => 'field_password'} Password:
+      %input#field_password{:type => 'password', :name => 'editor[password]'}
+
+    %p{:class => "compact assert matches-previous #{required}", :'data-min-length' => 5 }
+      %label{:for => 'field_password_confirmation'} Confirm:
+      %input#field_password_confirmation{:type => 'password', :name => 'editor[password_confirmation]'}

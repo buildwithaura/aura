@@ -1,0 +1,38 @@
+- title "Settings"
+
+- content_for :title do
+  %h1 Aura Settings
+
+- content_for :nav do
+
+  != admin_back_to_dashboard
+
+  %nav.crumbs
+    != link_to R(:admin, :settings) do
+      != admin_icon :settings
+      = "Settings"
+  %nav
+    %ul
+      -# TODO: admin_submenu('settings')
+      - Aura::Admin.menu.get('settings').items.each do |item|
+        %li{:class => ('browse' if item.items.any?)}
+          != link_to (item.href || '#') do
+            != admin_icon (item.icon || 'generic')
+            = item.name
+
+- content_for :tabs do
+  %ul
+    %li
+      != link_to R(:admin, :settings) do
+        Settings
+
+    - Aura::Admin.menu.get('settings').items.each do |item|
+      %li{:class => ('browse' if item.items.any?)}
+        != link_to (item.href || '#') do
+          = item.name
+
+- content_for :body do
+  Stuff go here
+  - 10.times do
+    %br
+

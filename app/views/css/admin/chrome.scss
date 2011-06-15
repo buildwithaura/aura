@@ -1,0 +1,208 @@
+/*
+ *
+ * Layout
+ *
+ */
+
+body {
+  #content { width: auto; min-width: 500px; }
+}
+
+/*
+ * The top bar
+ */
+
+#top {
+  height: $top-height; line-height: $top-height; overflow: hidden; 
+  background: $top-color; color: #ddd; padding: 0 10px;
+  @include gradient($top-hicolor, $top-color);
+
+  h3 {
+    position: absolute; top: 7px; left: 5px;
+    margin: 0; padding: 0; float: left;
+    width: 165px; position: relative;
+    a { color: #eee; padding: 0; display: block; float: left; font-size: 12pt; text-shadow: 0 0 4px $blue-glow-70; }
+    -webkit-transition-property: top, left;
+    -webkit-transition-duration: 0.2s, 0.2s;
+  }
+
+  h3 a.view {
+    display: block; float: right;
+    position: relative; top: -1px;
+    @include gradient(#eee, #d0d0d0); @include border-radius(10px);
+    padding: 0 10px; line-height: 20px; height: 18px; overflow: hidden; 
+    font-size: 8pt;  font-weight: bold; color: #333;
+    text-shadow: 1px 1px 0 $hilite50;
+    margin: (($top-height - 16px)/2) 0px;
+    text-transform: uppercase; 
+
+    &:hover {
+      text-decoration: none; @include gradient(#fafafa, #d9d9d9);
+      @include shadow(inset 0 0 3px $blue, 0 0 4px $blue);
+      color: $blue * 0.6;
+    }
+  }
+}
+
+body.no-sidebar #top {
+  h3 { top: -1px; }
+}
+
+#aux {
+  float: right; font-size: 8pt; color: #888;
+
+  h4 {
+    float: left; font-weight: normal; font-size: 1em;
+    margin: 0; padding: 0; margin-right: 20px;
+    a { color: white; }
+    a:hover { color: white; text-decoration: underline; }
+  }
+  strong { color: #ccc; font-weight: normal; }
+  ul { @include horiz-list; float: left; }
+  a {
+    color: $blue; font-weight: normal;
+    &:hover { color: $blue * 1.1; }
+  }
+}
+
+/*
+ * Tabs
+ */
+
+#tabs {
+  position: absolute; top: ($top-height - $tab-height); left: 200px;
+  z-index: 1;
+  ul { @include horiz-list; }
+  a, span {
+    @include border-top-radius(2px);
+    font-size: $small;
+    display: block; 
+    padding: 0 30px 0 10px; margin-right: 5px;  
+    color: #ddd; text-shadow: 1px 1px 0 $shadow20; 
+    @include gradient(#666, #555);
+    height: $tab-height; line-height: $tab-height; 
+    @include shadow(inset 0 1px 0 #7a7a7a);
+    &:hover { text-decoration: none; }
+  }
+  a:hover { @include gradient(#6a6a6a, #606060); color: #eee; }
+
+  li.active a, li.active span,
+  a.active, span.active {
+    cursor: default;
+    background: white; color: $grey; text-shadow: 1px 1px 0 $shadow10;
+    @include shadow(inset 0 1px 1px $blue-glow-40);
+  }
+}
+
+/*
+ * Title
+ */
+
+#title {
+  @include gradient(#fff, #f7f7f7);
+  border-bottom: solid 1px #ccc; 
+  margin: 0;
+  padding: 10px; text-align: left; @include clearfix;
+  @include shadow(2px 0 4px $shadow10, inset 0 -1px 0 $hilite30, inset 0 -1px 2px $blue-glow-20);
+  height: $title-height + 10px; overflow: hidden;
+
+  .title-c { float: left; }
+  h1, input {
+    color: $blue; font-size: 17pt;
+    height: $title-height - 10px;
+    line-height: $title-height - 10px; margin: 0;
+    font-family: $reset-heading-font;
+    text-shadow: 1px 1px 0 $hilite50;
+  }
+
+  h1 em {
+   font-weight: normal; color: #aaa; font-style: normal;
+   &:before { content: '/'; color: #ddd; margin-right: 8px; }
+  }
+
+  input {
+    width: 500px;
+    @include border-radius(4px);
+    margin: -5px;
+    background: transparent; padding: 5px; border: 0; font-weight: bold; cursor: text;
+    &:focus { outline: 0; }
+  }
+
+  &:hover input,
+  input:focus { background: fade-out($blue-glow-20, 0.08); @include shadow(1px 1px 0 fade-out($blue, 0.7)); }
+}
+
+body.fixed-layout {
+  overflow: hidden;
+
+  #nav, #title, #area { @include box-sizing(border-box); }
+  #nav { position: absolute; left: 0; top: $top-height; width: 200px; }
+  #title { position: absolute; }
+  #area { position: absolute; }
+}
+
+/*
+ * Toolbar
+ */
+
+#toolbar {
+  position: absolute; right: 10px; top: 10px; 
+  color: $grey;
+  height: $title-height - 10px;
+  line-height: $title-height - 10px;
+  ul { @include horiz-list; }
+  a {
+    margin-left: 10px; 
+
+    @include button;
+    @include button-metal;
+    &:hover { text-decoration: none; }
+    &:hover { @include glow; }
+    &:active { @include button-black; }
+  }
+
+  a.blue { @include button-blue; }
+  a.black { @include button-black; }
+}
+
+/*
+ * Area
+ */
+
+#area {
+  background: #eee; padding: 10px;
+  overflow-y: auto; overflow-x: hidden;
+  //@include shadow(2px -2px 2px $blue-glow-70);
+}
+#area.full #content { margin: -10px -10px 0 -10px; }
+
+#content {
+  margin: 0 auto;
+}
+
+/*
+ * Flash message
+ */
+
+#flash {
+  @include border-bottom-radius(4px);
+  @include gradient(fade-out($blue, 0.2), fade-out($blue * 1.2, 0.8));
+  margin: -11px -10px 10px -10px;
+  padding: 5px 10px; text-align: center;
+  @include shadow(0 0 4px fade-out(#adf, 0.1), inset 0 -1px 0 $hilite30, inset 0 2px 4px $shadow10);
+  color: white; text-shadow: 1px 1px 0 $shadow20;
+  border-bottom: solid 1px $blue * 1.1;
+
+  ul { @include non-list; }
+}
+
+/* Errors */
+#content .validation-errors {
+  @include gradient(#fee, #fee * 0.95);
+  margin: -10px -10px 20px -10px; padding: 10px;
+  border-bottom: solid 1px #fee * 0.9;
+  @include shadow(inset 0 1px 0 #fee*1.05, 0 2px 3px $shadow05);
+  text-shadow: 1px 1px 0 $hilite30; 
+  h3 { margin: 0; padding: 0; color: #855; }
+  ul { @include non-list; }
+}

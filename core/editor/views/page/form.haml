@@ -1,0 +1,21 @@
+-# The default fields of the subtype
+- unless item.subform.nil?
+  !~ item.subform.fieldset(:default).try(:fields_html, item)
+
+-# Default fields
+- fieldset = item.class.form.fieldset(:default)
+!~ fieldset.to_html(item)
+
+-# The extra fieldset of the subtype
+- unless item.subform.nil?
+  !~ item.subform.fieldset(:extra).try(:fields_html, item)
+
+-# Other fields of the subtype
+- unless item.subform.nil?
+  - item.subform.fieldsets.each do |fieldset|
+    !~ fieldset.to_html(item) unless (fieldset.default? or fieldset.id == :extra)
+
+-# Other fields
+- item.class.form.fieldsets.each do |fieldset|
+  !~ fieldset.to_html(item) unless fieldset.default?
+

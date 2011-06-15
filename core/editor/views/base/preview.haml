@@ -1,0 +1,28 @@
+- area_class 'full no-sidebar'
+
+- content_for :title do
+  %a.button{:href => item.path(:edit)}
+    Back
+
+- content_for :toolbar do
+  %li
+    %span You are seeing a preview.
+  %li
+    %a.ext{:href => item.path} View live
+
+- content_for :tabs do
+  != partial item.templates_for(:tabs), :item => item
+
+- content_for :nav do
+  != yield_content_of item.templates_for(:edit), :nav, { :item => item, :action => '' }
+
+%style
+  :plain
+    iframe { width: 100%; border: 0; height: 100%; }
+
+#iframe_container
+%script
+  :plain
+    window.setTimeout(function () {
+    jQuery('#iframe_container').html('<iframe src=\'#{item.path}\'>');
+    }, 200);

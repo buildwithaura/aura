@@ -1,0 +1,32 @@
+- layout 'layout'
+- title item.to_s
+
+#content
+  .crumbs
+    %ul
+      %li
+        %a{:href => '/'}!= "&hearts;"
+      - item.crumbs.each do |p|
+        %li{:class => ('active' if @item == p)}
+          %a{:href => p.path}= p
+
+  %h1{:class => 'level-3' }
+    Porfolio:
+    = item.to_s
+
+  .back
+    - if item.parent?
+      %a{:href => item.parent.path}
+        %span!= "&laquo;"
+        Back to
+        %br
+        %strong= item.parent
+
+  .body
+    != item.body  if item.respond_to?(:body)
+  .nav
+    %ul
+      - item.children.each do |p|
+        - next unless p.try(:renderable?)
+        %li
+          %a{:href => p.path}= p

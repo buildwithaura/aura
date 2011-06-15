@@ -1,0 +1,60 @@
+- title "Edit: %s" % [ item.to_s ]
+
+- content_for :tabs do
+  != partial item.templates_for('tabs'), :item => item, :model => item.class
+
+- content_for :nav do
+  - if item.children.any?
+    - if item.parent.nil?
+      != admin_back_to_dashboard
+
+    - else
+      %nav.back
+        != link_to item.parent.path(:edit) do
+          != admin_icon('page')
+          = item.parent.to_s
+
+    %nav.crumbs
+      != link_to item.path(:edit) do
+        != admin_icon('page')
+        = item.to_s
+
+    != partial item.templates_for('nav'), :items => item.children, :parent => item
+
+  - else
+    - if item.parent?
+      -# Show the parent's menu
+      != yield_content_of item.templates_for(:edit), :nav, { :item => item.parent }
+
+    - else
+      -# Show the main menu
+      != yield_content_of 'admin/dashboard', :nav
+
+- content_for :title do
+  %h1= item
+
+- content_for :toolbar do
+  - if item.try(:parentable?)
+    %li
+      %a{:href => item.path(:new)} Create new
+  %li
+    %a.black{:href => '#submit'} Save
+
+- content_for :body do
+  != partial item.templates_for('crumbs'), :item => item
+
+  != partial item.templates_for(:errors), :errors => item.errors
+
+  .slim
+    %form{:action => action, :method => 'post'}
+      != partial item.templates_for(:form), :item => item
+
+      %p.submit
+        %span.right
+          %a{:href => item.path(:delete)} Delete this
+          - if item.try(:renderable?)
+            != "&nbsp; | &nbsp;"
+            %a{:href => item.path, :target => 'preview'} View this
+
+        %button{:type => 'submit'}
+          %span Save

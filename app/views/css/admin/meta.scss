@@ -1,0 +1,42 @@
+div.split.meta {
+  > .right {
+    @include gradient($sidebar-hicolor * 1.04, $sidebar-hicolor * 1.00);
+    @include border-radius(4px);
+    @include shadow(
+                1px 1px 0 $sidebar-hicolor * 0.95,
+                inset -1px 1px 0 $hilite10);
+    padding: 0 2px; height: 100%;
+  }
+}
+
+div.split.meta>.right {
+  dl {
+    @include clearfix;
+    border-bottom: solid 1px $sidebar-hicolor * 0.98;
+    padding: 10px 0px;
+    line-height: 16pt;
+    font-size: $small;
+    text-shadow: 1px 1px 0 $hilite20;
+
+    &:last-child { border-bottom: 0; @include shadow(none); }
+
+    .line { display: inline-block; @include ellipsis; height: 16pt; width: 100%; }
+    dt, dd { 
+      @include box-sizing(border-box);
+      padding: 0 10px; float: left;
+    }
+    dt {
+      width: 32%;
+      padding-right: 15px; 
+      text-align: right;
+      font-size: $small; font-weight: bold;
+      color: $slate;
+    }
+
+    dd { padding-left: 0; width: (100% - 32%); }
+
+    dd {
+      input, textarea, select { @include box-sizing(border-box); width: 100%; }
+    }
+  }
+}

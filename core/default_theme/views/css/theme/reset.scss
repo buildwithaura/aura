@@ -1,0 +1,34 @@
+/* Reset */
+div, dl, dt, dd, ul, ol, li, form, fieldset, input, blockquote, th, td, legend { margin: 0; padding: 0; }
+
+#content {
+  pre, p, blockquote,
+  h1, h2, h3, h4, h5, h6    { margin: 1em 0 1em 0; }
+  blockquote                { border-left: solid 2px #ccc; padding: 0 1em; margin-left: 0.2em; color: #888; }
+  h1                        { font-size: 1.4em; }
+  h2                        { font-size: 1.3em; }
+  h3                        { font-size: 1.2em; }
+  h4                        { font-size: 1.1em; }
+  h5                        { font-size: 0.9em; }
+  h6                        { font-size: 0.9em; }
+  ol, ul                    { margin-left: 2em; }
+}
+
+/* Body & wrapper */
+html, body                { margin: 0; padding: 0; }
+body, td, input, textarea { font-family: arial, helvetica, sans-serif; font-size: 1em; }
+body                      { font-size: 0.75em; line-height: 1.5; background: white; color: #333; }
+#all                      { margin: 0 auto; width: auto; position: relative; }
+
+input, textarea           { line-height: 1.4; }
+
+/* Links */
+a                         { color: #379; text-decoration: none; font-weight: bold; padding: 1px; }
+a:visited                 { color: #379; }
+a:hover                   { color: #379; text-decoration: underline; }
+a img                     { border: 0; }
+
+button                    { cursor: pointer; }
+
+/* HTML5 */
+header, footer, aside, section, article, nav { display: block; }
