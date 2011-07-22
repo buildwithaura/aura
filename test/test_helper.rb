@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 
-require File.expand_path('../../init.rb', __FILE__)
+require File.expand_path('../app.rb', __FILE__)
 
 def require?(what, gem=what)
   require what
