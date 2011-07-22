@@ -9,15 +9,11 @@ end
 
 root = lambda { |p=''| File.expand_path("#{p}", ENV['AURA_ROOT']) }
 
-# TODO: Get rid of this after removing jsfiles
-$:.unshift *Dir[root['vendor/*/lib']]
-
 require "sinatra/base"
 require "sinatra/support"
 require "rtopia"
 require "sequel"
 require "sinatra/content_for"
-require "jsfiles"
 require "pistol"
 require "json"
 require "yaml"

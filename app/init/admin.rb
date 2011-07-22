@@ -17,10 +17,18 @@ Aura::Admin.menu.tap { |m|
     :href => Rtopia.R(:user, :list)
 }
 
-path   = Main.root_path(%w(public js))
-files  = Dir["#{path}/jquery.*.js"]
-files += Dir["#{path}/lib.*.js"]
-files += Dir["#{path}/admin.js"]
-files += Dir["#{path}/admin.*.js"]
+Main.register Sinatra::CompressedJS
 
-Main.set :admin_js, JsFiles.new(files)
+path = Main.root_path(%w(public js))
+
+Main.serve_compressed_js :admin_js,
+  :prefix => '/js',
+  :root   => path,
+  :path   => '/admin/script.js',
+  :files  =>
+    Dir["#{path}/jquery.*.js"].sort +
+    Dir["#{path}/lib.*.js"].sort +
+    Dir["#{path}/admin.js"].sort +
+    Dir["#{path}/admin.*.js"].sort
+
+ 

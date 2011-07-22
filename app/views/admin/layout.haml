@@ -69,8 +69,5 @@
 
     - unless request.xhr?
       != jquery_ui
-      - if (settings.production? or params[:compress]) and params[:no_compress].nil?
-        %script{:type => 'text/javascript', :src => '/admin/script.js?%s' % [settings.admin_js.mtime.to_i]}
-      - else
-        != settings.admin_js.to_html
+      != settings.admin_js.to_html
 
