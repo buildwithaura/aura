@@ -5,8 +5,7 @@
 Aura is a Sinatra app. It's structure is however a little unique: the
 system is divided into little pieces called 'extensions'.
 
-All extensions are in `core/` and `extensions/`, the former hosting
-all the system extensions.
+All extensions are in `extensions/`.
 
 ## What's an extension?
 

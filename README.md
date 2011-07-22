@@ -30,7 +30,7 @@ The dir structure:
      |
      |  [App stuff]
      |- config/             Default config files
-     |- core/               Core extensions
+     |- extensions/         Core extensions
      |- public/             Public files
      |
 

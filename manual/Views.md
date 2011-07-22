@@ -42,7 +42,7 @@ Now create your partial in another file:
 
 View folders are at:
 
-   core/*/views/
    extensions/*/views/
+   app/views/
 
 (TODO: explain show() and MultiView)

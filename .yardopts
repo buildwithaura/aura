@@ -1,4 +1,4 @@
-core app
+extensions app
 -r app/manual/Index.md
 --exclude test
 --no-private

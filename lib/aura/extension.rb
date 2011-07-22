@@ -16,8 +16,8 @@ class Aura
   #   ext.info             #=> #<OStruct>
   #   ext.info.author
   #
-  #   ext.path             #=> ~/aura/core/base
-  #   ext.path('init.rb')  #=> ~/aura/core/base/init.rb
+  #   ext.path             #=> ~/aura/extensions/base
+  #   ext.path('init.rb')  #=> ~/aura/extensions/base/init.rb
   #
   #   Aura::Extension.active  # Active extensions (Array of #<Extension>)
   #   Aura::Extension.all     # All extensions (Array of #<Extension>)
@@ -63,8 +63,8 @@ class Aura
     #
     # Example:
     #
-    #   Aura::Extension['base'].path             #=> ~/aura/core/base
-    #   Aura::Extension['base'].path('init.rb')  #=> ~/aura/core/base/init.rb
+    #   Aura::Extension['base'].path             #=> ~/aura/extensions/base
+    #   Aura::Extension['base'].path('init.rb')  #=> ~/aura/extensions/base/init.rb
     #
     def path(*a)
       return @path  if a.empty?
@@ -140,7 +140,11 @@ class Aura
     # Returns all extensions (not just the ones loaded).
     def self.all
       return @all  unless @all.nil?
-      @all ||= Dir[Main.root_path('{core,extensions}/{base,*}')].uniq.map { |path| self.new(path) }.compact
+
+      paths  = Dir[Main.approot('extensions/*')]
+      paths += Dir[Main.root('extensions/*')]
+
+      @all ||= paths.uniq.map { |path| self.new(path) }.compact
     end
   end
 end
