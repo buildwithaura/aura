@@ -141,8 +141,7 @@ class Aura
     def self.all
       return @all  unless @all.nil?
 
-      paths  = Dir[Main.approot('extensions/*')]
-      paths += Dir[Main.root('extensions/*')]
+      paths = Main.extensions_path.map { |path| Dir["#{path}/*"] }.flatten
 
       @all ||= paths.uniq.map { |path| self.new(path) }.compact
     end
