@@ -10,6 +10,7 @@ class Aura
   autoload :Subtype,            "#{PREFIX}/aura/subtype"
   autoload :Seeder,             "#{PREFIX}/aura/seeder"
   autoload :Utils,              "#{PREFIX}/aura/utils"
+  autoload :Editor,             "#{PREFIX}/aura/editor"
 
   require "#{PREFIX}/aura/version"
 
