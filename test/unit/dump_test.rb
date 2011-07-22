@@ -7,7 +7,6 @@ class DumpTest < Test::Unit::TestCase
     assert dump.is_a?(Hash)
     assert dump.keys.include?(:settings)
     assert dump.keys.include?(:pages)
-    assert dump.keys.include?(:contact_forms)
 
     require 'yaml'
     yml = YAML::dump(dump)

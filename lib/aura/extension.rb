@@ -133,7 +133,6 @@ class Aura
     # Returns all names of the extensions that are loaded in the config.
     def self.active_names
       exts  = Array.new
-      exts += Main.core_extensions        if Main.respond_to?(:core_extensions)
       exts += Main.additional_extensions  if Main.respond_to?(:additional_extensions)
       exts
     end
