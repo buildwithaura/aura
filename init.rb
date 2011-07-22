@@ -6,8 +6,4 @@ ENV['APP_ROOT'] ||= File.dirname(__FILE__)
 
 $:.unshift *Dir[File.expand_path('../lib', __FILE__)]
 
-# Gems
-require "gemist"
-Gemist.setup
-
 require 'aura/app'

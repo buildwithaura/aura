@@ -11,6 +11,8 @@ class Aura
   autoload :Seeder,             "#{PREFIX}/aura/seeder"
   autoload :Utils,              "#{PREFIX}/aura/utils"
 
+  require "#{PREFIX}/aura/version"
+
   Model = Sequel::Model
 
   # @group Settings
