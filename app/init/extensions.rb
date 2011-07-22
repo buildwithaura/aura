@@ -8,7 +8,7 @@ seed_file = Main.approot('config/seed.yml')
 if File.exists?(seed_file) and !Aura::Models::Setting.table_exists?
   Aura.db_restore YAML::load_file(seed_file)
 
-# ..otherwise, setup the database: do migrations and put in sample data.
+# ..otherwise, setup the database: do migrations and put in fresh data.
 else
   Aura::Models.all.each { |m| m.seed }
 end

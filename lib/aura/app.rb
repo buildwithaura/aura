@@ -108,5 +108,10 @@ Dir[root['app/{models,helpers,routes}/**/*.rb']].each { |f| require f }
 # Extensions
 require root['app/init/extensions.rb']
 
+# Load app/
+if File.directory?(Main.approot('app'))
+  Aura::Extension.new(Main.approot('app')).load!
+end
+
 Main.set :port, ENV['PORT'].to_i  unless ENV['PORT'].nil?
 Main.run!  if ENV['APP_FILE'] == $0

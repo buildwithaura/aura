@@ -22,6 +22,10 @@ class Aura
   #   Aura::Extension.active  # Active extensions (Array of #<Extension>)
   #   Aura::Extension.all     # All extensions (Array of #<Extension>)
   #
+  # == Not-so-common
+  #
+  #   ext = Aura::Extension.new('/path/to/ext')
+  #
   class Extension
     attr_reader :name
 
