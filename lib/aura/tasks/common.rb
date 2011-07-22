@@ -15,10 +15,3 @@ class RakeStatus
     puts "\033[1;#{color}m  %-14s\033[0m %s" % [what, status]
   end
 end
-
-def syst(cmd)
-  RakeStatus.heading :run, cmd
-  system cmd
-  puts ""
-end
-
