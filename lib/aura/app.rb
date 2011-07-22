@@ -1,5 +1,11 @@
 ENV['AURA_ROOT'] ||= File.expand_path('../../../', __FILE__)
-ENV['APP_ROOT']  ||= ENV['AURA_ROOT']
+
+if ENV['APP_FILE']
+  ENV['APP_ROOT'] ||= File.dirname(ENV['APP_FILE'])
+else
+  ENV['APP_ROOT'] ||= ENV['AURA_ROOT']
+  ENV['APP_FILE'] ||= __FILE__
+end
 
 root = lambda { |p=''| File.expand_path("#{p}", ENV['AURA_ROOT']) }
 
@@ -103,4 +109,4 @@ Dir[root['app/{models,helpers,routes}/**/*.rb']].each { |f| require f }
 require root['app/init/extensions.rb']
 
 Main.set :port, ENV['PORT'].to_i  unless ENV['PORT'].nil?
-Main.run!  if __FILE__ == $0 || $RUN
+Main.run!  if ENV['APP_FILE'] == $0

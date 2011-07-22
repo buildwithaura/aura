@@ -1,6 +1,5 @@
 class Aura
-  VERSION = "0.0.1.pre1"
   def self.version
-    VERSION
+    "0.0.1.pre1"
   end
 end
