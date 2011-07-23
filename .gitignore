@@ -1,23 +1,6 @@
-# Mac OS
-.DS_Store
-
-# Textmate
-*.tmproj
-tmtags
-
-# Emacs
-*~
-\#*
-.\#*
-
-# VIM
-*.swp
-*.swo
-*.swn
-
-# Project (general)
 tmp
 .yardoc
 /doc
 .sass-cache
 .rvmrc
+Gemfile.lock

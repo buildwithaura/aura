@@ -1,17 +1,12 @@
 ENV['RACK_ENV'] = 'test'
 
+ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
+require 'bundler'
+Bundler.setup
+
 require File.expand_path('../app/init.rb', __FILE__)
-
-def require?(what, gem=what)
-  require what
-rescue LoadError => e
-  $stderr << "Oops! Testing needs the #{gem} gem. Please try:\n"
-  $stderr << "$ sudo gem install #{gem}\n"
-  raise e
-end
-
-require? "rack/test", "rack-test"
-require? "contest"
+require "rack/test"
+require "contest"
 
 class Test::Unit::TestCase
   include Rack::Test::Methods
