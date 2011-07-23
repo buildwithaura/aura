@@ -1,9 +1,6 @@
 source :rubygems
 
-# Use the copy of Aura in `./aura/` if it exists.
-if File.exists?('./aura/aura.gemspec')
-  gem 'aura', :path => './aura'
-elsif File.exists?('../aura.gemspec')
+if File.exists?('../aura.gemspec')
   gem 'aura', :path => '../'
 else
   gem "aura", "0.0.1.pre1"
