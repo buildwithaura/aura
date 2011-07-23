@@ -29,6 +29,24 @@ Point your browser then to `http://localhost:9292`! The default user is
 Aura uses sqlite by default. If you'd want it to connect to another SQL 
 database, see the `config/database.rb.example`.
 
+### Development setup
+
+Clone the repo in your machine:
+
+    git clone http://github.com/aura-cms/aura.git
+
+You can install a copy of the gem like so:
+
+    cd aura
+    gem build *.gemspec
+    gem install *.gem
+
+Or you can:
+
+ * Rackup from the `default/` directory
+ * Add `bin/` to your path to get the *aura* command without installing the 
+ gem
+
 ## Authors and copyright
 
 Aura is authored and maintained by Rico Sta. Cruz of Sinefunc, Inc.
