@@ -33,7 +33,7 @@ class Aura
         next if ['Gemfile.lock', '.rvmrc'].include?(fn)
 
         if File.file?(from)
-          puts "     +  #{target}"
+          puts "     +  #{target}"  unless fn == '.gitignore'
 
           FileUtils.mkdir_p File.dirname(target)
           FileUtils.cp from, target
