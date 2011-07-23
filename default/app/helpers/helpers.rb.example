@@ -1,0 +1,9 @@
+class Aura::App
+  module MyHelpers
+    def random_animal
+      %w(Cow Chicken Duck Goose).shuffle.first
+    end
+  end
+
+  helpers MyHelpers
+end
