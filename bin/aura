@@ -2,59 +2,6 @@
 require 'shake'
 
 ENV['AURA_ROOT'] = File.expand_path('../../', __FILE__)
-
-class Aura
-  class CLI < Shake
-    include Shake::Defaults
-
-    task :new do
-      require 'fileutils'
-      if params.empty?
-        err "Usage: #{$0} new PROJECT_NAME"
-        pass
-      end
-
-      name = params.first
-      path = File.join(ENV['AURA_ROOT'], 'default')
-
-      if File.exists?(name)
-        err "That path already exists."
-        pass
-      end
-
-      puts "     +  #{name}"
-      FileUtils.mkdir name
-
-      Dir["#{path}/**/{.*,*}"].sort.each do |from|
-        base   = from.gsub(path, '')
-        fn     = File.basename(from)
-        target = File.join(name, base)
-
-        next if ['Gemfile.lock', '.rvmrc'].include?(fn)
-
-        if File.file?(from)
-          puts "     +  #{target}"  unless fn == '.gitignore'
-
-          FileUtils.mkdir_p File.dirname(target)
-          FileUtils.cp from, target
-        end
-      end
-
-      puts ""
-      puts "Done! Get started now:"
-      puts ""
-      puts "  $ cd #{name}"
-      puts "  $ bundle install"
-      puts ""
-      puts "Then start it as a Rack app."
-      puts ""
-      puts "  $ rackup"
-      puts ""
-    end
-
-    task.description = "Starts a new project"
-    task.usage = "new NAME"
-  end
-end
+require File.join(ENV['AURA_ROOT'], 'lib/aura/cli')
 
 Aura::CLI.run!
