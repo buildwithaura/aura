@@ -24,7 +24,7 @@ Point your browser then to `http://localhost:9292`! The default user is
 
 ## Other setup notes
 
-#### Configuring a database
+### Configuring a database
 
 Aura uses sqlite by default. If you'd want it to connect to another SQL 
 database, see the `config/database.rb.example`.
@@ -34,18 +34,17 @@ database, see the `config/database.rb.example`.
 Clone the repo in your machine:
 
     git clone http://github.com/aura-cms/aura.git
+    cd aura
+
+You can Rackup from the `default/` directory:
+
+    cd default
+    rackup
 
 You can install a copy of the gem like so:
 
-    cd aura
     gem build *.gemspec
     gem install *.gem
-
-Or you can:
-
- * Rackup from the `default/` directory
- * Add `bin/` to your path to get the *aura* command without installing the 
- gem
 
 ## Authors and copyright
 
