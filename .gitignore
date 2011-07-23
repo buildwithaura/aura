@@ -16,8 +16,7 @@ tmtags
 *.swn
 
 # Project (general)
-/tmp
-/db
+tmp
 .yardoc
 /doc
 .sass-cache
