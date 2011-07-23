@@ -4,22 +4,20 @@ Aura is a CMS.
 
 ## Super easy setup
 
-    gem install aura --pre
+Clone:
 
-Start a new project:
+    git clone http://github.com/aura-cms/aura.git
 
-    aura new myproject
+Setup:
 
-Set it up:
-
-    cd myproject
+    cd aura
     bundle install
 
 Run:
 
-    rackup
+    ruby init.rb
 
-Point your browser then to `http://localhost:9292`! The default user is
+Point your browser then to `http://localhost:4567`! The default user is
 `test@sinefunc.com` / `password`.
 
 ## Other setup notes

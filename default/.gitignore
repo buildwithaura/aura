@@ -1,0 +1,12 @@
+.rvmrc
+aura
+/tmp
+/db/*.db
+
+# Config
+/config/database.rb
+
+# Remove this line to deploy to Heroku
+/Gemfile.lock
+
+# Misc

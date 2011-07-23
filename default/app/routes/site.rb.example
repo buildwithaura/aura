@@ -1,0 +1,5 @@
+class Aura::App
+  get '/special' do
+    show :hello
+  end
+end

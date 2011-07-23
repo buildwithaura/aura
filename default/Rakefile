@@ -1,0 +1,8 @@
+ENV['APP_FILE'] = File.expand_path('../init.rb', __FILE__)
+
+require 'bundler'
+Bundler.setup
+
+require 'aura/tasks'
+
+Aura::Tasks.load!
