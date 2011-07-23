@@ -82,7 +82,7 @@ class Aura
       require fname  unless fname.nil?
 
       # Load the basic things usually autoloaded.
-      Dir["#{@path}/{models,routes,helpers}/*.rb"].each { |f| require f }
+      Dir["#{@path}/{init,models,routes,helpers}/*.rb"].each { |f| require f }
 
       # Ensure public/ works
       public_path = path(:public)

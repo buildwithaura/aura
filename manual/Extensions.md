@@ -11,6 +11,7 @@ All extensions are in `extensions/`.
 
     extensions/
     '- my_extension/
+       |- init/               - Initializers
        |- helpers/            - Helper methods (all *.rb autoloaded)
        |- models/             - Model files (all *.rb autoloaded)
        |- routes/             - Sinatra routes
@@ -37,6 +38,9 @@ Here's what happens when the extension is loaded:
   Load your classes here.
 
 - `init.rb` is called after all extensions are loaded.
+
+- All Ruby files are loaded from `init/`, `models/`, `helpers/`, and 
+`routes/`.
 
 The files described above are all optional, and they all will go under
 your extension's folder.
