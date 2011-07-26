@@ -1,0 +1,75 @@
+title: Aura manual
+--
+Aura is a CMS. It aims to make people's lives easier.
+
+<section class='literate'>
+<pre>
+$ gem install aura --pre
+
+$ aura
+</pre>
+
+h4. Installation
+
+Assuming you have Ruby installed (at least 1.8.7), just install the gem.
+</section>
+
+h2. Getting started
+
+<section class='literate'>
+<pre>
+$ aura new myproject
+   create  myproject/
+   create    config.ru
+   create    init.rb
+   create    app/
+   create      models/
+   create        page.rb.example
+   ...
+</pre>
+
+h4. Start a new project
+
+Start a new project using "@aura new@":aura_new.html. This creates a folder with a simple bare-bone Aura project.
+</section>
+
+<section class='literate'>
+<pre>
+$ cd myproject/
+$ bundle install
+  ...
+</pre>
+
+h4. Install the needed gems
+
+Using Bundler, this is pretty easy.
+</section>
+
+<section class='literate'>
+<pre>
+$ thin start
+* Starting server...
+>> Thin web server (v1.2.11 codename Bat-Shit Crazy)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:4833, CTRL+C to stop
+</pre>
+
+h4. Start it up
+
+Your app is a Rack app. Visit *http://localhost:4833* to see it. (Default user is `test@sinefunc.com`/`password`)
+</section>
+
+h2. Features
+
+* **For designers** and site builders:
+** Be in full control of markup, and write in whatever template language you're comfortable with.
+** Build custom page types that will the custom fields you need with the template you define.
+
+* **For site owners:**
+** Use a CMS with an interface you will love, rather than put up with.
+
+* **For developers:**
+** Easy-to-extend with a simple extension system.
+** Built on top of "Sinatra"!http://sinatrarb.com, a tried and tested microframework.
+
+<a class='github-link' href="http://github.com/aura-cms/aura">Source code</a>
