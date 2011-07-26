@@ -1,5 +1,6 @@
-# Views
-
+title: Views
+page_type: section
+--
 (TODO: make a sensible outline for these.)
 
 ## Using views

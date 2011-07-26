@@ -1,4 +1,7 @@
-# Creating extensions
+title: Recipes
+page_type: section
+--
+## Creating extensions
 
 (See {file:Extensions.md Extensions} for more info.)
 

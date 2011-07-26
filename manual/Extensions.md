@@ -1,4 +1,6 @@
-# Extensions
+title: Extensions
+page_type: section
+--
 
 ### How Aura is made up
 

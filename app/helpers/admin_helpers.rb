@@ -1,5 +1,6 @@
 class Main
   module AdminHelpers
+    # Admin helper: show_admin (Helpers)
     # Renders an admin page with the admin template.
     # 
     def show_admin(template, locals={})
@@ -15,14 +16,23 @@ class Main
       [{ :href => '/css/admin.css', :media => 'screen' }]
     end
 
-    # Draws an <img> tag of the given icon.
+    # Admin helper: admin_icon (Helpers)
+    # Draws an img tag of the given icon.
+    #
+    # ##  Example
+    #
+    #     != admin_icon('add')
+    #     #=> <img src='/images/admin_icons/add.png' class='icon'>
+    #
     def admin_icon(icon)
       icon = "#{icon}.png"  unless icon.to_s.include?('.')
       tag(:img, nil, { :src => "/images/admin_icons/#{icon}", :class => 'icon' })
     end
 
+    # Admin helper: admin_back_to_dashboard (Helpers)
     # Renders a 'back to dashboard' link in the sidebar.
-    # Example:
+    #
+    # ##  Example
     #
     #   - content_for :nav do
     #     != admin_back_to_dashboard

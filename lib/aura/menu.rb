@@ -1,26 +1,27 @@
 class Aura
+  # Class: Menu
   # A menu.
   #
-  # == Common usage
+  # ##  Common usage
   #
-  #   Aura::Admin.menu
-  #   Aura::Admin.menu.add "hello",
-  #     :name => "Hello",
-  #     :href => '/admin/lol',
-  #     :icon => 'settings'
+  #     Aura::Admin.menu
+  #     Aura::Admin.menu.add "hello",
+  #       :name => "Hello",
+  #       :href => '/admin/lol',
+  #       :icon => 'settings'
   #
-  #   Aura::Admin.menu.add "hello.subitem",
-  #     :name => "Subitem",
-  #     :href => '/admin/lol/sub',
-  #     :icon => 'settings'
+  #     Aura::Admin.menu.add "hello.subitem",
+  #       :name => "Subitem",
+  #       :href => '/admin/lol/sub',
+  #       :icon => 'settings'
   #
-  #   Aura::Admin.menu.items
+  #     Aura::Admin.menu.items
   #
-  #   item = Aura::Admin.menu.get('hello')
-  #   item.name
-  #   item.href
-  #   item.icon
-  #   item.items    # List of sub items
+  #     item = Aura::Admin.menu.get('hello')
+  #     item.name
+  #     item.href
+  #     item.icon
+  #     item.items    # List of sub items
   #
   class Menu
     def add(key, options={})
@@ -54,7 +55,7 @@ class Aura
 
   class MenuItem < OpenStruct
     # This will always have .path, and .key.
-    # Optional: .name .href .position
+    # Optional - .name .href .position
 
     def initialize(hash={})
       super

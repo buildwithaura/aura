@@ -1,3 +1,6 @@
+# Class: Aura
+# The main class.
+#
 class Aura
   PREFIX = File.dirname(__FILE__)
 

@@ -15,7 +15,16 @@ task :test do
   end
 end
 
-desc "Update documentation."
-task :doc do
-  exec 'yard'
+namespace :doc do
+  desc "Update documentation."
+  task :update do
+    # gem proscribe ~> 0.0.2
+    system "proscribe build"
+  end
+
+  desc "Updates the Aura homepage with the manual."
+  task :deploy => :update do
+    # http://github.com/rstacruz/git-update-ghpages
+    system "git update-ghpages aura-cms/aura-cms.github.com --branch master -i doc/"
+  end
 end

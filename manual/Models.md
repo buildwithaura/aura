@@ -1,3 +1,6 @@
+title: Models
+page_type: section
+--
 ## Creating models
 
 In your extension, create a model file like so.

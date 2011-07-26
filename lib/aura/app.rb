@@ -79,7 +79,7 @@ class Main < Sinatra::Base
   set :app_files,       Dir[root('init.rb'), root('{app,extensions}/**/*.rb') + root('**/*.rb')]
   set :extensions_path, [root('extensions'), approot('extensions')]
 
-  # Heroku: override the DB config with this env var.
+  # Heroku - override the DB config with this env var.
   set :database_url, ENV['DATABASE_URL']  unless ENV['DATABASE_URL'].nil?
 
   def self.restart!

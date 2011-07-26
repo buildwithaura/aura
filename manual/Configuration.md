@@ -1,4 +1,6 @@
-# Configuration
+title: Configuration
+page_type: section
+--
 
 Configuration is done by Sinatra's app configuration; that is,
 `Main.set :key, value`.

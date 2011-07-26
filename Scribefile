@@ -1,0 +1,6 @@
+manual: 'manual'
+
+files:
+- source: "{lib,app}/**/*.rb"
+
+output: doc

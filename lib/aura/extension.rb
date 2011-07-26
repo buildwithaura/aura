@@ -75,7 +75,7 @@ class Aura
 
     # Loads an extension.
     def load!
-      # TODO: Don't load a module that's already loaded
+      # TODO Don't load a module that's already loaded
 
       # Load the main file
       fname = path("#{name}.rb")

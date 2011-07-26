@@ -1,5 +1,5 @@
 class Aura::CLI
-  # TODO: This looks stupid, refactor later
+  # TODO This looks stupid, refactor later
   task :new do
     require 'fileutils'
     if params.empty?
