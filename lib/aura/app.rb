@@ -14,6 +14,7 @@ require "sinatra/support"
 require "rtopia"
 require "sequel"
 require "sinatra/content_for"
+require "sinatra/sequel"
 require "pistol"
 require "json"
 require "yaml"
@@ -54,22 +55,23 @@ class Main < Sinatra::Base
   enable   :raise_errors
 
   use      Rack::Session::Cookie
-  helpers  Rtopia
-
   use      Rack::Deflater  if production?
-
-  # Load all, but load defaults first
-  ( Dir[root('config/*.rb')].sort +
-    Dir[approot('config/*.rb')].sort
-  ).uniq.each { |f| load f }
 
   register Sinatra::AuraPublic
   register Sinatra::MultiRenderExt
   register Sinatra::CompassSupport
   register Aura::Seeder
+  register Sinatra::SequelExtension
+
+  helpers  Rtopia
   helpers  Sinatra::ContentFor
   helpers  Sinatra::UserAgentHelpers
   helpers  Shield::Helpers
+
+  # Load all, but load defaults first
+  ( Dir[root('config/*.rb')].sort +
+    Dir[approot('config/*.rb')].sort
+  ).uniq.each { |f| load f }
 
   set :login_success_message, nil
 
@@ -78,19 +80,15 @@ class Main < Sinatra::Base
   set :extensions_path, [root('extensions'), approot('extensions')]
 
   # Heroku: override the DB config with this env var.
-  set :sequel, ENV['DATABASE_URL']  unless ENV['DATABASE_URL'].nil?
-
-  unless self.respond_to?(:sequel)
-    $stderr << "No database configured. Try `rake setup` first.\n"
-    exit
-  end
-
-  set :db, Sequel.connect(sequel)
+  set :database_url, ENV['DATABASE_URL']  unless ENV['DATABASE_URL'].nil?
 
   def self.restart!
     require 'fileutils'
     FileUtils.touch approot('tmp', 'restart.txt')
   end
+
+  # Connect to db
+  database
 end
 
 # Initializers

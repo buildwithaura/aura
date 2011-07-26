@@ -9,11 +9,11 @@ module Aura::Seeder
 
       tables = Aura::Models.all.map { |m| m.table_name }
       tables << :schema_info
-      tables &= self.db.tables
+      tables &= self.database.tables
 
       tables.each do |table|
         blk.call(:drop_table, table)
-        self.db.drop_table table
+        self.database.drop_table table
       end
     end
 
