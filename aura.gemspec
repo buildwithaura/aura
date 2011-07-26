@@ -13,16 +13,18 @@ Gem::Specification.new do |s|
   s.add_dependency "haml", "= 3.1.1"
   s.add_dependency "jsmin", "= 1.0.1"
   s.add_dependency "rack", "= 1.3.0"
-  s.add_dependency "rtopia"
-  s.add_dependency "sequel", "= 3.16.0"
-  s.add_dependency "shield", "= 0.0.3"
+  s.add_dependency "rtopia"                         # Helpers
+  s.add_dependency "sequel", "= 3.16.0"             # ORM
+  s.add_dependency "shield", "= 0.0.3"              # User authentication
   s.add_dependency "compass", "= 0.11.5"
   s.add_dependency "sinatra", "~> 1.2.6"
   s.add_dependency "sinatra-content-for", "= 0.2"
   s.add_dependency "sinatra-support", "= 1.2.0"
   s.add_dependency "sinatra-sequel", "~> 0.9.0"
-  s.add_dependency "pistol", "= 0.0.2"
-  s.add_dependency "shake", "~> 0.1.2"
+  s.add_dependency "pistol", "= 0.0.2"              # Rack reloader
+  s.add_dependency "shake", "~> 0.1.2"              # CLI helpers
+  s.add_dependency "rdiscount", "~> 1.6.8"          # Markdown support
+  s.add_dependency "RedCloth", "~> 4.2.7"           # Textile support
 
   s.add_development_dependency "contest", "~> 0.1.3"
   s.add_development_dependency "capybara", "~> 0.4.1.2"
