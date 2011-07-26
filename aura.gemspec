@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors = ["Rico Sta. Cruz"]
   s.email = ["rico@sinefunc.com"]
   s.homepage = "http://github.com/aura-cms"
-  s.files = Dir["*/**/*", "*.md", "Rakefile"].reject { |f| File.directory?(f) }
+  s.files = `git ls-files`.strip.split("\n")
 
   s.add_dependency "ffaker", "= 0.4.0"
   s.add_dependency "haml", "= 3.1.1"
