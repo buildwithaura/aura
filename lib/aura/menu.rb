@@ -3,14 +3,14 @@ class Aura
   # A menu.
   #
   # #### Accessing the singleton
-  # Doing Aura::Admin.menu will get you the single instance of Aura::Menu.
+  # Doing Aura.admin_menu will get you the single instance of Aura::Menu.
   #
-  #     m = Aura::Admin.menu    #=> #<Aura::Menu ...>
+  #     m = Aura.admin_menu    #=> #<Aura::Menu ...>
   #
   # #### Adding menu items
   # Use {Aura::Menu#add}.
   #
-  #     Aura::Admin.menu.add "hello",
+  #     Aura.admin_menu.add "hello",
   #       :name => "Hello",
   #       :href => '/admin/lol',
   #       :icon => 'settings'
@@ -18,7 +18,7 @@ class Aura
   # #### Adding submenu items
   # Add sub items by using the dot notation on the name.
   #
-  #     Aura::Admin.menu.add "hello.subitem",
+  #     Aura.admin_menu.add "hello.subitem",
   #       :name => "Subitem",
   #       :href => '/admin/lol/sub',
   #       :icon => 'settings'
@@ -26,9 +26,9 @@ class Aura
   # #### Retrieving menu items
   # Use {Aura::Menu.items}.
   #
-  #     Aura::Admin.menu.items    #=> Array of MenuItems
+  #     Aura.admin_menu.items    #=> Array of MenuItems
   #
-  #     item = Aura::Admin.menu.get('hello')
+  #     item = Aura.admin_menu.get('hello')
   #     item.name
   #     item.href
   #     item.icon
@@ -39,7 +39,7 @@ class Aura
     # Adds a menu item.
     #
     # ##  Usage
-    #     Aura::Admin.menu.add 'key',
+    #     Aura.admin_menu.add 'key',
     #       :name => 'name',
     #       :href => '/url',
     #       :icon => 'icon_name'     # <= optional
@@ -60,7 +60,7 @@ class Aura
     # Returns the root menu items.
     #
     # ##  Usage
-    #     Aura::Admin.menu.items
+    #     Aura.admin_menu.items
     #
     # ## Description
     #    Returns instances of {Aura::MenuItem}.
@@ -73,19 +73,19 @@ class Aura
     # Returns a menu item of a given key.
     #
     # ##  Usage
-    #     Aura::Admin.menu.get(keyname)
+    #     Aura.admin_menu.get(keyname)
     #
     # ##  Example
     #
     # #### Get and set
     # Use {Aura::Menu#add} to add, then `get` to get.
     #
-    #     Aura::Admin.menu.add "hello",
+    #     Aura.admin_menu.add "hello",
     #       :name => "Hello",
     #       :href => '/admin/lol',
     #       :icon => 'settings'
     #
-    #     item = Aura::Admin.menu.get('hello')  #=> #<MenuItem>
+    #     item = Aura.admin_menu.get('hello')  #=> #<MenuItem>
     #     item.name                             #=> "Hello"
     #     item.icon                             #=> "settings"
     #
@@ -137,6 +137,6 @@ class Aura
   end
 end
 
-#Aura::Admin.menu.add 'settings.db', :name => "Settings", :href => "/settings"
-#Aura::Admin.menu.get('settings') # list of MenuItems
-#Aura::Admin.menu.items
+#Aura.admin_menu.add 'settings.db', :name => "Settings", :href => "/settings"
+#Aura.admin_menu.get('settings') # list of MenuItems
+#Aura.admin_menu.items

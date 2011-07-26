@@ -1,4 +1,4 @@
-require 'stories_helper'
+require File.expand_path('../../stories_helper', __FILE__)
 
 class Main
   get '/lalala' do

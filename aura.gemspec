@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Aura is a CMS."
   s.authors = ["Rico Sta. Cruz"]
   s.email = ["rico@sinefunc.com"]
-  s.homepage = "http://github.com/aura-cms"
+  s.homepage = "http://aura-cms.github.com"
   s.files = `git ls-files`.strip.split("\n")
 
   s.add_dependency "ffaker", "= 0.4.0"
@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara", "~> 0.4.1.2"
   s.add_development_dependency "rack-test", "~> 0.6.0"
   s.add_development_dependency "sqlite3-ruby", "~> 1.3.3"
+  s.add_development_dependency "launchy", "~> 0.3.7"
 end

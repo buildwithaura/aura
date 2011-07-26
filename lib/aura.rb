@@ -4,7 +4,6 @@
 class Aura
   PREFIX = File.dirname(__FILE__)
 
-  autoload :Admin,              "#{PREFIX}/aura/admin"
   autoload :Extension,          "#{PREFIX}/aura/extension"
   autoload :ExtensionNotFound,  "#{PREFIX}/aura/extension"
   autoload :Menu,               "#{PREFIX}/aura/menu"
@@ -18,8 +17,6 @@ class Aura
   require "#{PREFIX}/aura/version"
 
   Model = Sequel::Model
-
-  # @group Settings
 
   # Alias for Setting.get.
   # See Setting.get for an example.
@@ -45,27 +42,26 @@ class Aura
     Models::Setting.del key
   end
 
-  # @group Database handling
-
+  # Class method: db_dump (Aura)
   # Returns the database backup as a hash.
   #
   # @see db_dump_yaml
   #
-  # @example
+  # ## Example
   #
-  #   data = Aura.db_dump
-  #   yml_data = YAML::dump(data) # also see db_dump_yaml.
-  #   File.open('backup.yml', 'w') { |f| f << yml_data }
-  #   puts yml_data.inspect
+  #     data = Aura.db_dump
+  #     yml_data = YAML::dump(data) # also see db_dump_yaml.
+  #     File.open('backup.yml', 'w') { |f| f << yml_data }
+  #     puts yml_data.inspect
   #
-  #   # Sample output:
-  #   # pages:
-  #   #   - title: Hello.
-  #   #     body: Good day everyone!
-  #   #   - title: Cheers!
-  #   #     body: What's going on?
-  #   # settings:
-  #   #   - ...
+  #     # Sample output:
+  #     # pages:
+  #     #     - title: Hello.
+  #     #       body: Good day everyone!
+  #     #     - title: Cheers!
+  #     #       body: What's going on?
+  #     # settings:
+  #     #     - ...
   #
   def self.db_dump
     db = Models.all.first.db
@@ -77,22 +73,23 @@ class Aura
     }
   end
 
+  # Class method: db_restore (Aura)
   # Restores a previous output of db_dump.
   #
-  # This function takes in the parameter @@hash@@, which is a hash table
+  # This function takes in the parameter `hash`, which is a hash table
   # with the keys as the table names, and it's values are arrays of
   # records.
   # 
   # See #db_dump for an example of the hash that #db_restore expects.
   #
-  # @example
+  # ## Example
   #
-  #   # Load a previously saved copy of the hash, as spitted out
-  #   # by db_dump.
-  #   yaml_data = YAML::load_file 'backup.yml'
+  #     # Load a previously saved copy of the hash, as spitted out
+  #     # by db_dump.
+  #     yaml_data = YAML::load_file 'backup.yml'
   #
-  #   # Load it.
-  #   Aura.db_restore(yaml_data)
+  #     # Load it.
+  #     Aura.db_restore(yaml_data)
   #
   def self.db_restore(hash)
     # Hash format:
@@ -110,6 +107,7 @@ class Aura
     end
   end
 
+  # Class method: db_dump_yaml (Aura)
   # Returns the database backup as a YAML document.
   #
   def self.db_dump_yaml
@@ -117,62 +115,70 @@ class Aura
     YAML::dump db_dump
   end
 
-  # @group Site content
-
+  # Class method: site_empty? (Aura)
   # Checks if the site is empty.
   #
   # All content models are queried to see if there are any records available.
   # Content models are determined by checking if the model classes respond
-  # #content? as @@true@@.
+  # #content? as `true`.
   # 
-  # @example
+  # ## Example
   #
-  #   if Aura.site_empty?
-  #     page = Page.new :title => "Hello"
-  #     page.save
-  #     assert Aura.site_empty? == false
-  #   end
+  #     if Aura.site_empty?
+  #       page = Page.new :title => "Hello"
+  #       page.save
+  #       assert Aura.site_empty? == false
+  #     end
   #
   def self.site_empty?
     ! Models.all.select { |m| m.content? }.detect { |m| m.any? }
   end
 
+  # Class method: find (Aura)
   # Finds a record that corresponds to a path.
   #
-  # @example
+  # ## Example
   #
-  #   products = Page.new :slug => 'products'
-  #   products.save
+  #     products = Page.new :slug => 'products'
+  #     products.save
   #
-  #   boots = Page.new :parent => 'products', :slug => 'boots'
-  #   boots.save
+  #     boots = Page.new :parent => 'products', :slug => 'boots'
+  #     boots.save
   #
-  #   foo = Aura.find('/products/boots')
-  #   assert foo == boots
+  #     foo = Aura.find('/products/boots')
+  #     assert foo == boots
   #
   def self.find(path)
     Slugs.find path
   end
 
+  # Class method: roots (Aura)
   # Returns all model records without parents.
   # 
   # Records are considered without parents when they respond to #parent
-  # with @@nil@@.
+  # with `nil`.
   #
   def self.roots
     Models.all.inject([]) { |a, m| a += m.roots.try(:all) }
   end
 
+  # Class method: menu (Aura)
   # Returns the menu items, sorted properly.
   #
-  # @example
+  # ##  Example
   #
-  #   -# HAML
-  #   - Aura.menu.each do |item|
-  #     %li
-  #       %a{:href => item.path}= item.menu_title
+  #       - Aura.menu.each do |item|
+  #         %li
+  #           %a{:href => item.path}= item.menu_title
   #
   def self.menu
     roots.select { |item| item.shown_in_menu? }.sort
+  end
+
+  # Class method: admin_menu (Aura)
+  # Returns admin menu items.
+  #
+  def self.admin_menu
+    @menu ||= Menu.new
   end
 end

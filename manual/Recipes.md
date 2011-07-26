@@ -31,7 +31,7 @@ If it's a model you want on there:
 For anything else, put this in your app's initializers. (See {Aura::Menu} for more info)
 
     [app/init/menu.rb (ruby)]
-    Aura::Admin.menu.add "id",
+    Aura.admin_menu.add "id",
       :name => "My menu entry",
       :href => '/admin/foo',
       :icon => 'settings'

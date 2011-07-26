@@ -1,19 +1,7 @@
-$:.unshift(*Dir['./vendor/*/lib'])
+require File.expand_path('../test_helper', __FILE__)
 
-def require?(what, gem=what)
-  require what
-rescue LoadError => e
-  $stderr << "Oops! Testing needs the #{gem} gem. Please try:\n"
-  $stderr << "$ sudo gem install #{gem}\n"
-  raise e
-end
-
-require "rubygems"
-require? "contest"
-require? "capybara"
-require? "capybara/dsl", :capybara
-
-require "test_helper"
+require "capybara"
+require "capybara/dsl"
 
 Capybara.app = Main
 
@@ -46,6 +34,7 @@ class Test::Unit::TestCase
       fill_in 'username', :with => Main.default_user
       fill_in 'password', :with => Main.default_password
       click_button 'Login'
+      save_and_open_page
       assert ! page.has_content?('Login'), 'Login failed.'
     end
   end

@@ -14,7 +14,7 @@
   %nav
     %ul
       -# TODO: admin_submenu('settings')
-      - Aura::Admin.menu.get('settings').items.each do |item|
+      - Aura.admin_menu.get('settings').items.each do |item|
         %li{:class => ('browse' if item.items.any?)}
           != link_to (item.href || '#') do
             != admin_icon (item.icon || 'generic')
@@ -26,7 +26,7 @@
       != link_to R(:admin, :settings) do
         Settings
 
-    - Aura::Admin.menu.get('settings').items.each do |item|
+    - Aura.admin_menu.get('settings').items.each do |item|
       %li{:class => ('browse' if item.items.any?)}
         != link_to (item.href || '#') do
           = item.name
