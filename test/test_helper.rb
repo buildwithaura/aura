@@ -7,18 +7,27 @@ Bundler.setup
 require File.expand_path('../app/init.rb', __FILE__)
 require "rack/test"
 require "contest"
+#require "renvy"
 
 class Test::Unit::TestCase
   include Rack::Test::Methods
   include Rtopia
 
+  #alias _setup setup
+
   def setup
+    Main.set :migrations_log, lambda { StringIO.new }
     Main.flush!
+    Aura.run_migrations!
     Main.seed
   end
 
   def app
     Main.new
+  end
+
+  def db
+    Main.database
   end
 
   def p(what, obj=nil)

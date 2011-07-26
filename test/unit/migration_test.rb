@@ -1,8 +1,14 @@
-require 'test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class MigrationTest < Test::Unit::TestCase
+  Page = Aura::Models::Page
+
   setup do
     @old = Page.schema
+    Page.set_schema do
+      primary_key :id
+      foreign_key :parent_id
+    end
   end
 
   test "Should not remove old stuff" do
@@ -41,6 +47,5 @@ class MigrationTest < Test::Unit::TestCase
 
   teardown do
     Page.instance_variable_set :'@schema', @old
-    Page.sync_schema
   end
 end

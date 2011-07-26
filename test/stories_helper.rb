@@ -23,11 +23,6 @@ class Test::Unit::TestCase
     assert_equal loc, current_path
   end
 
-  setup do
-    Main.flush!
-    Main.seed!
-  end
-
   def login!
     visit '/login'
     if page.has_css?("form[action$=login]")

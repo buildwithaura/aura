@@ -7,9 +7,7 @@ module Aura::Seeder
     def flush!(&blk)
       blk = lambda { |*a| }  unless block_given?
 
-      tables = Aura::Models.all.map { |m| m.table_name }
-      tables << :schema_info
-      tables &= self.database.tables
+      tables = self.database.tables
 
       tables.each do |table|
         blk.call(:drop_table, table)

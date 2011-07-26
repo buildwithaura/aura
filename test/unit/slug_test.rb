@@ -1,13 +1,13 @@
-require 'test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class SlugTest < Test::Unit::TestCase
   setup do
     # With slug
-    @products = Page.new :title => 'Products', :slug => 'products'
+    @products = Aura::Models::Page.new :title => 'Products', :slug => 'products'
     @products.save
 
     # No slug
-    @boots = Page.new :title => 'Boots', :parent => @products
+    @boots = Aura::Models::Page.new :title => 'Boots', :parent => @products
     @boots.save
   end
 
@@ -17,13 +17,13 @@ class SlugTest < Test::Unit::TestCase
   end
 
   should "autoslug" do
-    assert Page[@products.id] == @products
-    assert Page[@products.id].slug == 'products'
+    assert Aura::Models::Page[@products.id] == @products
+    assert Aura::Models::Page[@products.id].slug == 'products'
 
-    assert Page[@boots.id] == @boots
-    assert Page[@boots.id].slug == 'boots'
+    assert Aura::Models::Page[@boots.id] == @boots
+    assert Aura::Models::Page[@boots.id].slug == 'boots'
 
-    boots_2 = Page.new :title => 'Boots', :parent => @products
+    boots_2 = Aura::Models::Page.new :title => 'Boots', :parent => @products
     boots_2.save
 
     assert_equal 'boots-2', boots_2.slug
@@ -31,9 +31,9 @@ class SlugTest < Test::Unit::TestCase
 
   should "find records by their paths" do
     page = Aura.find('/products')
-    assert page == @products
+    assert page.id == @products.id
 
     page = Aura.find('/products/boots')
-    assert page == @boots
+    assert page.id == @boots.id
   end
 end

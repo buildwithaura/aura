@@ -10,9 +10,8 @@ if File.exists?(seed_file) and !Aura::Models::Setting.table_exists?
 
 # ..otherwise, setup the database: do migrations and put in fresh data.
 else
-  Aura::Models.all.each { |m| m.seed }
+  Aura.run_migrations!
+  Main.seed
 end
-
-Aura::Models.unpack
 
 Aura::Extension.active.each { |ext| ext.init }

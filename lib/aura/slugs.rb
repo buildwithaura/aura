@@ -1,5 +1,5 @@
 class Aura
-  module Slugs # TODO Change to Router
+  module Slugs
     extend self
 
     # @group Module functions

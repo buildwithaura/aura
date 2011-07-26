@@ -1,15 +1,6 @@
 class Aura
 module Models
 class User < Model
-  set_schema do
-    primary_key :id
-
-    String :email
-    String :slug
-    String :crypted_password
-    Time :last_login
-  end
-
   plugin :aura_editable
 
   extend Shield::Model
@@ -65,8 +56,6 @@ class User < Model
 
     blk.call :info, "You may login with '#{email}' and password '#{password}'."  if block_given?
   end
-
-  seed  unless table_exists?
 end
 end
 end

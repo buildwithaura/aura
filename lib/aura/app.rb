@@ -59,7 +59,6 @@ class Main < Sinatra::Base
 
   register Sinatra::AuraPublic
   register Sinatra::MultiRenderExt
-  register Sinatra::CompassSupport
   register Aura::Seeder
   register Sinatra::SequelExtension
 
@@ -72,6 +71,8 @@ class Main < Sinatra::Base
   ( Dir[root('config/*.rb')].sort +
     Dir[approot('config/*.rb')].sort
   ).uniq.each { |f| load f }
+
+  register Sinatra::CompassSupport
 
   set :login_success_message, nil
 

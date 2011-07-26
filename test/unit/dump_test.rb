@@ -1,8 +1,7 @@
-
-require 'test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class DumpTest < Test::Unit::TestCase
-  should "dump properly" do
+  test "dump properly" do
     dump = Aura.db_dump
     assert dump.is_a?(Hash)
     assert dump.keys.include?(:settings)

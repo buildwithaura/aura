@@ -5,7 +5,7 @@ class Main
     end
 
     def current_user
-      authenticated(User)
+      authenticated(Aura::Models::User)
     end
 
     def require_login

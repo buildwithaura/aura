@@ -181,4 +181,28 @@ class Aura
   def self.admin_menu
     @menu ||= Menu.new
   end
+
+  def self.gem_path(*a)
+    File.join(ENV['AURA_ROOT'], *a)
+  end
+
+  def self.path(*a)
+    File.join(ENV['APP_ROOT'], *a)
+  end
+
+  # Class method: run_migrations! (Aura)
+  # Runs manual migrations for everything.
+  def self.run_migrations!
+    files  = Array.new
+    files << gem_path('app/migrations/**/*.rb')
+    files << path('app/migrations/**/*.rb')
+    files += Extension.active.map { |e| e.path('migrations/**/*.rb') }
+
+    # Find and load all
+    files = files.compact.map { |spec| Dir[spec].sort }.flatten.uniq
+    files.each { |f| load f }
+
+    # Reload models to ensure they get the right schemae.
+    Aura::Models.reload!
+  end
 end

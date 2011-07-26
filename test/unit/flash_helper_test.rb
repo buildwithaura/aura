@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class FlashHelperTest < Test::Unit::TestCase
   setup do
@@ -6,7 +6,7 @@ class FlashHelperTest < Test::Unit::TestCase
     @app.extend Main::FlashHelpers
   end
 
-  should "flash errors" do
+  test "flash errors" do
     @app.production do |a|
       assert ! a.flash_errors?
 
@@ -20,7 +20,7 @@ class FlashHelperTest < Test::Unit::TestCase
     end
   end
 
-  should "flash" do
+  test "flash" do
     @app.production do |a|
       assert ! a.flash_messages?
 

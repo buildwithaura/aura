@@ -14,9 +14,9 @@ class Main
       partial name, locals
     end
 
-    def partial(template, locals={})
+    def partial(template, locals={}, options={})
       layout, @layout = @layout, nil
-      out = show template, {:layout => false}, locals
+      out = show template, {:layout => false}.merge(options), locals
       @layout = layout
       out
     end
