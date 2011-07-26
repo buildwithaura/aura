@@ -1,16 +1,11 @@
 title: Extensions
 page_type: section
 --
+You may package your entire `app/` folder as an extension by copying it into
+`extensions/my_extension/`. You may then redistribute it for using in other
+Aura apps.
 
-### How Aura is made up
-
-Aura is a Sinatra app. It's structure is however a little unique: the
-system is divided into little pieces called 'extensions'.
-
-All extensions are in `extensions/`.
-
-## What's an extension?
-
+    $ ...
     extensions/
     '- my_extension/
        |- init/               - Initializers
@@ -30,6 +25,7 @@ All extensions are in `extensions/`.
    all Ruby files inside them are autoloaded.
  - You may also have a YAML file called `info.yml`, which hosts metadata
    about your extension.
+ - The directories described above are all optional.
 
 ## Extensions
 
@@ -37,47 +33,25 @@ Custom extensions go into `extensions/<extension_name>/`.
 Here's what happens when the extension is loaded:
 
 - After everything is set up, `extension_name.rb` is loaded.
-  Load your classes here.
-
 - `init.rb` is called after all extensions are loaded.
+- All Ruby files are loaded from `init/`, `models/`, `helpers/`, and `routes/`.
 
-- All Ruby files are loaded from `init/`, `models/`, `helpers/`, and 
-`routes/`.
+## Metadata
 
-The files described above are all optional, and they all will go under
-your extension's folder.
+#### Defining metadata
+Use `info.yml` in your extension.
+
+    [extensions/twitter/info.yml (yaml)]
+    name: Twitter integration
+    author: Rico Sta. Cruz
+    description: Shows twitter feeds in the home page.
 
 ## Loading extensions
 
-(Todo: insert a note here about to configure which extensions are loaded)
+#### Loading extensions
+Edit `config/extensions.rb` of your app.
 
-## Sinatra::MultiRenderExt
-
-Aura includes a plugin Sinatra::MultiRenderExt which is built on top of
-Sinatra's `render` system.
-
-Using the `show()` helper (instead of `render`) will search all
-view paths and template formats.
-
-For instance, if you have:
-
-    extensions/
-    '- one/
-    |  '- views/
-    |     |- home.haml
-    |     '- footer.haml
-    '- two/
-       '- views/
-          '- header.erb
-
-You can then use:
-
-    show 'home'       # Finds one/views/home.haml
-    show 'footer'     # Finds one/views/footer.haml
-    show 'header'     # Finds two/views/header.erb
-
-This is also done for partials:
-
-    partial 'header'     # Finds views/header.erb
-    partial 'header', :name => "Archer"
-
+    [config/extensions.rb (ruby)]
+    Main.configure do |m|
+      m.set :additional_extensions, %w(default_theme)
+    end

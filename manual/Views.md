@@ -1,49 +1,66 @@
 title: Views
 page_type: section
 --
-(TODO: make a sensible outline for these.)
+Aura has a unique way of handling views, different from Sinatra's `render`.
 
-## Using views
-
+#### Creating views
 To create a view, put them in the `view/` folder of your extension.
 
-    -# extension/myext/views/hello.haml
+    [app/views/hello.haml (haml)]
     %h1
       Hello, world!
 
-Now call it in your Ruby code like so.
-
-    # extension/myext/routes/hello.rb
-    get '/hello' do
-      show :hello
-    end
-
+#### Showing views
+Now call it in your Ruby code using `show`.
 Unlike Sinatra's `render`, using `show` will automatically try and find the file
 in the view directories of all extensions, and guess the right filetype based
 on the extension.
 
-## Supported formats
+    [app/routes/hello.rb (ruby)]
+    get '/hello' do
+      show :hello
+    end
 
-Aura supports views in any format supported by Sinatra. You can try ERB, HAML, SASS, LESS
-
-## Partials
-
+#### Using Partials
 Aura provides a `partial` helper.
 
-    -# extension/myext/views/hello.haml
-    %h1
-      - partial :'hello/heading'
+    [app/views/hello.haml (haml)]
+    %hgroup
+      != partial :'hello/heading', title: 'Hello'
 
-Now create your partial in another file:
-
-    -# extension/myext/views/hello/heading.haml
-    Hello world!
+#### Defining partials
+    [extension/myext/views/hello/heading.haml (haml)]
+    %h1= title
 
 ## View folders
 
-View folders are at:
+Using `show` will find the file in all view directories. Those are:
 
-   extensions/*/views/
-   app/views/
+ - Your app's view path (`app/views/`)
+ - Views in your extensions
+ - The default views in the Aura gem
 
-(TODO: explain show() and MultiView)
+#### Example
+For instance, if you have this structure:
+
+    extensions/
+    '- one/
+    |  '- views/
+    |     |- home.haml
+    |     '- footer.haml
+    '- two/
+       '- views/
+          '- header.erb
+
+#### for #show
+You can then use:
+
+    show :home       # Finds one/views/home.haml
+    show :footer     # Finds one/views/footer.haml
+    show :header     # Finds two/views/header.erb
+
+#### for #partial
+This is also done for partials:
+
+    partial :header     # Finds views/header.erb
+    partial :header, :name => "Archer"

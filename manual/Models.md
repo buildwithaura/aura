@@ -1,9 +1,7 @@
 title: Models
 page_type: section
 --
-## Description
-
-All models are Sequel models. It uses the Sequel plugin system.
+All models are Sequel models. Aura also uses the Sequel plugin system.
 
 #### Creating a model
 Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
@@ -31,6 +29,7 @@ Use Sequel's `set_schema`. Schemas defined this way will have it's tables automa
     end
 
 #### Setting up plugins
+Use Sequel's `plugin` class method.
 
     [app/models/movie.rb (ruby)]
     class Movie < Model
