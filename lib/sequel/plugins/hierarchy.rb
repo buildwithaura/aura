@@ -5,14 +5,20 @@
 #    This automatically gives models parent/child support.
 #
 # #### How to use
-# Use `plugin :aura_hierarchy`.
+# Use `plugin :aura_hierarchy`, and add `:parent_id` to your schema.
 #
 #     module Aura::Models
 #       class Book < Model
 #         plugin :aura_hierarchy
 #       end
+#
+#       set_schema do
+#         foreign_key :parent_id
+#         # ...
+#       end
 #     end
 #
+# #### Needs sce
 # #### Example
 # Our `Book` class can now have parents and children.
 #

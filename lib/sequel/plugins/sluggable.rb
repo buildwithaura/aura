@@ -5,14 +5,18 @@
 #    This automatically gives models the ability to be accessed via a
 #    slug URL (like `/products/boots`).
 #
-#    Your schema must have `String :slug` for this to work.
-#
 # #### How to use
-# Use `plugin :aura_sluggable`.
+# Use `plugin :aura_sluggable`, and add `String :slug` to your schema.
 #
 #     module Aura::Models
 #       class Book < Model
 #         plugin :aura_sluggable
+#
+#         set_schema do
+#           String :slug
+#
+#           # ...
+#         end
 #       end
 #     end
 #
