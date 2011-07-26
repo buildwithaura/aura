@@ -1,15 +1,6 @@
 class Aura
 module Models
 class ContactForm < Model
-  set_schema do
-    primary_key :id
-
-    String :title
-    String :slug
-    
-    String :form_fields, :text => true
-  end
-
   plugin :aura_sluggable      # Accessible via slug: /about-us/services
   plugin :aura_renderable     # Can show a page when accessed by that URL
   plugin :aura_editable

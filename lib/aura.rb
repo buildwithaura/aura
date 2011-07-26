@@ -97,7 +97,7 @@ class Aura
 
     # Bring the DB back to the state where we have tables ready.
     Main.flush!
-    Models.all.each { |m| m.sync_schema }
+    Aura.run_migrations!
     db = Models.all.first.db
 
     hash.each do |table, entries|

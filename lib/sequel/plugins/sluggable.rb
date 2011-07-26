@@ -6,18 +6,22 @@
 #    slug URL (like `/products/boots`).
 #
 # #### How to use
-# Use `plugin :aura_sluggable`, and add `String :slug` to your schema.
+# Use `plugin :aura_sluggable`.
 #
 #     module Aura::Models
 #       class Book < Model
 #         plugin :aura_sluggable
 #
-#         set_schema do
-#           String :slug
-#
-#           # ...
-#         end
+#         # ...
 #       end
+#     end
+#
+# #### Database setup
+# Add `String :slug` to your schema.
+#
+#     database.create_table :books do
+#       String :slug
+#       # ...
 #     end
 #
 module Sequel

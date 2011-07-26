@@ -1,12 +1,5 @@
 module Aura::Models
   class Something < Model
-    set_schema do
-      primary_key :id
-
-      String :title
-      String :slug
-    end
-
     plugin :aura_sluggable      # Accessible via slug: /about-us/services
     plugin :aura_renderable     # Can show a page when accessed by that URL
     plugin :aura_editable       # Shows up in editor

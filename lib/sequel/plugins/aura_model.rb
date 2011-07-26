@@ -1,27 +1,6 @@
 # Class: Model (Aura::Models)
 # A class that represents a record type.
 #
-# #### Creating a model
-# Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
-#
-#     module Aura::Models
-#       class Movie < Model
-#         # ...
-#       end
-#     end
-#   
-# #### Setting up auto-migration
-# Use Sequel's `set_schema`. Schemas defined this way will have it's tables automatically created.
-#
-#     class Movie < Model
-#       set_schema do
-#         primary_key :id
-#
-#         String :name
-#         String :description
-#       end
-#     end
-#
 # ## Description
 #    Inherits from {AuraModel}.
 
@@ -221,14 +200,12 @@ module Sequel::Plugins::AuraModel
     # load up some sample data.
     #
     def seed(type=nil, &b)
-      sync_schema  unless schema.nil?
     end
 
     # Class method: seed! (AuraModel)
     # Like `seed`, but empties the table first.
     #
     def seed!(type=nil, &b)
-      sync_schema  unless schema.nil?
       delete
       seed type, &b
     end
