@@ -1,21 +1,32 @@
 class Aura
-  # Class: Menu
+  # Class: Menu (Aura)
   # A menu.
   #
-  # ##  Common usage
+  # #### Accessing the singleton
+  # Doing Aura::Admin.menu will get you the single instance of Aura::Menu.
   #
-  #     Aura::Admin.menu
+  #     m = Aura::Admin.menu    #=> #<Aura::Menu ...>
+  #
+  # #### Adding menu items
+  # Use {Aura::Menu#add}.
+  #
   #     Aura::Admin.menu.add "hello",
   #       :name => "Hello",
   #       :href => '/admin/lol',
   #       :icon => 'settings'
+  #
+  # #### Adding submenu items
+  # Add sub items by using the dot notation on the name.
   #
   #     Aura::Admin.menu.add "hello.subitem",
   #       :name => "Subitem",
   #       :href => '/admin/lol/sub',
   #       :icon => 'settings'
   #
-  #     Aura::Admin.menu.items
+  # #### Retrieving menu items
+  # Use {Aura::Menu.items}.
+  #
+  #     Aura::Admin.menu.items    #=> Array of MenuItems
   #
   #     item = Aura::Admin.menu.get('hello')
   #     item.name
@@ -24,6 +35,15 @@ class Aura
   #     item.items    # List of sub items
   #
   class Menu
+    # Method: add (Aura::Menu)
+    # Adds a menu item.
+    #
+    # ##  Usage
+    #     Aura::Admin.menu.add 'key',
+    #       :name => 'name',
+    #       :href => '/url',
+    #       :icon => 'icon_name'     # <= optional
+    #
     def add(key, options={})
       path = key.to_s.split('.')
       last = path.pop
@@ -36,10 +56,39 @@ class Aura
       node.raw_items[last] = MenuItem.new(options.merge(:path => path, :key => last))
     end
 
+    # Method: items (Aura::Menu)
+    # Returns the root menu items.
+    #
+    # ##  Usage
+    #     Aura::Admin.menu.items
+    #
+    # ## Description
+    #    Returns instances of {Aura::MenuItem}.
+    #
     def items
       root.items
     end
 
+    # Method: get (Aura::Menu)
+    # Returns a menu item of a given key.
+    #
+    # ##  Usage
+    #     Aura::Admin.menu.get(keyname)
+    #
+    # ##  Example
+    #
+    # #### Get and set
+    # Use {Aura::Menu#add} to add, then `get` to get.
+    #
+    #     Aura::Admin.menu.add "hello",
+    #       :name => "Hello",
+    #       :href => '/admin/lol',
+    #       :icon => 'settings'
+    #
+    #     item = Aura::Admin.menu.get('hello')  #=> #<MenuItem>
+    #     item.name                             #=> "Hello"
+    #     item.icon                             #=> "settings"
+    #
     def get(key='')
       path = key.to_s.split('.')
       node = root
@@ -53,10 +102,18 @@ class Aura
     end
   end
 
+  # Class: MenuItem (Aura)
+  # A menu item.
+  #
+  # ## Description
+  #    This is an OpenStruct.
+  #
+  #    It will always have `.path` and `.key`.
+  #    Optional items are `.name`, `.href`, and `.position`.
+  #
+  #    Methods such as {Aura::Menu.items} and {Aura::Menu.get} return menu items.
+  #
   class MenuItem < OpenStruct
-    # This will always have .path, and .key.
-    # Optional - .name .href .position
-
     def initialize(hash={})
       super
       self.items = Hash.new

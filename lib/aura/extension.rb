@@ -4,27 +4,39 @@ require 'ostruct'
 class Aura
   ExtensionNotFound = Class.new(StandardError)
 
-  # Aura extensions.
+  # Class: Extension (Aura)
+  # A class representing an extension in Aura.
+  # 
+  # #### Lookup
+  # Get an Extension instance by passing an extension name.
   #
-  # == Common usage
+  #     ext = Aura::Extension['base']
   #
-  #   ext = Aura::Extension['base']
+  # #### Loading extensions
   #
-  #   ext.active?
-  #   ext.load!
+  #     ext.active?          #=> false (probably)
+  #     ext.load!
+  #     ext.active?          #=> true
   #
-  #   ext.info             #=> #<OStruct>
-  #   ext.info.author
+  # #### Getting extension info
+  # These are loaded from an extension's YAML file.
   #
-  #   ext.path             #=> ~/aura/extensions/base
-  #   ext.path('init.rb')  #=> ~/aura/extensions/base/init.rb
+  #     ext.info             #=> #<OStruct>
+  #     ext.info.author
   #
-  #   Aura::Extension.active  # Active extensions (Array of #<Extension>)
-  #   Aura::Extension.all     # All extensions (Array of #<Extension>)
+  # #### Getting paths
+  # Use {Aura::Extension#path}.
   #
-  # == Not-so-common
+  #     ext.path             #=> ~/aura/extensions/base
+  #     ext.path('init.rb')  #=> ~/aura/extensions/base/init.rb
   #
-  #   ext = Aura::Extension.new('/path/to/ext')
+  #     Aura::Extension.active  # Active extensions (Array of #<Extension>)
+  #     Aura::Extension.all     # All extensions (Array of #<Extension>)
+  #
+  # #### Manual instanciation
+  # You can pass a path to the constructor.
+  #
+  #     ext = Aura::Extension.new('/path/to/ext')
   #
   class Extension
     attr_reader :name
@@ -57,14 +69,17 @@ class Aura
       raise ExtensionNotFound  unless File.directory?(@path.to_s)
     end
 
+    # Method: path (Aura::Extension)
     # Returns the path of the extension.
-    # If arguments are given, they are joined into the extension's path.
-    # nil will be returned if the path does not exist.
     #
-    # Example:
+    # ## Description
+    #    If arguments are given, they are joined into the extension's path.
+    #    nil will be returned if the path does not exist.
     #
-    #   Aura::Extension['base'].path             #=> ~/aura/extensions/base
-    #   Aura::Extension['base'].path('init.rb')  #=> ~/aura/extensions/base/init.rb
+    # ## Example
+    #
+    #     Aura::Extension['base'].path             #=> ~/aura/extensions/base
+    #     Aura::Extension['base'].path('init.rb')  #=> ~/aura/extensions/base/init.rb
     #
     def path(*a)
       return @path  if a.empty?
@@ -73,7 +88,9 @@ class Aura
       File.exists?(ret) ? ret : nil
     end
 
+    # Method: load! (Aura::Extension)
     # Loads an extension.
+    #
     def load!
       # TODO Don't load a module that's already loaded
 
@@ -96,23 +113,29 @@ class Aura
       end
     end
 
+    # Method: active? (Aura::Extension)
     # Determines if the given extension is currently active in the config.
+    #
     def active?
       self.class.active_names.include?(@name)
     end
 
     # Initializes an extension after it's already loaded.
     # This is done after all extensions are loaded.
+    #
     def init
       fname = path("init.rb")
       load fname  unless fname.nil?
     end
 
-    # Returns an ostruct of information on the extension.
-    # Example:
+    # Method: info (Aura::Extension)
+    # Returns an OpenStruct of information on the extension.
     #
-    #   Aura::Extension['default_theme'].info
-    #   Aura::Extension['default_theme'].info.author
+    # ##  Example
+    #
+    #     Aura::Extension['default_theme'].info
+    #     Aura::Extension['default_theme'].info.author
+    #
     def info
       return @info  unless @info.nil?
 
@@ -124,20 +147,38 @@ class Aura
 
     alias to_s name
 
+    # Class method: active (Aura::Extension)
     # Returns all the extensions that are loaded in the config.
+    #
+    # ## See also
+    #  * {Aura::Extension.all}
+    #
     def self.active
       return @actives  unless @actives.nil?
       @actives ||= self.active_names.map { |ext| self[ext] }.compact
     end
 
+    # Class method: active_names (Aura::Extension)
     # Returns all names of the extensions that are loaded in the config.
+    #
+    # ## Description
+    #    Returns an array of strings.
+    #
     def self.active_names
       exts  = Array.new
       exts += Main.additional_extensions  if Main.respond_to?(:additional_extensions)
       exts
     end
 
+    # Class method: all (Aura::Extension)
     # Returns all extensions (not just the ones loaded).
+    #
+    # ## Description
+    #    Returns an array of {Aura::Extension} instances.
+    #
+    # ## See also
+    #  * {Aura::Extension.active}
+    #
     def self.all
       return @all  unless @all.nil?
 

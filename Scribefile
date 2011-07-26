@@ -1,6 +1,6 @@
 manual: 'manual'
 
 files:
-- source: "{lib,app}/**/*.rb"
+- source: "./**/*.rb"
 
 output: doc
