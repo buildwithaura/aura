@@ -1,27 +1,54 @@
+# Module: Models (Aura)
+# The namespace for models.
+#
+# #### Creating a model
+# Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
+#
+#     module Aura::Models
+#       class Movie < Model
+#         # ...
+#       end
+#     end
+#   
+# #### Finding models
+# Use {Aura::Models.all}.
+#
+#     Aura::Models.all.map { |m| m.name }
+#
+# #### Find by name
+# Use {Aura::Models.get} or Ruby's `const_get`.
+#
+#     Aura::Models.get('contact_form')       #=> Aura::Models::ContactForm
+#     Aura::Models.const_get(:ContactForm)   #=> Aura::Models::ContactForm
+#
 class Aura
   module Models
     extend self
 
+    # Class method: all (Aura::Models)
     # Returns an array of all model classes.
     #
-    # @example
-    #
-    #   content_models = Aura::Models.all.select { |m| m.content? }
+    # ##  Example
+    #     Aura::Models.all.each do |m|
+    #       # ...
+    #     end
     #
     def all
       constants.map { |cons| const_get(cons) }
     end
 
+    # Class method: get (Aura::Models)
     # Returns a given model.
     #
-    # Looks up the model @@name@@ and returns the model class, or @@nil@@
-    # if it's not found.
+    # ## Usage
+    #     Aura::Models.get(name)
     #
-    # @param name [string] The model name.
+    # ## Description
+    #   Looks up the model `name` and returns the model class, or `nil`
+    #   if it's not found.
     #
-    # @example
-    #
-    #   Aura::Models.get('contact_form') #=> Aura::Model::ContactForm
+    # ##  Example
+    #     Aura::Models.get('contact_form') #=> Aura::Model::ContactForm
     #
     def get(name)
       name = camelize(name)  if name.downcase == name

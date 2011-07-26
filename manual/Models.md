@@ -1,7 +1,44 @@
 title: Models
 page_type: section
 --
-## Creating models
+## Description
+
+All models are Sequel models. It uses the Sequel plugin system.
+
+#### Creating a model
+Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
+
+    [app/models/movie.rb (ruby)]
+    module Aura::Models
+      class Movie < Model
+        # ...
+      end
+    end
+  
+#### Setting up auto-migration
+Use Sequel's `set_schema`. Schemas defined this way will have it's tables automatically created.
+
+    [app/models/movie.rb (ruby)]
+    class Movie < Model
+      set_schema do
+        primary_key :id
+
+        String :name
+        String :description
+      end
+      
+      # ...
+    end
+
+#### Setting up plugins
+
+    [app/models/movie.rb (ruby)]
+    class Movie < Model
+      plugin :aura_editable
+      plugin :aura_sluggable
+    end
+
+## Example
 
 In your extension, create a model file like so.
 
@@ -22,15 +59,3 @@ In your extension, create a model file like so.
       end
     end
 
-## Sequel models
-
-All models are Sequel models. It uses the sequel plugin system.
-
-All models will automatically include the {Sequel::Plugins::AuraModel} plugin.
-
-## Reference
-
-Every Aura model has these functions.
-
-- {Sequel::Plugins::AuraModel::ClassMethods AuraModel (class methods)}
-- {Sequel::Plugins::AuraModel::InstanceMethods AuraModel (instance methods)}

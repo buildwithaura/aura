@@ -1,3 +1,18 @@
+# Sequel plugin: AuraEditable
+# For things that you can edit in the admin panel.
+#
+# ## Description
+#    Use this plugin in you want your model editable.
+#
+# #### How to use
+# Use `plugin :aura_editable`.
+#
+#     module Aura::Models
+#       class Book < Model
+#         plugin :aura_editable
+#       end
+#     end
+#
 module Sequel
   module Plugins
     module AuraEditable

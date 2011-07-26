@@ -1,10 +1,46 @@
+# Class: Model (Aura::Models)
+# A class that represents a record type.
+#
+# #### Creating a model
+# Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
+#
+#     module Aura::Models
+#       class Movie < Model
+#         # ...
+#       end
+#     end
+#   
+# #### Setting up auto-migration
+# Use Sequel's `set_schema`. Schemas defined this way will have it's tables automatically created.
+#
+#     class Movie < Model
+#       set_schema do
+#         primary_key :id
+#
+#         String :name
+#         String :description
+#       end
+#     end
+#
+# ## Description
+#    Inherits from {AuraModel}.
+
+# Sequel plugin: AuraModel
+# The base plugin for a model.
+#
+# ## Description
+#    All models use this plugin, and all methods it provides are available
+#    to all Aura/Sequel models.
+#
 module Sequel::Plugins::AuraModel
   def self.configure(model)
     model.plugin :validation_helpers
   end
 
   module InstanceMethods
+    # Method: parent (AuraModel)
     # Returns the parent.
+    #
     def parent
       nil
     end
@@ -21,7 +57,10 @@ module Sequel::Plugins::AuraModel
       raise Sequel::ValidationFailed(errors)  unless valid?
     end
 
+    # Method: shown_in_menu? (AuraModel)
     # Determines if the record should be shown to visitors in the site menus.
+    #
+    # ## Description
     # This only affects the front-facing site, and has to influence as
     # to whether it will be shown in the admin area.
     #
@@ -35,18 +74,24 @@ module Sequel::Plugins::AuraModel
       self.sort_index <=> other.sort_index
     end
 
+    # Method: sort_index (AuraModel)
     # This is what they'll be sorted by.
-    # To sort: implement a 'position' field.
+    #
+    # To enable sorting, implement a `position` field.
     #
     # You can reimplement this. Make sure it returns a tuple of an int and an int.
+    #
     def sort_index
       pos = nil
       pos ||= self.position  if self.respond_to?(:position)
       [pos || 9999, self.id]
     end
 
+    # Method: set_fields (AuraModel)
     # Sets the fields to the values in the hash.
-    # Overriding set_fields to make the 2nd param optional.
+    #
+    # Overriding `set_fields` to make the 2nd param optional.
+    #
     def set_fields(hash, keys=hash.keys)
       super hash, keys
     end
@@ -55,23 +100,25 @@ module Sequel::Plugins::AuraModel
       self.class.templates_for template
     end
 
+    # Method: menu_title (AuraModel)
     # Returns the name of the record as it should appear on the menu.
     #
-    # This defaults to whatever the title of the record is (#to_s).
+    # This defaults to whatever the title of the record is (`#to_s`).
     # Have your model override this if you need to.
     #
     def menu_title
       to_s
     end
 
+    # Method: path (AuraModel)
     # Returns the URL path for the record.
     #
-    # @example
+    # ##  Example
     #
-    #   Page[1].path  #=> '/products/cx-300'
-    #   User[1].path  #=> '/user/1' (because user is not sluggable.)
-    #
-    #   Page[1].path(:edit)  # => '/products/cx-300/edit'
+    #     Page[1].path  #=> '/products/cx-300'
+    #     User[1].path  #=> '/user/1' (because user is not sluggable.)
+    #   
+    #     Page[1].path(:edit)  # => '/products/cx-300/edit'
     #
     def path(*a)
       ret = "/#{self.class.class_name}/#{self.id}"
@@ -80,57 +127,55 @@ module Sequel::Plugins::AuraModel
       ret
     end
 
+    # Method: parentable? (AuraModel)
     # Determines if the record can have children.
     #
-    # Reimplemented by aura_hierarchy
+    # This is reimplemented by {AuraHierarchy}.
     #
     def parentable?
       false
     end
-
-    # Returns the parent of the record.
-    #
-    # @return [Model] If a parent is available
-    # @return [nil] If a parent is not available, or the record is a root node
-    #
-    def parent
-      nil
-    end
-
+    
+    # Method: parent? (AuraModel)
     # Determines if the record has a parent.
+    #
     def parent?
       ! parent.nil?
     end
 
+    # Method: children (AuraModel)
+    # Returns the children of the record.
     def children
       Array.new
     end
 
+    # Method: submenu (AuraModel)
     # Returns a list of items for the submenu.
     #
-    # @example
+    # ##  Example
     #
-    #   <% item.submenu.each do %>
-    #     <li><% item.to_s %></li>
-    #   <% end %>
+    #     <% item.submenu.each do %>
+    #       <li><% item.to_s %></li>
+    #     <% end %>
     #
     def submenu
       children.select { |item| item.shown_in_menu? }.sort
     end
 
-    # Returns an array of records determining the breadcrumb path of
-    # the record, starting from the root.
+    # Method: crumbs (AuraModel)
+    # Returns an array of records of breadcrumb path of the record, starting from the root.
+    #
     def crumbs
       [self]
     end
 
     # Determines how far removed the record is from the root.
     #
-    # @example
+    # ## Example
     #
-    #   p = Page[1]
-    #   p.parent?  #=> false
-    #   p.depth    #=> 1
+    #     p = Page[1]
+    #     p.parent?  #=> false
+    #     p.depth    #=> 1
     #
     def depth
       crumbs.size
@@ -142,19 +187,26 @@ module Sequel::Plugins::AuraModel
   end
 
   module ClassMethods
+    # Class method: content? (AuraModel)
     # Returns if the model data is considered to be site content.
+    #
+    # ## Description
     # The site is considered empty if all models that are content?
     # are empty.
+    #
     def content?
       false
     end
 
+    # Class method: roots (AuraModel)
     # Returns a set of results of all records that don't have parents.
+    #
     # Returns a Sequel dataset.
     def roots
       select
     end
 
+    # Class method: seed (AuraModel)
     # Ensures that the model has some bare essentials in it.
     #
     # This is called every time the application initializes.
@@ -172,13 +224,16 @@ module Sequel::Plugins::AuraModel
       sync_schema  unless schema.nil?
     end
 
+    # Class method: seed! (AuraModel)
     # Like `seed`, but empties the table first.
+    #
     def seed!(type=nil, &b)
       sync_schema  unless schema.nil?
       delete
       seed type, &b
     end
 
+    # Class method: parentable (AuraModel)
     # Determines if the model can have children.
     #
     # Reimplemented by aura_hierarchy.
@@ -193,43 +248,47 @@ module Sequel::Plugins::AuraModel
       ]
     end
 
+    # Class method: class_name (AuraModel)
     # Returns a string of the model's name for use in URLs.
     #
-    # @example
+    # ## Example
     #
-    #   BlogPost.class_name #=> "blog_post"
+    #     BlogPost.class_name #=> "blog_post"
     #
     def class_name
       self.to_s.demodulize.underscore
     end
 
+    # Class method: title (AuraModel)
     # Returns a string of the model's name to appear on pages.
     #
-    # @example
+    # ## Example
     #
-    #   BlogPost.title #=> "Blog post"
+    #     BlogPost.title #=> "Blog post"
     #
     def title
       self.class_name.humanize
     end
 
+    # Class method: title_plural (AuraModel)
     # Returns a string of the model's name, pluralized, to appear on pages.
     #
-    # @example
+    # ## Example
     #
-    #   BlogPost.title_plural #=> "Blog posts"
+    #     BlogPost.title_plural #=> "Blog posts"
     #
     def title_plural
       self.title.pluralize
     end
 
-    # Retruns a URL path for an action for the model.
+    # Class method: path (AuraModel)
+    # Returns a URL path for an action for the model.
     #
-    # @example
+    # ## Example
     #
-    #   BlogPost.path               #=> /blog_post
-    #   BlogPost.path(:list)        #=> /blog_post/list
-    #   BlogPost.path(:list, :all)  #=> /blog_post/list/all
+    #     BlogPost.path               #=> /blog_post
+    #     BlogPost.path(:list)        #=> /blog_post/list
+    #     BlogPost.path(:list, :all)  #=> /blog_post/list/all
     #
     def path(*a)
       ret = "/#{class_name}"
@@ -237,6 +296,5 @@ module Sequel::Plugins::AuraModel
       ret += "?" + Aura::Utils.query_string(a.shift)  if a.first.is_a?(Hash)
       ret
     end
-
   end
 end

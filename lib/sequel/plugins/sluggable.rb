@@ -1,9 +1,20 @@
-# Implemented for models that are to be accessible via a slug URL,
-# for example, `/products/boots`.
+# Sequel plugin: AuraSluggable
+# Implemented for models that are to be accessible via a slug URL.
 #
-# Assumptions:
+# ## Description
+#    This automatically gives models the ability to be accessed via a
+#    slug URL (like `/products/boots`).
 #
-#  - Your table must have `String :slug`.
+#    Your schema must have `String :slug` for this to work.
+#
+# #### How to use
+# Use `plugin :aura_sluggable`.
+#
+#     module Aura::Models
+#       class Book < Model
+#         plugin :aura_sluggable
+#       end
+#     end
 #
 module Sequel
   module Plugins
@@ -17,7 +28,9 @@ module Sequel
           true
         end
 
+        # Method: path (AuraSluggable)
         # Returns the URL path.
+        #
         def path(*a)
           return super  if slug.nil?
           ret = '/' + (slug.to_s)
@@ -27,7 +40,16 @@ module Sequel
           ret
         end
 
+        # Method: slugify (AuraSluggable)
         # Returns a unique slug for the item.
+        #
+        # ##  Example
+        #     b = Book.new
+        #     b.title = 'Darkly Dreaming Dexter'
+        #     
+        #     b.slugify                       #=> "darkly-dreaming-dexter"
+        #     b.slugify("Dexter by Design")   #=> "dexter-by-design"
+        #
         def slugify(str=title)
           str = str.to_s
           str = str.scan(/[A-Za-z0-9]+/).join('-').downcase
@@ -54,6 +76,12 @@ module Sequel
           true
         end
 
+        # Class method: get_by_slug (AuraSluggable)
+        # Finds an item by a given slug.
+        #
+        # ##  Example
+        #     b = Book.get_by_slug('darkly-dreaming-dexter')
+        #
         def get_by_slug(slug, parent=nil)
           pid = parent.nil? ? nil : parent.id
 

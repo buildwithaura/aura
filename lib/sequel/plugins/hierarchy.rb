@@ -1,3 +1,28 @@
+# Sequel plugin: AuraHierarchy
+# Used on models that have children and parents.
+#
+# ## Description
+#    This automatically gives models parent/child support.
+#
+# #### How to use
+# Use `plugin :aura_hierarchy`.
+#
+#     module Aura::Models
+#       class Book < Model
+#         plugin :aura_hierarchy
+#       end
+#     end
+#
+# #### Example
+# Our `Book` class can now have parents and children.
+#
+#     book = Book[2]
+#
+#     # Traversion
+#     book.parent
+#     book.children
+#     book.siblings
+#
 module Sequel::Plugins::AuraHierarchy
   def self.configure(model, options={})
     model.many_to_one :parent, :class => model

@@ -13,7 +13,7 @@ Getting started
 ---------------
 
 #### Start a new project
-Start a new project using "aura new":aura_new.html. This creates a folder with a simple bare-bone Aura project.
+Start a new project using [aura new](aura_new.html). This creates a folder with a simple bare-bone Aura project.
 
     $ aura new myproject
        create  myproject/
@@ -44,14 +44,14 @@ Your app is a Rack app. Visit *http://localhost:4833* to see it. (Default user i
 ## Features
 
 * **For designers** and site builders:
- * Be in full control of markup, and write in whatever template language you're comfortable with.
- * Build custom page types that will the custom fields you need with the template you define.
+  * Be in full control of markup, and write in whatever template language you're comfortable with.
+  * Build custom page types that will the custom fields you need with the template you define.
 
 * **For site owners:**
- * Use a CMS with an interface you will love, rather than put up with.
+  * Use a CMS with an interface you will love, rather than put up with.
 
 * **For developers:**
- * Easy-to-extend with a simple extension system.
- * Built on top of [Sinatra](http://sinatrarb.com), a tried and tested microframework.
+  * Easy-to-extend with a simple extension system.
+  * Built on top of [Sinatra](http://sinatrarb.com), a tried and tested microframework.
 
 [Source code on GitHub](http://github.com/aura-cms/aura "Source code")
