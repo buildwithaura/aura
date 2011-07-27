@@ -22,22 +22,22 @@ module AuraSubtyped
     # Returns the definition for a given subtype.
     # If options are given, sets the options for the given subtype.
     def subtype(name, options=nil)
-      @subtypes ||= Hash.new
+      @@subtypes ||= Hash.new
 
-      return @subtypes[name]  if options.nil?
+      return @@subtypes[name]  if options.nil?
       raise ArgumentError  unless options.is_a? Hash
 
-      @subtypes[name] = Aura::Subtype.new(options.merge({:id => name }))
+      @@subtypes[name] = Aura::Subtype.new(options.merge({:id => name }))
     end
 
     def subtypes
-      @subtypes ||= Hash.new
+      @@subtypes ||= Hash.new
 
-      @subtypes[:default] ||= Aura::Subtype.new :id => :default,
+      @@subtypes[:default] ||= Aura::Subtype.new :id => :default,
         :name     => 'Default',
         :template => 'id'
 
-      @subtypes.values.sort_by { |st| st._id.to_s }
+      @@subtypes.values.sort_by { |st| st._id.to_s }
     end
   end
 end

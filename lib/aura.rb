@@ -206,8 +206,8 @@ class Aura
   def self.run_migrations!
     files  = Array.new
     files << gem_root('app/migrations/**/*.rb')
-    files << root('app/migrations/**/*.rb')
     files += Extension.active.map { |e| "#{e.path}/migrations/**/*.rb" }
+    files << root('app/migrations/**/*.rb')
 
     # Find and load all
     files = files.compact.map { |spec| Dir[spec].sort }.flatten.uniq
