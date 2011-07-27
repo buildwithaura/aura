@@ -6,6 +6,7 @@ module Sinatra
 
     module ClassMethods
       def add_public(dir)
+        return  unless File.directory?(dir)
         dir = File.realpath(dir)
 
         get '*' do |path|
