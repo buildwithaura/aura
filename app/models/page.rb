@@ -5,6 +5,7 @@ class Page < Sequel::Model
   plugin :aura_hierarchy      # Can have children
   plugin :aura_subtyped       # Has subtypes
 
+  plugin :timestamps
   plugin :serialization, :yaml, :custom
 
   form do
