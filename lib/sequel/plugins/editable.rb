@@ -7,10 +7,8 @@
 # #### How to use
 # Use `plugin :aura_editable`.
 #
-#     module Aura::Models
-#       class Book < Model
-#         plugin :aura_editable
-#       end
+#     class Book < Sequel::Model
+#       plugin :aura_editable
 #     end
 #
 module Sequel

@@ -7,10 +7,9 @@
 # #### How to use
 # Use `plugin :aura_hierarchy` in your model.
 #
-#     module Aura::Models
-#       class Book < Model
-#         plugin :aura_hierarchy
-#       end
+#     class Book < Sequel::Model
+#       plugin :aura_hierarchy
+#     end
 #
 # #### Database setup
 # Add `:parent_id` to your schema.

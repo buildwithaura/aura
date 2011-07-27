@@ -8,12 +8,10 @@
 # #### How to use
 # Use `plugin :aura_sluggable`.
 #
-#     module Aura::Models
-#       class Book < Model
-#         plugin :aura_sluggable
+#     class Book < Sequel::Model
+#       plugin :aura_sluggable
 #
-#         # ...
-#       end
+#       # ...
 #     end
 #
 # #### Database setup
