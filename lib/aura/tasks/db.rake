@@ -35,3 +35,8 @@ namespace :db do
     puts ""
   end
 end
+
+task :default do
+  exec 'rake -s -T'
+end
+
