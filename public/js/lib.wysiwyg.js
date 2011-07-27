@@ -33,45 +33,111 @@
   });
 
   $.fn.auraWysiwyg = function () {
-    $(this).wysiwyg({
+    var w = $(this).wysiwyg({
       css: '/css/admin/wysiwyg_field.css',
+      rmUnusedControls: true,
       controls: {
-        strikeThrough: { visible: false },
-        subscript: { visible: false },
-        superscript: { visible: false },
-        separator03: { visible: false },
-        undo: { visible: false },
-        redo: { visible: false },
-        separator04: { visible: false },
-        cut: { visible: false },
-        copy: { visible: false },
-        paste: { visible: false },
+        bold: { visible: true },
+        italic: { visible: true },
+        underline: { visible: true },
+        indent: { visible: true },
+        outdent: { visible: true },
+        insertOrderedList: { visible: true },
+        insertUnorderedList: { visible: true },
+        h2: { visible: true },
+        h3: { visible: true },
+        paragraph: { visible: true },
         html: {
           visible: true,
           exec: function() {
-            // Put the original inside.
-            if (!$(this.original).closest('div.wysiwyg').length) {
-              var $div = $(this.editor).closest('div.wysiwyg');
-              $div.append($(this.original));
+            var elementHeight;
+
+            if (this.options.resizeOptions && $.fn.resizable) {
+              elementHeight = this.element.height();
             }
 
             if (this.viewHTML) {
-              this.setContent($(this.original).val());
+              this.setContent(this.original.value);
+
               $(this.original).hide();
-              $(this.editor).show();
-              this.focus();
-            }
+              this.editor.show();
 
-            else {
+              if (this.options.resizeOptions && $.fn.resizable) {
+                // if element.height still the same after frame was shown
+                if (elementHeight === this.element.height()) {
+                  this.element.height(elementHeight + this.editor.height());
+                }
+
+                this.element.resizable($.extend(true, {
+                  alsoResize: this.editor
+                }, this.options.resizeOptions));
+              }
+
+              $(this.element).find('.toolbar-two').hide();
+              $(this.element).find('.toolbar').show();
+              
+              // this.ui.toolbar.find("li").each(function () {
+              //   var li = $(this);
+
+              //   if (li.hasClass("html")) {
+              //     li.removeClass("active");
+              //   } else {
+              //     li.removeClass('disabled');
+              //   }
+              // });
+            } else {
               this.saveContent();
-              $(this.editor).hide();
-              $(this.original).show().focus();
+
+              $(this.original).css({
+                width:	this.element.outerWidth(),
+                height: this.element.height() - this.ui.toolbar.height() - 10,
+                resize: "none"
+              }).show();
+              this.editor.hide();
+              
+              if (this.options.resizeOptions && $.fn.resizable) {
+                // if element.height still the same after frame was hidden
+                if (elementHeight === this.element.height()) {
+                  this.element.height(this.ui.toolbar.height());
+                }
+
+                this.element.resizable("destroy");
+              }
+
+              $(this.element).find('.toolbar').hide();
+              $(this.element).find('.toolbar-two').show();
+              // this.ui.toolbar.find("li").each(function () {
+              //   var li = $(this);
+
+              //   if (li.hasClass("html")) {
+              //     li.addClass("active");
+              //   } else {
+              //     if (false === li.hasClass("fullscreen")) {
+              //       li.removeClass("active").addClass('disabled');
+              //     }
+              //   }
+              // });
             }
 
-            this.viewHTML = !( this.viewHTML );
+            this.viewHTML = !(this.viewHTML);
           }
         }
       }
     });
+
+    var $div = $(this).closest('p').find('div.wysiwyg');
+
+    // Make toolbar 2
+    var $a = $("<a class='back-to-rtf'>");
+    var $tool2 = $("<div class='toolbar-two'>");
+    $tool2.append("<span>You are editing raw HTML. </span>");
+    $tool2.append($a);
+    $a.html("Back to WYSIWYG");
+    $a.click(function() {
+      $div.find('.toolbar .html').trigger('click');
+    });
+
+    $div.prepend($tool2);
+    $tool2.hide();
   };
 })(jQuery);

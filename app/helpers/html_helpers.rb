@@ -3,16 +3,23 @@ class Main
     # Helper: html (Helpers)
     # Sanitizes HTML with Markdown and Textile support.
     #
-    def html(str)
-      str = str.strip
+    def html(string)
+      require 'nokogiri'
 
-      if str =~ /^\s*<textile>(.*?)(<\/textile>)?\s*$/
-        str = Tilt.new('textile') { $1 }.render
-      elsif str =~ /^\s*<markdown>(.*?)(<\/markdown>)?\s*$/
-        str = Tilt.new('markdown') { $1 }.render
+      doc = Nokogiri.HTML(string)
+
+      # Convert textile/markdown
+      %w(textile markdown).each do |type|
+        doc.css("[format='#{type}'], #{type}").each do |el|
+          el.after(Tilt.new(type) { el.inner_html }.render)
+          el.remove
+        end
       end
 
-      str.strip
+      # Stupidity
+      doc.css('p:empty').each { |el| el.remove }
+
+      doc.at_css('body').inner_html.strip
     end
   end
 

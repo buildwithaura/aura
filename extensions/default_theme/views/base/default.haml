@@ -22,7 +22,7 @@
         %strong= item.parent
 
   .body
-    != html item.body  if item.respond_to?(:body)
+    != html(item.body)  if item.respond_to?(:body)
   .nav
     %ul
       - item.submenu.each do |p|

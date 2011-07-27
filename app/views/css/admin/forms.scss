@@ -180,9 +180,9 @@ form:not(.bypass) {
 //
 
 p.html textarea {
-  // Pseudo-hide it so that the 'flash of unstyled textareas' dont look so bad.
-  visibility: hidden;
-  margin-bottom: 24px;
+  padding: 15px;
+  border-top: 0;
+  @include shadow(none);
 }
 
 div.wysiwyg {
@@ -195,27 +195,41 @@ div.wysiwyg {
   textarea {
     visibility: visible;
     margin-bottom: -8px;
+    padding: 15px;
+    padding-bottom: 0;
   }
 
-  ul.panel {
+  iframe { border: 0; @include shadow(none); }
+
+  ul.toolbar, div.toolbar-two {
     height: 20px; overflow: hidden;
-    background: white;
+    font-size: 8pt; color: #888; line-height: 20px;
     padding: 5px 4px 4px 4px;
     border-bottom: solid 1px #e2e2e2;
     @include gradient(#f7f7f7, #f4f4f4);
     @include shadow(inset 0 1px 0 $hilite50);
     @include border-top-radius(4px);
 
-    li { background: transparent; padding: 0 3px; }
-    li a.active,
-    li a { padding: 0; border: solid 1px transparent; background-color: transparent; }
-    li a:focus { outline: 0; }
+    li, li.active {
+      @include border-radius(2px);
+      border: solid 1px transparent;
+      margin: 0 3px; }
 
-    // Fade
+    li.active {
+      background-color: $blue-glow-20;
+      @include shadow(0 0 4px $blue-glow-20); }
+
+    li:active {
+      background-color: $blue-glow-40; }
+
     & { opacity: 0.9; }
-    li a { opacity: 0.2; }
-    a:not(.bold):not(.italic):not(.underline):not(.justifyLeft):not(.justifyCenter):not(.justifyRight):not(.justifyFull) { opacity: 0; }
-    li.separator { opacity: 0.0; }
+    li { opacity: 0.2; }
+    li:not(.bold):not(.italic):not(.underline):not(.justifyLeft):not(.justifyCenter):not(.justifyRight):not(.justifyFull) { opacity: 0; }
+  }
+
+  div.toolbar-two {
+    span, a {
+      margin: 0 5px; }
   }
 
   iframe { margin: 0; width: 100% !important; }
@@ -229,14 +243,18 @@ html:not(.webkit) p div.wysiwyg,
 p.focus div.wysiwyg {
   background: white;
 
-  ul.panel { opacity: 1; border-color: #ddd; }
-  ul.panel li a { opacity: 0.9 !important; }
-  ul.panel li.separator { opacity: 0.5; }
+  ul.toolbar { opacity: 1; }
+  ul.toolbar li { opacity: 0.9 !important; }
+  ul.toolbar li.separator { opacity: 0.4 !important; }
   &, li, a { @extend .animate-opacity; }
 }
 
-p.focus div.wysiwyg {
+p.html.focus {
+  @include border-radius(4px);
   @include input-focus;
+  padding-bottom: 0;
+
+  textarea { @include shadow(none); }
 }
 
 body.js-on #area.editable-title p.main-title { display: none; }

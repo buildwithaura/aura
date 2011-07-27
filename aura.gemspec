@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sinatra-content-for", "= 0.2"
   s.add_dependency "sinatra-support", "= 1.2.0"
   s.add_dependency "sinatra-sequel", "~> 0.9.0"
+  s.add_dependency "nokogiri", "~> 1.5.0"           # HTML parser
   s.add_dependency "pistol", "= 0.0.2"              # Rack reloader
   s.add_dependency "shake", "~> 0.1.2"              # CLI helpers
   s.add_dependency "rdiscount", "~> 1.6.8"          # Markdown support
