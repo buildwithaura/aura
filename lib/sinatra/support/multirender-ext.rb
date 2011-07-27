@@ -35,32 +35,60 @@ module Sinatra::MultiRenderExt
   end
 
   module Helpers
+    # Helper: layout (Helpers)
+    # Defines a layout to use.
     def layout(what=nil)
       @layout = what  if what
       @layout
     end
 
+    # Helper: show (Helpers)
     # Shows a given template.
     #
-    # You may pass +options[:engine]+ to specify which engines you will want
-    # to limit the search to. This defaults to +App.multi_engines+, or Tilt's
-    # supported engines if that's not defined.
+    # ##  Usage
+    #     show(template[, options[, locals])
+    #     show(model, template[, options[, locals])
     #
-    # You may pass +options[:views]+ to specify which directories to scour.
-    # This defaults to +App.multi_views+, or +App.views+.
+    # ## Options
+    #   You may pass +options[:engine]+ to specify which engines you will want
+    #   to limit the search to. This defaults to +App.multi_engines+, or Tilt's
+    #   supported engines if that's not defined.
+    #   
+    #   You may pass +options[:views]+ to specify which directories to scour.
+    #   This defaults to +Main.multi_views+, or +Main.views+.
     #
-    # == Examples
+    # #### Show a template
     #
-    #   # Only HAML
-    #   show :home, engine: :haml
+    #     show :home
     #
-    #   # HAML or ERB, favoring HAML first
-    #   show :home, engine: [:haml, :erb]
+    # #### Show a model's view
+    # This example looks at `:'page/index'` and `:'base/index'`, using
+    # whichever it finds first
     #
-    #   # Only look at certain paths
-    #   show :home, views: [ './views', './skins/default' ]
+    #     page = Page['/about']
+    #     show page, :index
     #
-    def show(templates, options={}, locals={}, &block)
+    # #### Limiting engines
+    #
+    #     # HAML only
+    #     show :home, engine: :haml
+    #
+    #     # HAML or ERB, favoring HAML first
+    #     show :home, engine: [:haml, :erb]
+    #
+    # #### Only certain paths
+    # Only look at certain paths
+    #
+    #    show :home, views: [ './views', './skins/default' ]
+    #
+    def show(templates, *args, &block)
+      if templates.respond_to?(:templates_for)
+        templates = templates.templates_for(args.shift || 'index')
+      end
+
+      options = args.shift || {}
+      locals  = args.shift || {}
+
       paths     = [*(options[:views]  || settings.multi_views)].join(',')
       engines   = [*(options[:engine] || settings.multi_engines)].join(',')
 

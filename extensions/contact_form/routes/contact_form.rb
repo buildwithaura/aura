@@ -5,7 +5,7 @@ class Main
     @item = Aura.find(path) or pass
     pass unless @item.is_a?(ContactForm)
 
-    show_admin @item.templates_for('responses'),
+    show_admin @item, :responses,
       :item   => @item
   end
 end

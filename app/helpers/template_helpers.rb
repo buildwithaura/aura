@@ -17,7 +17,14 @@ class Main
     # Template helper: partial (Helpers)
     # Renders a partial.
     #
-    def partial(template, locals={}, options={})
+    def partial(template, *args) #locals={}, options={}
+      if template.respond_to?(:templates_for)
+        template = template.templates_for(args.shift || 'index')
+      end
+
+      locals  = args.shift || {}
+      options = args.shift || {}
+
       layout, @layout = @layout, nil
       out = show template, {:layout => false}.merge(options), locals
       @layout = layout
@@ -52,8 +59,16 @@ class Main
     #
     # ##  Usage
     #     yield_content_of(template, section[, locals])
+    #     yield_content_of(model, template, section[, locals])
     #
-    def yield_content_of(template, section, locals={})
+    def yield_content_of(template, *args) #section, locals={}
+      if template.respond_to?(:templates_for)
+        template = template.templates_for(args.shift || :index)
+      end
+
+      section = args.shift || :content
+      locals  = args.shift || {}
+
       custom_activate!
 
       show template, { :layout => false }, locals

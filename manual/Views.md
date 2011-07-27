@@ -21,6 +21,14 @@ on the extension.
       show :hello
     end
 
+#### Showing views for models
+You can pass a model to `show`. In this example, since the record is a `Page`,
+Aura will render `:page/index` or `:base/index`, whichever it finds first.
+
+    page = Page['/about.html']
+
+    show page, :index
+
 ## Partials
 
 #### Using Partials

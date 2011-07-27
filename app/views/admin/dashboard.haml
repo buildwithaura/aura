@@ -9,7 +9,7 @@
 
   - Aura::Editor.roots.each do |model, items|
     - next unless model.try(:show_on_sidebar?)
-    != partial model.templates_for('nav'), :items => items, :model => model
+    != partial model, 'nav', :items => items, :model => model
 
   %nav
     %h3 System

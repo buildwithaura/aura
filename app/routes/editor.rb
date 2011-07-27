@@ -4,7 +4,7 @@ class Main
     @model = Aura.models.get(model) or pass
     pass unless @model.try(:editable?)
 
-    show_admin @model.templates_for('list'),
+    show_admin @model, :list,
       :model => @model
   end
 
@@ -15,7 +15,7 @@ class Main
 
     @item = @model.new
 
-    show_admin @model.templates_for('new'),
+    show_admin @model, 'new',
       :model  => @model,
       :parent => nil,
       :item   => @item,
@@ -49,7 +49,7 @@ class Main
     @item = Aura.find(path) or pass
     pass unless @item.try(:editable?)
 
-    show_admin @item.templates_for('edit'),
+    show_admin @item, 'edit',
       :item   => @item,
       :action => @item.path(:edit)
   end
@@ -72,7 +72,7 @@ class Main
     rescue Sequel::ValidationFailed
     end
 
-    show_admin @item.templates_for('edit'),
+    show_admin @item, 'edit',
       :item   => @item,
       :action => @item.path(:edit)
   end
@@ -82,7 +82,7 @@ class Main
     @item = Aura.find(path) or pass
     pass unless @item.try(:editable?)
 
-    show_admin @item.templates_for('preview'),
+    show_admin @item, 'preview',
       :item   => @item
   end
 
@@ -94,7 +94,7 @@ class Main
 
     @model = @parent.class
 
-    show_admin @model.templates_for('new'),
+    show_admin @model, 'new',
       :model  => @model,
       :item   => @model.new(:parent => @item),
       :parent => @parent,
@@ -118,7 +118,7 @@ class Main
       flash_message "The new item has been created."
 
     rescue => e
-      return show_admin(@item.templates_for('new'),
+      return show_admin(@item, 'new',
         :model  => @model,
         :item   => @item,
         :parent => @parent,
@@ -133,7 +133,7 @@ class Main
     @item = Aura.find(path) or pass
     pass unless @item.try(:editable?)
 
-    show_admin @item.templates_for('delete'),
+    show_admin @item, 'delete',
       :item   => @item,
       :action => @item.path(:delete)
   end

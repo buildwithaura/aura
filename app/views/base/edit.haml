@@ -1,7 +1,7 @@
 - title "Edit: %s" % [ item.to_s ]
 
 - content_for :tabs do
-  != partial item.templates_for('tabs'), :item => item, :model => item.class
+  != partial item, :tabs, :item => item, :model => item.class
 
 - content_for :nav do
   - if item.children.any?
@@ -19,12 +19,12 @@
         != admin_icon('page')
         = item.to_s
 
-    != partial item.templates_for('nav'), :items => item.children, :parent => item
+    != partial item, :nav, :items => item.children, :parent => item
 
   - else
     - if item.parent?
       -# Show the parent's menu
-      != yield_content_of item.templates_for(:edit), :nav, { :item => item.parent }
+      != yield_content_of item, :edit, :nav, { :item => item.parent }
 
     - else
       -# Show the main menu
@@ -41,13 +41,13 @@
     %a.black{:href => '#submit'} Save
 
 - content_for :body do
-  != partial item.templates_for('crumbs'), :item => item
+  != partial item, :crumbs, :item => item
 
-  != partial item.templates_for(:errors), :errors => item.errors
+  != partial item, :errors, :errors => item.errors
 
   .slim
     %form{:action => action, :method => 'post'}
-      != partial item.templates_for(:form), :item => item
+      != partial item, :form, :item => item
 
       %p.submit
         %span.right

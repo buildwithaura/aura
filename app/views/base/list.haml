@@ -11,4 +11,4 @@
     %section.items
       %table
         - model.each do |item|
-          != partial model.templates_for('list_item'), :item => item
+          != partial model, :list_item, :item => item

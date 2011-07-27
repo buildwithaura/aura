@@ -10,12 +10,12 @@
   != yield_content_of :'base/new', :toolbar, options
 
 - content_for! :body do
-  != partial item.templates_for('errors'), :errors => item.errors
+  != partial item, :errors, :errors => item.errors
 
   .slim.fixed
 
     %form.ext{:action => action, :method => 'post' }
-      != partial item.templates_for(:form), options
+      != partial item, :form, options
 
       %input{:type => 'hidden', :name => 'next', :value => R(:admin)}
 

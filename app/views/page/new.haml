@@ -4,8 +4,8 @@
 - title "New: %s" % [ item.to_s ]
 
 - content_for! :body do
-  != partial item.templates_for('crumbs'), :item => parent, :model => model, :new => true
-  != partial item.templates_for('errors'), :errors => item.errors
+  != partial item, :crumbs, :item => parent, :model => model, :new => true
+  != partial item, :errors, :errors => item.errors
 
   %form{:action => action, :method => 'post' }
     .split-250-side.meta
@@ -16,11 +16,11 @@
             %a{:href => parent.path(:edit)}<= parent
             %span>= "."
 
-        != partial item.templates_for(:form), options
+        != partial item, :form, options
 
         %p.submit
           %button{:type => 'submit'}
             %span Save
 
       .right
-        != partial item.templates_for(:meta_form), options
+        != partial item, :meta_form, options

@@ -11,10 +11,10 @@
     %a.ext{:href => item.path} View live
 
 - content_for :tabs do
-  != partial item.templates_for(:tabs), :item => item
+  != partial item, :tabs, :item => item
 
 - content_for :nav do
-  != yield_content_of item.templates_for(:edit), :nav, { :item => item, :action => '' }
+  != yield_content_of item, :edit, :nav, { :item => item, :action => '' }
 
 %style
   :plain

@@ -5,14 +5,14 @@
 != extends :'base/edit', options
 
 - content_for! :body do
-  != partial item.templates_for('crumbs'), :item => item
+  != partial item, :crumbs, :item => item
 
-  != partial item.templates_for('errors'), :errors => item.errors
+  != partial item, :errors, :errors => item.errors
 
   %form{:action => action, :method => 'post' }
     .split-250-side.meta
       .left
-        != partial item.templates_for(:form), options
+        != partial item, :form, options
 
         %p.submit
           %span.right
@@ -25,4 +25,4 @@
             %span Save
 
       .right
-        != partial item.templates_for(:meta_form), options
+        != partial item, :meta_form, options

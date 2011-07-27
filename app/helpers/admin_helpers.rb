@@ -3,7 +3,13 @@ class Main
     # Admin helper: show_admin (Helpers)
     # Renders an admin page with the admin template.
     # 
-    def show_admin(template, locals={})
+    def show_admin(template, *args) #template, locals={})
+      if template.respond_to?(:templates_for)
+        template = template.templates_for(args.shift || 'index')
+      end
+
+      locals = args.shift || {}
+
       show template, { :layout => :'admin/layout' }, locals
     end
 

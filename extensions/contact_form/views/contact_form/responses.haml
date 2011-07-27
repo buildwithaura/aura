@@ -4,7 +4,7 @@
 - title "%s - Responses" % [ item.to_s ]
 
 - content_for! :nav do
-  != partial item.templates_for('nav'), :parent => item, :model => item.class
+  != partial item, :nav, :parent => item, :model => item.class
 
 - content_for! :title do
   %h1

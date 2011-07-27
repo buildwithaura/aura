@@ -3,7 +3,7 @@ class Main
   get '/admin/welcome' do
     require_login
     @first = true
-    show_admin User.templates_for('edit'),
+    show_admin User, :edit,
       :item   => current_user,
       :action => current_user.path(:edit),
       :first  => @first
@@ -41,7 +41,7 @@ class Main
     require_login
     @item = current_user
 
-    show_admin @item.templates_for('edit'),
+    show_admin @item, :edit,
       :item   => @item,
       :action => @item.path(:edit)
   end
