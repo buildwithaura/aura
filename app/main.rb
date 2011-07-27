@@ -75,11 +75,13 @@ class Main < Sinatra::Base
   set :login_success_message, nil
 
   set :multi_views,     [root('app/views')]
-  set :app_files,       Dir[root('init.rb'), root('{app,extensions}/**/*.rb') + root('**/*.rb')]
+  set :app_files,       Dir[root('init.rb'), root('**/*.rb') + approot('**/*.rb')]
   set :extensions_path, [root('extensions'), approot('extensions')]
 
   # Heroku - override the DB config with this env var.
   set :database_url, ENV['DATABASE_URL']  unless ENV['DATABASE_URL'].nil?
+
+  add_public approot('public')
 
   def self.restart!
     require 'fileutils'

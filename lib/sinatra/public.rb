@@ -6,9 +6,17 @@ module Sinatra
 
     module ClassMethods
       def add_public(dir)
-        Dir[File.join(dir, '**/*')].each do |fname|
-          path = fname.gsub(/^#{dir}\/*/, '/')
-          get(path) { send_file(fname) }
+        dir = File.realpath(dir)
+
+        get '*' do |path|
+          begin
+            fname = File.realpath(File.join(dir, path))
+            pass  unless fname[0...dir.size] == dir
+
+            send_file fname
+          rescue Errno::ENOENT => e
+            pass
+          end
         end
       end
     end
