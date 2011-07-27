@@ -92,8 +92,12 @@
                 width:	this.element.outerWidth(),
                 height: this.element.height() - this.ui.toolbar.height() - 10,
                 resize: "none"
-              }).show();
+              }).show().css({ display: 'block' });
               this.editor.hide();
+
+              var self = this;
+
+              setTimeout(function() { $(self.original).focus(); }, 1);
               
               if (this.options.resizeOptions && $.fn.resizable) {
                 // if element.height still the same after frame was hidden
@@ -139,5 +143,11 @@
 
     $div.prepend($tool2);
     $tool2.hide();
+
+    // Default to HTML view if it's a textile/markdown thing
+    if ($(this).val().match(/format=/)) {
+      $div.find('.toolbar .html').trigger('click');
+      $(this).val($(this).val().replace(/<p><\/p>/g, ''));
+    }
   };
 })(jQuery);
