@@ -36,6 +36,7 @@
     var w = $(this).wysiwyg({
       css: '/css/admin/wysiwyg_field.css',
       rmUnusedControls: true,
+      initialContent: '',
       controls: {
         bold: { visible: true },
         italic: { visible: true },
