@@ -16,9 +16,9 @@ You can use Markdown in your CMS. Go to HTML editing mode, and simply use
 To use Textile, just use `format='textile'` instead.
 
     <div format='textile'>
-      h3. Hello
+      h3. Hello again
 
-      * This is Markdown text.
+      * This is Textile text!
       * In your site, this will look just like how it should be.
     </div>
 
