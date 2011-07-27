@@ -11,7 +11,7 @@ class Main
     # Returns the current user as an instance of {Aura::Models::User}.
     #
     def current_user
-      authenticated(Aura::Models::User)
+      authenticated(User)
     end
 
     # User helper: require_login (Helpers)

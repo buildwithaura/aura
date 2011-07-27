@@ -1,9 +1,3 @@
-# Class: Model (Aura::Models)
-# A class that represents a record type.
-#
-# ## Description
-#    Inherits from {AuraModel}.
-
 # Sequel plugin: AuraModel
 # The base plugin for a model.
 #

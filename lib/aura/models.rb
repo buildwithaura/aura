@@ -1,40 +1,36 @@
-# Module: Models (Aura)
-# The namespace for models.
+# Class: Models (Aura)
+# Models.
 #
-# #### Creating a model
-# Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
-#
-#     module Aura::Models
-#       class Movie < Model
-#         # ...
-#       end
-#     end
-#   
 # #### Finding models
-# Use {Aura::Models.all}.
+# `Aura.models` returns a Models instance, which is enumerable.
 #
-#     Aura::Models.all.map { |m| m.name }
+#     Aura.models    #=> #<Aura::Models>
+#     Aura.models.map { |m| m.name }
 #
 # #### Find by name
-# Use {Aura::Models.get} or Ruby's `const_get`.
+# Use {Aura.models.get} or Ruby's `const_get`.
 #
-#     Aura::Models.get('contact_form')       #=> Aura::Models::ContactForm
-#     Aura::Models.const_get(:ContactForm)   #=> Aura::Models::ContactForm
+#     Aura.models.get('contact_form')       #=> ContactForm
+#     Aura.models.const_get(:ContactForm)   #=> ContactForm
 #
 class Aura
-  module Models
-    extend self
+  class Models
+    include Enumerable
+
+    def each(&blk)
+      all.each &blk
+    end
 
     # Class method: all (Aura::Models)
     # Returns an array of all model classes.
     #
     # ##  Example
-    #     Aura::Models.all.each do |m|
+    #     Aura.models.all.each do |m|
     #       # ...
     #     end
     #
     def all
-      constants.map { |cons| const_get(cons) }
+      @@all ||= Array.new
     end
 
     # Class method: get (Aura::Models)
@@ -53,7 +49,7 @@ class Aura
     def get(name)
       name = camelize(name)  if name.downcase == name
       begin
-        const_get(name)
+        Object.const_get(name)
       rescue NameError
         nil
       end
@@ -63,7 +59,8 @@ class Aura
     # Reloads models
     #
     def reload!
-      constants.each { |c| self.send :remove_const, c }
+      all.each { |m| Object.send :remove_const, m.name.to_sym }
+      @@all = Array.new
 
       files  = Array.new
       files << Aura.gem_root('app/models/**/*.rb')

@@ -38,7 +38,7 @@ class Main
     flash_message "Everything has been cleared. Welcome to your new fresh site!"
 
     # Log in as the test user.
-    session[:user] = Aura::Models::User.first.try(:id)
+    session[:user] = User.first.try(:id)
     redirect R(:admin, :welcome)
   end
 end

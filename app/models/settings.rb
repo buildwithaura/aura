@@ -1,6 +1,4 @@
-class Aura
-module Models
-class Setting < Model
+class Setting < Sequel::Model
   plugin :serialization, :yaml, :value
 
   def self.seed(type=nil, &blk)
@@ -59,6 +57,4 @@ class Setting < Model
     return set(key, value)  if s.nil?
     get key
   end
-end
-end
 end

@@ -37,30 +37,28 @@ class Aura
 
   require "#{PREFIX}/aura/version"
 
-  Model = Sequel::Model
-
   # Alias for Setting.get.
   # See Setting.get for an example.
   def self.get(key)
-    Models::Setting.get key
+    Setting.get key
   end
 
   # Alias for Setting.set.
   # See Setting.get for an example.
   def self.set(key, value)
-    Models::Setting.set key, value
+    Setting.set key, value
   end
 
   # Alias for Setting.default.
   # See Setting.get for an example.
   def self.default(key, value)
-    Models::Setting.default key, value
+    Setting.default key, value
   end
 
   # Alias for Setting.delete.
   # See Setting.get for an example.
   def self.del(key)
-    Models::Setting.del key
+    Setting.del key
   end
 
   # Class method: db_dump (Aura)
@@ -85,9 +83,9 @@ class Aura
   #     #     - ...
   #
   def self.db_dump
-    db = Models.all.first.db
+    db = models.all.first.db
 
-    Models.all.inject({}) { |hash, model|
+    models.all.inject({}) { |hash, model|
       table = model.table_name
       hash[table] = db[table].all
       hash
@@ -119,7 +117,7 @@ class Aura
     # Bring the DB back to the state where we have tables ready.
     Main.flush!
     Aura.run_migrations!
-    db = Models.all.first.db
+    db = models.all.first.db
 
     hash.each do |table, entries|
       entries.each do |entry|
@@ -152,7 +150,7 @@ class Aura
   #     end
   #
   def self.site_empty?
-    ! Models.all.select { |m| m.content? }.detect { |m| m.any? }
+    ! models.all.select { |m| m.content? }.detect { |m| m.any? }
   end
 
   # Class method: find (Aura)
@@ -180,7 +178,7 @@ class Aura
   # with `nil`.
   #
   def self.roots
-    Models.all.inject([]) { |a, m| a += m.roots.try(:all) }
+    models.all.inject([]) { |a, m| a += m.roots.try(:all) }
   end
 
   # Class method: menu (Aura)
@@ -216,6 +214,17 @@ class Aura
     files.each { |f| load f }
 
     # Reload models to ensure they get the right schemae.
-    Aura::Models.reload!
+    Aura.models.reload!
+  end
+
+  # Class method: models (Aura)
+  # Returns a list of models.
+  #
+  # ## Description
+  #    This returns a {Aura::Models} instance. See the class
+  #    documentation for more info.
+  #
+  def self.models
+    Aura::Models.new
   end
 end

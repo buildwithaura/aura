@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ModelTest < Test::Unit::TestCase
-  Page = Aura::Models::Page
-
   setup do
     @main = Page.new(:title => "About us")
     @main.save

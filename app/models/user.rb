@@ -1,6 +1,4 @@
-class Aura
-module Models
-class User < Model
+class User < Sequel::Model
   plugin :aura_editable
 
   extend Shield::Model
@@ -56,6 +54,4 @@ class User < Model
 
     blk.call :info, "You may login with '#{email}' and password '#{password}'."  if block_given?
   end
-end
-end
 end

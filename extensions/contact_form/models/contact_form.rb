@@ -1,6 +1,4 @@
-class Aura
-module Models
-class ContactForm < Model
+class ContactForm < Sequel::Model
   plugin :aura_sluggable      # Accessible via slug: /about-us/services
   plugin :aura_renderable     # Can show a page when accessed by that URL
   plugin :aura_editable
@@ -12,6 +10,4 @@ class ContactForm < Model
     text :title, "Title", :class => 'title main-title'
     text :slug, "Slug", :class => 'compact hide'
   end
-end
-end
 end

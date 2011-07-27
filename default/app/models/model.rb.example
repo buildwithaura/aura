@@ -1,13 +1,11 @@
-module Aura::Models
-  class Something < Model
-    plugin :aura_sluggable      # Accessible via slug: /about-us/services
-    plugin :aura_renderable     # Can show a page when accessed by that URL
-    plugin :aura_editable       # Shows up in editor
+class Something < Sequel::Model
+  plugin :aura_sluggable      # Accessible via slug: /about-us/services
+  plugin :aura_renderable     # Can show a page when accessed by that URL
+  plugin :aura_editable       # Shows up in editor
 
-    form do
-      text :title, "Title", :class => 'title main-title'
-    end
-
-    def self.show_on_sidebar?; true; end
+  form do
+    text :title, "Title", :class => 'title main-title'
   end
+
+  def self.show_on_sidebar?; true; end
 end

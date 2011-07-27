@@ -18,7 +18,7 @@ module Aura::Seeder
     def seed(type=nil, &blk)
       blk = lambda { |*a| }  unless block_given?
 
-      Aura::Models.all.each { |m|
+      Aura.models.each { |m|
         blk.call :seed, m.title_plural
         m.seed(type, &blk)
       }
@@ -27,7 +27,7 @@ module Aura::Seeder
     def seed!(type=nil, &blk)
       blk = lambda { |*a| }  unless block_given?
 
-      Aura::Models.all.each { |m|
+      Aura.models.each { |m|
         blk.call :seed, m.title_plural
         m.seed!(type, &blk)
       }

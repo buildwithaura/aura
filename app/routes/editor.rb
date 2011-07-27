@@ -1,7 +1,7 @@
 class Main
   get '/:model/list' do |model|
     require_login
-    @model = Aura::Models.get(model) or pass
+    @model = Aura.models.get(model) or pass
     pass unless @model.try(:editable?)
 
     show_admin @model.templates_for('list'),
@@ -10,7 +10,7 @@ class Main
 
   get '/:model/new' do |model|
     require_login
-    @model = Aura::Models.get(model) or pass
+    @model = Aura.models.get(model) or pass
     pass unless @model.try(:editable?)
 
     @item = @model.new
@@ -24,7 +24,7 @@ class Main
 
   post '/:model/new' do |model|
     require_login
-    @model = Aura::Models.get(model) or pass
+    @model = Aura.models.get(model) or pass
     pass unless @model.try(:editable?)
 
     begin

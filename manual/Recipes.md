@@ -6,7 +6,7 @@ page_type: section
 #### Use subtype
 In your model:
 
-    class Aura::Models::Page
+    class Page < Sequel::Model
       subtype :portfolio,
         :name     => "Portfolio page",
         :template => "id_portfolio"
@@ -23,7 +23,7 @@ In your model:
 #### Adding models
 If it's a model you want on there:
 
-    class Aura::Models::MyModel
+    class MyModel < Sequel::Model
       def self.show_on_sidebar?; true; end
     end
 

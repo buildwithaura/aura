@@ -41,7 +41,7 @@ class Aura
       id = id.to_i
       return nil  if id == 0
 
-      model = Aura::Models.all.detect { |m| m.class_name == model_name }
+      model = Aura.models.all.detect { |m| m.class_name == model_name }
       return nil  if model.nil?
 
       model[id]

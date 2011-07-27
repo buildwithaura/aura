@@ -1,4 +1,4 @@
-class Aura::Models::Page
+class Page
   subtype :portfolio,
     :name     => "Portfolio page",
     :template => "id_portfolio"

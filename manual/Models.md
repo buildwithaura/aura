@@ -4,13 +4,11 @@ page_type: section
 All models are Sequel models. Aura also uses the Sequel plugin system.
 
 #### Creating a model
-Subclass {Aura::Models::Model} in the *Aura::Models* namespace.
+Subclass `Sequel::Model`.
 
     [app/models/movie.rb (ruby)]
-    module Aura::Models
-      class Movie < Model
-        # ...
-      end
+    class Movie < Sequel::Model
+      # ...
     end
   
 #### Setting up migrations
@@ -36,7 +34,7 @@ method in your migrations files.
 Use Sequel's `plugin` class method.
 
     [app/models/movie.rb (ruby)]
-    class Movie < Model
+    class Movie < Sequel::Model
       plugin :aura_editable
       plugin :aura_sluggable
       plugin :aura_hierarchy
@@ -47,19 +45,14 @@ Use Sequel's `plugin` class method.
 In your extension, create a model file like so.
 
     # extensions/myext/models/post.rb
-    class Aura
-      module Models
-        class Post < Model
-    
-          # put guts here
-          # for example:
-    
-          plugin :aura_editable
-          plugin :aura_sluggable
-    
-          def shown_in_menu?() true; end
-    
-        end
-      end
+    class Post < Sequel::Model
+
+      # put guts here
+      # for example:
+
+      plugin :aura_editable
+      plugin :aura_sluggable
+
+      def shown_in_menu?() true; end
     end
 

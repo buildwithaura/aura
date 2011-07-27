@@ -3,14 +3,14 @@ class Main
   get '/admin/welcome' do
     require_login
     @first = true
-    show_admin Aura::Models::User.templates_for('edit'),
+    show_admin User.templates_for('edit'),
       :item   => current_user,
       :action => current_user.path(:edit),
       :first  => @first
   end
 
   post '/login' do
-    if login(Aura::Models::User, params[:username], params[:password])
+    if login(User, params[:username], params[:password])
       redirect_to_return_url
 
     else
@@ -30,7 +30,7 @@ class Main
 
   get '/logout' do
     if logged_in?
-      logout(Aura::Models::User)
+      logout(User)
       flash_message "You have logged out."
     end
 
