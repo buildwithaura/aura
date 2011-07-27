@@ -4,3 +4,5 @@ files:
 - source: "./**/*.rb"
 
 output: doc
+
+github: aura-cms/aura

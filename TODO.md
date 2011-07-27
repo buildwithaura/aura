@@ -1,4 +1,0 @@
- - Timestamping
- - Cache headers
- - Image upload
- - Categories
