@@ -2,6 +2,7 @@ class Aura::CLI
   # TODO This looks stupid, refactor later
   task :new do
     require 'fileutils'
+
     if params.empty?
       err "Usage: #{$0} new PROJECT_NAME"
       pass
@@ -17,6 +18,7 @@ class Aura::CLI
 
     FileUtils.mkdir name
 
+    # Copy everything over
     Dir["#{path}/**/{.*,*}"].sort.each do |from|
       base   = from.gsub(path, '')
       fn     = File.basename(from)
@@ -29,6 +31,13 @@ class Aura::CLI
         FileUtils.cp from, target
       end
     end
+
+    # Edit the Gemfile
+    gemfile = File.read(File.join(name, 'Gemfile'))
+    version = Aura.prerelease? ? Aura.version : "~> #{Aura.version}"
+    gemfile.gsub!("AURA_GEM_VERSION", version)
+
+    File.open(File.join(name, 'Gemfile'), 'w') { |f| f.write gemfile }
 
     show_tree name
 

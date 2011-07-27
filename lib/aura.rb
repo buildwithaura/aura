@@ -1,3 +1,5 @@
+require "sequel"
+
 # Class: Aura
 # The main class.
 #
@@ -6,6 +8,7 @@ class Aura
 
   autoload :Extension,          "#{PREFIX}/aura/extension"
   autoload :ExtensionNotFound,  "#{PREFIX}/aura/extension"
+  autoload :CLI,                "#{PREFIX}/aura/cli"
   autoload :Menu,               "#{PREFIX}/aura/menu"
   autoload :Models,             "#{PREFIX}/aura/models"
   autoload :Slugs,              "#{PREFIX}/aura/slugs"

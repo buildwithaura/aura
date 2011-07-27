@@ -3,7 +3,7 @@ source :rubygems
 if File.exists?('../aura.gemspec')
   gem 'aura', :path => '../'
 else
-  gem "aura", "0.0.1.pre1"
+  gem "aura", "AURA_GEM_VERSION"
 end
 
 group :development, :test do
