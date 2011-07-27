@@ -1,5 +1,8 @@
 class Main
   module PageHelpers
+    # Page helper: body_class (Helpers)
+    # Sets or gets the class for the body.
+    #
     def body_class(v = nil)
       @body_classes ||= []
       @body_classes << v  if v
@@ -7,16 +10,17 @@ class Main
       @body_classes.join(' ')
     end
 
+    # Page helper: title (Helpers)
+    # Sets or gets the title for the page.
+    #
     def title(title=nil)
       @page_title = title  if title
       @page_title
     end
 
-    def has_content?(key)
-      return false  unless content_blocks.keys.include?(key.to_sym)
-      content_blocks[key.to_sym].any?
-    end
-
+    # Page helper: link_to (Helpers)
+    # Builds a link.
+    #
     def link_to(url, *a, &b)
       attrs = Hash.new
       attrs[:href]  = url

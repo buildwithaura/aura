@@ -18,7 +18,7 @@ Migrations are defined in `app/migrations/`. Use
 [Sinatra-Sequel](http://github.com/rtomayko/sinatra-sequel)'s `migration`
 method in your migrations files.
 
-    [app/migratinos/movie.rb (ruby)]
+    [app/migrations/movie.rb (ruby)]
     class Main
       migration "foo v0.0.1 - create" do
         database.create_table do

@@ -21,6 +21,8 @@ on the extension.
       show :hello
     end
 
+## Partials
+
 #### Using Partials
 Aura provides a `partial` helper.
 
@@ -31,6 +33,58 @@ Aura provides a `partial` helper.
 #### Defining partials
     [extension/myext/views/hello/heading.haml (haml)]
     %h1= title
+
+## Layouts
+
+#### Defining layouts
+Use the `layout` helper to define which layout will be used. This example will look for
+a view called `cart.haml` (or any other layout extension).
+
+    [app/views/cart/list.haml (haml)]
+    - layout 'cart'
+
+    %h1 Your shopping cart
+
+#### Layout files
+Layouts are ordinary view files that use `yield`.
+
+    [app/views/cart.haml (haml)]
+    !!! 5
+    %html
+      %title Shopping cart
+      %body(class='cart')
+        != yield
+
+#### Nested layouts
+You may nest layouts using the `layout` helper in layouts as well. This example
+will place everything inside the `default.haml` layout.
+
+    [app/views/cart.haml (haml)]
+    - layout 'default'
+
+    %section#cart
+      != yield
+    
+## Content sections
+
+#### Content sections
+Aura uses `sinatra-content-for`. In your views, you can use the `content_for` helper.
+
+    [app/views/cart/list.haml (haml)]
+    - layout 'cart'
+
+    - content_for :sidebar do
+      %h3 Your cart
+      %a(href='/checkout') Checkout
+      %a(href='/') Continue shopping
+
+#### Defining regions
+In your layout, use `yield_content` to show the content for it.
+
+    [app/views/cart.haml (haml)]
+    %aside#sidebar
+      != yield_content :sidebar
+
 
 ## View folders
 

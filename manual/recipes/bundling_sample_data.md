@@ -24,5 +24,7 @@ Be sure to add this file to your repository.
 
     $ git add config/seed.yml
 
-The next time your application starts, it will rebuild the database from that snapshot.
+The next time your application starts, it will rebuild the database from
+that snapshot. You can use `rake db:flush` to ensure that this will
+happen the next time the application loads.
 

@@ -43,6 +43,14 @@ class Main
     def admin_back_to_dashboard
       partial :'admin/_back_to_dashboard'
     end
+
+    # Admin helper: admin_watermark (Helpers)
+    # Shows the link to the admin page from the public site.
+    #
+    def admin_watermark
+      return  if current_user.nil?
+      partial 'watermark/watermark'
+    end
   end
 
   helpers AdminHelpers
