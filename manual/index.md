@@ -31,6 +31,14 @@ Using Bundler, this is pretty easy.
     $ bundle install
       ...
 
+#### Configure a database (optional)
+Sequel uses Sqlite by default. To point it to another database, edit the `config/database.rb.example` file.
+
+    [config/database.rb (rb)]
+    Main.configure do |m|
+      m.set :database_url, "mysql://root:pickles@localhost/db_name"
+    end
+
 
 #### Start it up
 Your app is a Rack app. Visit *http://localhost:4833* to see it. (Default user is `test@sinefunc.com`/`password`)

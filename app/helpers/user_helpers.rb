@@ -1,20 +1,20 @@
 class Main
   module UserHelpers
-    # User helpers: logged_in? (Helpers)
+    # User helper: logged_in? (Helpers)
     # Checks if there is a user logged in or not.
     #
     def logged_in?
       !! current_user
     end
 
-    # User helpers: current_user (Helpers)
+    # User helper: current_user (Helpers)
     # Returns the current user as an instance of {Aura::Models::User}.
     #
     def current_user
       authenticated(Aura::Models::User)
     end
 
-    # User helpers: require_login (Helpers)
+    # User helper: require_login (Helpers)
     # Ensures that a route is only accessible to logged in users.
     #
     def require_login
