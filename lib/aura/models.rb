@@ -66,8 +66,8 @@ class Aura
       constants.each { |c| self.send :remove_const, c }
 
       files  = Array.new
-      files << Aura.gem_path('app/models/**/*.rb')
-      files << Aura.path('app/models/**/*.rb')
+      files << Aura.gem_root('app/models/**/*.rb')
+      files << Aura.root('app/models/**/*.rb')
       files += Extension.active.map { |e| e.path('models/**/*.rb') }
 
       # Find and load all

@@ -1,3 +1,12 @@
+ENV['AURA_ROOT'] ||= File.expand_path('../../', __FILE__)
+
+if ENV['APP_FILE']
+  ENV['APP_ROOT'] ||= File.dirname(ENV['APP_FILE'])
+else
+  ENV['APP_ROOT'] ||= ENV['AURA_ROOT']
+  ENV['APP_FILE'] ||= __FILE__
+end
+
 require "sequel"
 
 # Class: Aura
@@ -6,16 +15,25 @@ require "sequel"
 class Aura
   PREFIX = File.dirname(__FILE__)
 
-  autoload :Extension,          "#{PREFIX}/aura/extension"
-  autoload :ExtensionNotFound,  "#{PREFIX}/aura/extension"
-  autoload :CLI,                "#{PREFIX}/aura/cli"
-  autoload :Menu,               "#{PREFIX}/aura/menu"
-  autoload :Models,             "#{PREFIX}/aura/models"
-  autoload :Slugs,              "#{PREFIX}/aura/slugs"
-  autoload :Subtype,            "#{PREFIX}/aura/subtype"
-  autoload :Seeder,             "#{PREFIX}/aura/seeder"
-  autoload :Utils,              "#{PREFIX}/aura/utils"
-  autoload :Editor,             "#{PREFIX}/aura/editor"
+  def self.gem_root(*a)
+    File.join(ENV['AURA_ROOT'], *a)
+  end
+
+  def self.root(*a)
+    File.join(ENV['APP_ROOT'], *a)
+  end
+
+  autoload :Extension,          gem_root("lib/aura/extension")
+  autoload :ExtensionNotFound,  gem_root("lib/aura/extension")
+  autoload :CLI,                gem_root("lib/aura/cli")
+  autoload :Menu,               gem_root("lib/aura/menu")
+  autoload :Models,             gem_root("lib/aura/models")
+  autoload :Slugs,              gem_root("lib/aura/slugs")
+  autoload :Subtype,            gem_root("lib/aura/subtype")
+  autoload :Seeder,             gem_root("lib/aura/seeder")
+  autoload :Utils,              gem_root("lib/aura/utils")
+  autoload :Editor,             gem_root("lib/aura/editor")
+  autoload :App,                gem_root("app/main")
 
   require "#{PREFIX}/aura/version"
 
@@ -185,20 +203,12 @@ class Aura
     @menu ||= Menu.new
   end
 
-  def self.gem_path(*a)
-    File.join(ENV['AURA_ROOT'], *a)
-  end
-
-  def self.path(*a)
-    File.join(ENV['APP_ROOT'], *a)
-  end
-
   # Class method: run_migrations! (Aura)
   # Runs manual migrations for everything.
   def self.run_migrations!
     files  = Array.new
-    files << gem_path('app/migrations/**/*.rb')
-    files << path('app/migrations/**/*.rb')
+    files << gem_root('app/migrations/**/*.rb')
+    files << root('app/migrations/**/*.rb')
     files += Extension.active.map { |e| e.path('migrations/**/*.rb') }
 
     # Find and load all

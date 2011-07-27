@@ -5,4 +5,4 @@ require "rubygems"  unless defined?(::Gem)
 require "bundler"
 Bundler.setup
 
-require 'aura/app'
+require "aura"
