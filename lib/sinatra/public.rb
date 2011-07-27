@@ -13,6 +13,7 @@ module Sinatra
           begin
             fname = File.realpath(File.join(dir, path))
             pass  unless fname[0...dir.size] == dir
+            pass  unless File.file?(fname)
 
             send_file fname
           rescue Errno::ENOENT => e
