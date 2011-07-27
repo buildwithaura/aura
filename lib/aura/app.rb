@@ -44,6 +44,12 @@ if defined?(::Encoding)
   Encoding.default_external = 'utf-8'
 end
 
+# Class: Main
+# The main Sinatra application.
+#
+# ## Description
+#    This is the main application. It is also accessible as `Aura::App`.
+#
 class Main < Sinatra::Base
   set      :root, lambda { |*args| File.join(ENV['AURA_ROOT'], *args) }
   set      :root_path, lambda { |*args| root *args }
