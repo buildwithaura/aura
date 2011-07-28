@@ -33,6 +33,8 @@ class Aura
   autoload :Seeder,             gem_root("lib/aura/seeder")
   autoload :Utils,              gem_root("lib/aura/utils")
   autoload :Editor,             gem_root("lib/aura/editor")
+  autoload :Public,             gem_root("lib/aura/public")
+  autoload :Rendering,          gem_root("lib/aura/rendering")
   autoload :App,                gem_root("app/main")
 
   require "#{PREFIX}/aura/version"

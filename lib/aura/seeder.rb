@@ -1,3 +1,5 @@
+# Sinatra plugin: Seeder (Aura)
+# To be refactored--this sucks
 module Aura::Seeder
   def self.registered(app)
     app.extend ClassMethods

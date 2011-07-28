@@ -1,30 +1,32 @@
+# Sinatra plugin: Rendering (Aura)
 # Allows rendering from multiple engines or renderers.
 #
-# == Usage
+# ## Usage
 #
-#   require 'sinatra/support/multirender'
+# #### Registering
 #
-#   class Main < Sinatra::Base
-#     register Sinatra::MultiRender
+#     class Main < Sinatra::Base
+#       register Aura::Rendering
 #
-#     # These two settings are optional.
-#     set :multi_views,   [ './views', './skin/default' ]
-#     set :multi_engines, [ :erb, :haml ]
+#       # These two settings are optional.
+#       set :multi_views,   [ './views', './skin/default' ]
+#       set :multi_engines, [ :erb, :haml ]
 #
-#     get '/' do
-#       show :home
-#     end
-#   end
-#
+# #### Using show
 # Using #show will automatically find the appropriate template, trying the
-# following variations:
+# following variations.
 #
-#   ./views/home.erb
-#   ./views/home.haml
-#   ./skin/default/home.erb
-#   ./skin/default/home.haml
+#       get '/' do
+#         show :home
+#       end
+#     end
 #
-module Sinatra::MultiRenderExt
+#     # ./views/home.erb
+#     # ./views/home.haml
+#     # ./skin/default/home.erb
+#     # ./skin/default/home.haml
+#
+module Aura::Rendering
   def self.registered(app)
     views = app.views || './views'
 

@@ -55,8 +55,8 @@ class Main < Sinatra::Base
   use      Rack::Session::Cookie
   use      Rack::Deflater  if production?
 
-  register Sinatra::AuraPublic
-  register Sinatra::MultiRenderExt
+  register Aura::Public
+  register Aura::Rendering
   register Aura::Seeder
   register Sinatra::SequelExtension
 
