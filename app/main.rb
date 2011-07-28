@@ -25,10 +25,6 @@ require root['lib/aura']
 require root['lib/terra']
 require root['lib/terra/ext']
 
-# Sinatra plugins
-require root['lib/sinatra/public']
-require root['lib/sinatra/support/multirender-ext']
-
 # Sequel plugins
 Dir[root['lib/sequel/plugins/*.rb']].each { |f| require f }
 

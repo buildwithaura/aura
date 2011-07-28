@@ -50,7 +50,7 @@ class Aura
     # Ensures that a given model is going to be searched by
     # {Aura.find}.
     #
-    # This is automatically called by {Sequel::Plugins::AuraSluggable}.
+    # This is automatically called by {AuraSluggable}.
     #
     # @example
     #

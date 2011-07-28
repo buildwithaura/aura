@@ -1,5 +1,11 @@
 require 'ostruct'
 
+# Class: Subtype (Aura)
+# A subtype.
+#
+# ## Description
+#    This is an OpenStruct. See {AuraSubtyped} for details.
+#
 class Aura
 class Subtype < OpenStruct
   def to_s

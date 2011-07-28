@@ -1,7 +1,23 @@
+# Module: Utils (Aura)
+# Miscellaneous utilities.
+#
 class Aura
   module Utils
     extend self
 
+    # Method: query_string (Aura::Utils)
+    # Converts a hash into a query string.
+    #
+    # ## Usage
+    #     query_string(hash)
+    #
+    # ## Example
+    #     query_string(:q => "peanuts", :page => 2)
+    #     #=> q=peanuts&page=2
+    #
+    #     query_string(:fruits => %w[apple banana])
+    #     #=> q[]=apple&q[]=banana
+    #
     def query_string(hash)
       hash.inject([]) { |arr, (key, value)|
         if value.is_a?(Array)
@@ -20,11 +36,25 @@ class Aura
       }.join('&')
     end
 
+    # Method: key_value (Aura::Utils)
+    # Converts two strings into a key value pair.
+    #
+    # ## Example
+    #     key_value('q', 'peanuts')
+    #     #=> q=peanuts
+    #
     def key_value(k, v)
       require 'cgi'
       '%s=%s' % [CGI.escape(k.to_s), URI.escape(v.to_s)]
     end
 
+    # Method: underscorize (Aura::Utils)
+    # Underscorizes a class's name.
+    #
+    # ## Example
+    #     underscorize(Sequel::Plugins::AuraSluggable)
+    #     #=> 'aura_sluggable'
+    #
     def underscorize(klass)
       klass.to_s.split('::').last.scan(/[A-Z][a-z0-9]*/).map { |s| s.downcase }.join('_')
     end
