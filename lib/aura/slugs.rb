@@ -30,7 +30,7 @@ class Aura
     #
     # @example
     #
-    #   page = Aura::Slugs.find_by_model_id('/page/2')
+    #   page = Aura.slugs.find_by_model_id('/page/2')
     #   assert page == Page[2]
     #
     def find_by_model_id(path)

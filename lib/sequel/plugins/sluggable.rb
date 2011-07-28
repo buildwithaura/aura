@@ -26,7 +26,7 @@ module Sequel
   module Plugins
     module AuraSluggable
       def self.configure(model, opts={})
-        Aura::Slugs.register(model)
+        Aura.slugs.register(model)
       end
 
       module InstanceMethods

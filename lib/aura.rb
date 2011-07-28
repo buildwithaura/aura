@@ -15,10 +15,20 @@ require "sequel"
 class Aura
   PREFIX = File.dirname(__FILE__)
 
+  # Class method: gem_root
+  # Returns the root path of the Aura gem.
+  #
   def self.gem_root(*a)
     File.join(ENV['AURA_ROOT'], *a)
   end
 
+  # Class method: root
+  # Returns the root path of the application.
+  #
+  # ## Example
+  #     Aura.root              #=> "~/myapp"
+  #     Aura.root('init.rb')   #=> "~/myapp/init.rb"
+  #
   def self.root(*a)
     File.join(ENV['APP_ROOT'], *a)
   end
@@ -228,5 +238,19 @@ class Aura
   #
   def self.models
     Aura::Models.new
+  end
+
+  # Class method: slugs (Aura)
+  # Returns the Slugs module.
+  #
+  # ## Description
+  #    Returns {Aura::Slugs} where you can access methods that
+  #    deal with URL slugs.
+  #
+  # ## Example
+  #     Aura.slugs.find('/boots')
+  #
+  def self.slugs
+    Slugs
   end
 end
