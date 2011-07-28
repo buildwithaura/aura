@@ -6,8 +6,12 @@ Bundler.setup
 
 require File.expand_path('../app/init.rb', __FILE__)
 require "rack/test"
-require "contest"
-#require "renvy"
+
+require "para/test/unit"
+# require "contest"
+
+require "redcloth"
+require "rdiscount"
 
 require File.expand_path('../test_temp_helper', __FILE__)
 require File.expand_path('../test_cli_helper', __FILE__)
@@ -18,8 +22,6 @@ class Test::Unit::TestCase
 
   include TempHelper
   include CliHelper
-
-  #alias _setup setup
 
   def setup
     Main.flush!

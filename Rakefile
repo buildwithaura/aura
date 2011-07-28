@@ -9,7 +9,6 @@ desc "Runs tests."
 task :test do
   $:.unshift File.join(File.dirname(__FILE__), 'test')
 
-  #Dir['test/**/*_{test,story}.rb'].each { |file| loaf file }
   Dir['test/{unit,stories}/*.rb'].each { |file| load file }
 end
 
