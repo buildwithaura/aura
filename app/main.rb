@@ -20,13 +20,8 @@ require root['lib/core/object_ext']
 
 # Aura proper
 require root['lib/aura']
-
-# Terra
 require root['lib/terra']
 require root['lib/terra/ext']
-
-# Sequel plugins
-Dir[root['lib/sequel/plugins/*.rb']].each { |f| require f }
 
 if defined?(::Encoding)
   Encoding.default_external = 'utf-8'

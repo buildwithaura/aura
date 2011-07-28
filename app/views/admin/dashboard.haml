@@ -7,7 +7,7 @@
     != link_to R(:admin) do
       = "Dashboard"
 
-  - Aura::Editor.roots.each do |model, items|
+  - Aura.editor.roots.each do |model, items|
     - next unless model.try(:show_on_sidebar?)
     != partial model, 'nav', :items => items, :model => model
 

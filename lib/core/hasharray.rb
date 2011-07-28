@@ -1,31 +1,35 @@
+# Class: HashArray
 # A stopgap solution to Ruby 1.8's lack of ordered hashes.
 #
 # A HashArray, for all intents and purposes, acts like an array. However, the
 # common stuff are overloaded to work with hashes.
 #
-# == Basic usage
+# ## Basic usage
 #
-# You can create a HashArray by passing it an array:
+# #### Creating
+# You can create a HashArray by passing it an array.
 #
-#   dict = HashArray.new([
-#     { :good_morning => "Bonjour" },
-#     { :goodbye      => "Au revoir" },
-#     { :good_evening => "Bon nuit" }
-#   ])
+#     dict = HashArray.new([
+#       { :good_morning => "Bonjour" },
+#       { :goodbye      => "Au revoir" },
+#       { :good_evening => "Bon nuit" }
+#     ])
 #
+# #### Converting
 # You may also use it like so:
 #
-#   letters = [ { :a => "Aye"}, { :b => "Bee" } ].to_hash_array
+#     letters = [ { :a => "Aye"}, { :b => "Bee" } ].to_hash_array
 #
+# #### Iterating
 # Now you can use the typical enumerator functions:
 #
-#   dict.each do |(key, value)|
-#     puts "#{key} is #{value}"
-#   end
+#     dict.each do |(key, value)|
+#       puts "#{key} is #{value}"
+#     end
 #
-#   #=> :good_morning is "Bonjour"
-#   #   :goodbye is "Au revoir"
-#   #   :good_evening is "Bon nuit"
+#     #=> :good_morning is "Bonjour"
+#     #   :goodbye is "Au revoir"
+#     #   :good_evening is "Bon nuit"
 #
 class HashArray < Array
   # Works like Hash#each.

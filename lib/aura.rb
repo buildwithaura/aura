@@ -253,4 +253,18 @@ class Aura
   def self.slugs
     Slugs
   end
+
+  # Class method: editor (Aura)
+  # Returns the Editor module.
+  #
+  # ## Description
+  #    Returns {Aura::Editor} where you can access methods that
+  #    deal with the editor.
+  #
+  # ## Example
+  #     Aura.editor.roots
+  #
+  def self.editor
+    Editor
+  end
 end
