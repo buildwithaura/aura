@@ -82,9 +82,8 @@ class Aura::CLI
       require 'aura/version'
 
       puts "Aura #{Aura.version}"
-      exit
+    else
+      super *a
     end
-
-    super *a
   end
 end
