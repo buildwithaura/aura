@@ -2,6 +2,7 @@ class Aura::CLI
   # TODO This looks stupid, refactor later
   task :new do
     require 'fileutils'
+    require 'aura/version'
 
     if params.empty?
       err "Usage: #{$0} new PROJECT_NAME"
@@ -78,6 +79,8 @@ class Aura::CLI
 
   def self.run(*a)
     if %w(-v --version).include?(a.join(' '))
+      require 'aura/version'
+
       puts "Aura #{Aura.version}"
       exit
     end

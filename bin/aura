@@ -2,6 +2,7 @@
 require 'shake'
 
 ENV['AURA_ROOT'] = File.expand_path('../../', __FILE__)
-require File.join(ENV['AURA_ROOT'], 'lib/aura')
+$:.unshift "#{ENV['AURA_ROOT']}/lib"
 
+require 'aura/cli'
 Aura::CLI.run!
