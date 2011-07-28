@@ -22,7 +22,6 @@ class Test::Unit::TestCase
   #alias _setup setup
 
   def setup
-    Main.set :migrations_log, lambda { StringIO.new }
     Main.flush!
     Aura.run_migrations!
     Main.seed

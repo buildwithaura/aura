@@ -10,6 +10,10 @@ class CLITest < Test::Unit::TestCase
 
       assert File.directory?('x/')
       assert File.file?('x/Gemfile')
+      assert File.file?('x/config.ru')
+
+      aura "new x"
+      assert stderr.include?("already exists")
     }
   end
 

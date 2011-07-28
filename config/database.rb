@@ -3,5 +3,10 @@ Main.configure do |m|
 end
 
 Main.configure(:test) do |m|
-  m.set :database_url, "sqlite://#{Dir.tmpdir}/test-#{Time.now.to_i}.db"
+  path = "#{Dir.tmpdir}/test-#{rand}.db"
+
+  m.set :migrations_log, lambda { StringIO.new }
+  m.set :database_url, "sqlite://#{path}"
+
+  at_exit { FileUtils.rm_rf path }
 end
