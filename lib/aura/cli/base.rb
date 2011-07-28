@@ -72,7 +72,7 @@ class Aura::CLI
     err
     err "Example:"
     err "  # This generates a new project in ./my_project."
-    err "  $ aura new my_project"
+    err "  $ #{executable} new my_project"
     err
   end
   task.description = "Shows this help screen"

@@ -9,9 +9,15 @@ require "rack/test"
 require "contest"
 #require "renvy"
 
+require File.expand_path('../test_temp_helper', __FILE__)
+require File.expand_path('../test_cli_helper', __FILE__)
+
 class Test::Unit::TestCase
   include Rack::Test::Methods
   include Rtopia
+
+  include TempHelper
+  include CliHelper
 
   #alias _setup setup
 
@@ -28,6 +34,13 @@ class Test::Unit::TestCase
 
   def db
     Main.database
+  end
+
+  def aura(cmd)
+    old, $0 = $0, 'aura_'
+    cli { Aura::CLI.run *cmd.split(' ') }
+  ensure
+    $0 = old
   end
 
   def p(what, obj=nil)
