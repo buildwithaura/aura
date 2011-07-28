@@ -6,7 +6,7 @@ class Aura
   #    Aura.version  #=> "0.5.2"
   #
   def self.version
-    "0.0.1.pre4"
+    "0.0.1.pre5"
   end
   
   # Class method: prerelease? (Aura)
