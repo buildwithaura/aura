@@ -32,6 +32,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rack-test", "~> 0.6.0"
   s.add_development_dependency "sqlite3-ruby", "~> 1.3.3"
   s.add_development_dependency "launchy", "~> 0.3.7"
-  s.add_development_dependency "para", "~> 0.0.4"
+  s.add_development_dependency "para", "~> 0.1.0"
   # s.add_development_dependency "contest", "~> 0.1.3"
 end

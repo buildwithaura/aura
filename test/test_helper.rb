@@ -23,6 +23,8 @@ class Test::Unit::TestCase
   include TempHelper
   include CliHelper
 
+  disable_parallel
+
   def setup
     Main.flush!
     Aura.run_migrations!
