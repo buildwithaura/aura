@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email = ["rico@sinefunc.com"]
   s.homepage = "http://aura-cms.github.com"
   s.files = `git ls-files`.strip.split("\n")
+  s.executables = ['rake']
 
   s.add_dependency "ffaker", "= 0.4.0"
   s.add_dependency "haml", "= 3.1.1"
