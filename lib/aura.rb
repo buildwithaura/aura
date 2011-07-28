@@ -214,7 +214,7 @@ class Aura
   end
 
   # Class method: run_migrations! (Aura)
-  # Runs manual migrations for everything.
+  # Runs migrations for everything.
   def self.run_migrations!
     files  = Array.new
     files << gem_root('app/migrations/**/*.rb')

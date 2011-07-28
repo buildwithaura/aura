@@ -55,4 +55,33 @@ class Aura::CLI
 
   task.description = "Starts a new project"
   task.usage = "new NAME"
+
+  task :help do
+    err "Usage: #{executable} <command>"
+    err
+    err "Options:"
+    err "  -v, [--version]      Shows the Aura version number and quits"
+    err
+    err "Commands:"
+    tasks.each { |name, task| err "  %-20s %s" % [ name, task.description ] }
+    err
+    err "Description:"
+    err "  The '#{executable} new' command creates a new Aura application with"
+    err "  the default directory structure."
+    err
+    err "Example:"
+    err "  # This generates a new project in ./my_project."
+    err "  $ aura new my_project"
+    err
+  end
+  task.description = "Shows this help screen"
+
+  def self.run(*a)
+    if %w(-v --version).include?(a.join(' '))
+      puts "Aura #{Aura.version}"
+      exit
+    end
+
+    super *a
+  end
 end
