@@ -1,35 +1,24 @@
-# Aura
+# My Application
 
-Aura is a CMS.
+Config (optional)
+-----------------
 
-## Super easy setup
+See `config/database.rb.example`.
 
-Clone:
+Development setup
+-----------------
 
-    git clone http://github.com/aura-cms/aura.git
+    $ bundle install
+    $ rackup
 
-Setup:
+Deploying to Heroku
+-------------------
 
-    cd aura
-    bundle install
+    heroku create NAME --stack bamboo-mri-1.9.2
+    git push heroku master
 
-Run:
+Default user names
+------------------
 
-    ruby init.rb
+After the first installation, log in with `test@sinefunc.com` / `password`.
 
-Point your browser then to `http://localhost:4567`! The default user is
-`test@sinefunc.com` / `password`.
-
-## Other setup notes
-
-#### Configuring a database
-
-Aura uses sqlite by default. If you'd want it to connect to another SQL 
-database, see the `config/database.rb.example`.
-
-## Authors and copyright
-
-Aura is authored and maintained by Rico Sta. Cruz of Sinefunc, Inc.
-See more of our work on [www.sinefunc.com](http://www.sinefunc.com)!
-
-(c) 2010-2011 Rico Sta. Cruz. Released under the MIT license.
