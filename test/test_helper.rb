@@ -7,8 +7,8 @@ Bundler.setup
 require File.expand_path('../app/init.rb', __FILE__)
 require "rack/test"
 
-require "para/test/unit"
-# require "contest"
+require "test/unit"
+require "contest"
 
 require "redcloth"
 require "rdiscount"
@@ -22,6 +22,12 @@ class Test::Unit::TestCase
 
   include TempHelper
   include CliHelper
+
+  # Stub
+  unless defined?(::Para)
+    def self.enable_parallel() end
+    def self.disable_parallel() end
+  end
 
   disable_parallel
 

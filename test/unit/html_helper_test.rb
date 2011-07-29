@@ -24,6 +24,6 @@ class HtmlHelper < Test::Unit::TestCase
 
   test "textile" do
     assert_equal html('<textile>"ab":/cd</textile>'), '<p><a href="/cd">ab</a></p>'
-    assert_equal "<h2>Hello</h2>\n<p>What&#8217;s up?</p>", html("<textile>\nh2. Hello\n\nWhat's up?\n</textile>")
+    assert_equal "<h2>Hello</h2>\n<p>Whats up?</p>", html("<textile>\nh2. Hello\n\nWhats up?\n</textile>")
   end
 end

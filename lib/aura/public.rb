@@ -49,8 +49,6 @@ class Aura
       #
       def add_public(dir, options={})
         return  unless File.directory?(dir)
-        dir = File.realpath(dir)
-
         prefix = options.delete(:prefix)
 
         get "#{prefix}*" do |path|

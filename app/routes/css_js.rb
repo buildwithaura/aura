@@ -30,7 +30,7 @@ class Main
   end
 
   get '/css/*.css' do |fname|
-    pass  if dirty_glob?(str)
+    pass  if dirty_glob?(fname)
 
     engines = %w(sass scss less)
     type    = :css
@@ -41,7 +41,7 @@ class Main
   end
 
   get '/js/*.js' do |fname|
-    pass  if dirty_glob?(str)
+    pass  if dirty_glob?(fname)
 
     engines = %w(coffee)
     type    = :js

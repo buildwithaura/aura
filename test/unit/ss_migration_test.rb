@@ -9,6 +9,6 @@ class SsMigrationTest < Test::Unit::TestCase
 
     Aura.run_migrations!
 
-    assert_include db.tables, :pages
+    assert db.tables.include?(:pages)
   end
 end

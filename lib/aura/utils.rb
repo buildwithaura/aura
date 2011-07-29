@@ -66,14 +66,14 @@ class Aura
     #
     def in_dir?(file, dir)
       return false  unless File.exists?(file)
+      return false  unless File.directory?(dir)
 
-      dir  = File.realdirpath(dir) # Can throw Errno:ENOENT
       node = File.dirname(file)
 
       while true
-        parent = File.realdirpath(File.join(node, '..'))
-        return false  if parent == node
-        return true   if node == dir
+        parent = File.join(node, '..')
+        return false  if File.identical?(parent, node)
+        return true   if File.identical?(node, dir)
         node = parent
       end
     end

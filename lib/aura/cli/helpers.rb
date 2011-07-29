@@ -8,7 +8,10 @@ module Aura::CLI::Helpers
   end
 
   def show_tree(path, what=:create)
-    explore = lambda { |path, depth=0|
+    explore = lambda { |*a| #path, depth=0
+      path, depth = a
+      depth ||= 0
+
       files = Dir["#{path}/{.*,*}"]
 
       dirs  = files.select { |f| File.directory?(f) && !%w(. ..).include?(File.basename(f)) }
@@ -18,7 +21,7 @@ module Aura::CLI::Helpers
       status :create, path + '/'
 
       files.each { |f|
-        status :'', path + '/' + color(File.basename(f), 30)
+        status '', (path + '/' + color(File.basename(f), 30))
       }
 
       dirs.each  { |d| explore[d, depth+1] }
