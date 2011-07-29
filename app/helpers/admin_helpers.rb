@@ -18,10 +18,6 @@ class Main
       @area_class
     end
 
-    def admin_css
-      [{ :href => '/css/admin.css', :media => 'screen' }]
-    end
-
     # Admin helper: admin_icon (Helpers)
     # Draws an img tag of the given icon.
     #

@@ -6,8 +6,8 @@
       %title!= title || Aura.get('site.name')
       != jquery
 
-      - admin_css.each do |css|
-        %link{:rel => 'stylesheet', :media => css[:media], :type => 'text/css', :href => css[:href]}
+      - Aura.admin.css.each do |css|
+        %link{:rel => 'stylesheet', :media => css[:media] || 'screen', :type => 'text/css', :href => css[:href]}
 
   %body{:class => body_class}
 

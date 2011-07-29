@@ -25,11 +25,10 @@ class Test::Unit::TestCase
 
   def login!
     visit '/login'
-    if page.has_css?("form[action$=login]")
+    if page.has_css?("form input[name=username]")
       fill_in 'username', :with => Main.default_user
       fill_in 'password', :with => Main.default_password
       click_button 'Login'
-      save_and_open_page
       assert ! page.has_content?('Login'), 'Login failed.'
     end
   end
