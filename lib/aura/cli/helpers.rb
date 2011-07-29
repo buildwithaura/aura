@@ -9,16 +9,16 @@ module Aura::CLI::Helpers
 
   def show_tree(path, what=:create)
     explore = lambda { |path, depth=0|
-      files = Dir["#{path}/*"]
+      files = Dir["#{path}/{.*,*}"]
 
-      dirs  = files.select { |f| File.directory?(f) && !%w(. ..).include?(f) }
+      dirs  = files.select { |f| File.directory?(f) && !%w(. ..).include?(File.basename(f)) }
       files = files.select { |f| File.file?(f) }
 
       dirname = File.basename(path)
-      status :mkdir, path + '/'
+      status :create, path + '/'
 
       files.each { |f|
-        status :+, path + '/' + color(File.basename(f),30)
+        status :'', path + '/' + color(File.basename(f), 30)
       }
 
       dirs.each  { |d| explore[d, depth+1] }
