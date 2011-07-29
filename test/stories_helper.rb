@@ -38,7 +38,7 @@ class Test::Unit::TestCase
   def assert_admin(url, session=self)
     session.visit url
     assert ! session.has_content?('Login'), 'Ended up in a login page.'
-    assert session.has_content?('Aura')
+    assert session.has_content?('TESTSITE')
     assert session.has_css?('#top')
     assert session.has_css?('aside#nav')
   end

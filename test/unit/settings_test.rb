@@ -2,12 +2,8 @@ require 'test_helper'
 
 class SettingsTest < Test::Unit::TestCase
   test "Settings" do
-    assert_equal "My Site", Aura.get('site.name')
-
     Aura.set('site.name', 'Hello')
     assert_equal 'Hello', Aura.get('site.name')
-
-    Aura.set('site.name', 'My Site')
   end
 
   test "Default settings" do

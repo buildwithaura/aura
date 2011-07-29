@@ -29,6 +29,7 @@ class Test::Unit::TestCase
     Main.flush!
     Aura.run_migrations!
     Main.seed
+    Aura.set 'site.name', 'TESTSITE'
   end
 
   def app
