@@ -25,14 +25,14 @@ require "sequel"
 class Aura
   PREFIX = File.dirname(__FILE__)
 
-  # Class method: gem_root
+  # Class method: gem_root (Aura)
   # Returns the root path of the Aura gem.
   #
   def self.gem_root(*a)
     File.join(ENV['AURA_ROOT'], *a)
   end
 
-  # Class method: root
+  # Class method: root (Aura)
   # Returns the root path of the application.
   #
   # ## Example

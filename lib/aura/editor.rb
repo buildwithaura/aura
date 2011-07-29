@@ -6,7 +6,7 @@
 #
 class Aura
   module Editor
-    # Class method: roots
+    # Class method: roots (Aura::Editor)
     # Returns the root nodes to be shown on the editor sidebar.
     #
     # ## Usage
