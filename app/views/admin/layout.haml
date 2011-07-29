@@ -3,7 +3,7 @@
   - unless request.xhr?
     %head
       %meta(charset='UTF-8')
-      %title!= title || "Aura"
+      %title!= title || Aura.get('site.name')
       != jquery
 
       - admin_css.each do |css|
@@ -20,7 +20,7 @@
       %header#top
         %h3
           %a{:href => R(:admin)}
-            Aura
+            = Aura.get('site.name')
           %a.view.ext{:href => '/', :target => 'preview'}
             view site
 
