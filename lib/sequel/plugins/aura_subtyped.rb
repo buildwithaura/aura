@@ -6,7 +6,7 @@ module Plugins
 module AuraSubtyped
   module InstanceMethods
     def template
-      subtype.try(:template) || 'index'
+      subtype.try(:template) || 'show'
     end
 
     # Method: subtype (AuraSubtyped)
@@ -67,7 +67,7 @@ module AuraSubtyped
 
       @@subtypes[:default] ||= Aura::Subtype.new :id => :default,
         :name     => 'Default',
-        :template => 'index'
+        :template => 'show'
 
       @@subtypes.values.sort_by { |st| st._id.to_s }
     end

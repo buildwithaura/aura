@@ -22,15 +22,15 @@ module Sequel
 
           [ :"#{klass}/#{template}",
             :"base/#{template}",
-            :"#{klass}/default",
-            :"base/default"
+            :"#{klass}/show",
+            :"base/show"
           ].map { |s| s.to_sym }.uniq
         end
 
         # Returns the template to be used when it's displayed.
         # Overridden by AuraSubtyped.
         def template
-          'default'
+          'show'
         end
 
         def renderable?

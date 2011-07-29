@@ -17,7 +17,7 @@ class Subtype < OpenStruct
   end
 
   def template
-    @table[:template] || 'id'
+    @table[:template] || 'show'
   end
 
   def _id
