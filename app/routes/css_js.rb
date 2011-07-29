@@ -23,9 +23,15 @@ class Main
     rescue Errno::ENOENT => e
       nil
     end
+
+    def dirty_glob?(str)
+      %w(* .. { } [ ]).any? { |sym| str.include?(sym) }
+    end
   end
 
   get '/css/*.css' do |fname|
+    pass  if dirty_glob?(str)
+
     engines = %w(sass scss less)
     type    = :css
 
@@ -35,6 +41,8 @@ class Main
   end
 
   get '/js/*.js' do |fname|
+    pass  if dirty_glob?(str)
+
     engines = %w(coffee)
     type    = :js
 
