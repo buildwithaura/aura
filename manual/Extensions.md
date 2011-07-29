@@ -1,23 +1,11 @@
 title: Extensions
 page_type: section
 --
+(TODO: Update this to be easier to read)
+
 You may package your entire `app/` folder as an extension by copying it into
 `extensions/my_extension/`. You may then redistribute it for using in other
 Aura apps.
-
-    $ ...
-    extensions/
-    '- my_extension/
-       |- init/               - Initializers
-       |- helpers/            - Helper methods (all *.rb autoloaded)
-       |- models/             - Model files (all *.rb autoloaded)
-       |- routes/             - Sinatra routes
-       |- public/             - Raw files to be served
-       |- tasks/              - Rake tasks (all *.rake autoloaded when doing `rake`)
-       |- views/
-       |- my_extension.rb     - Main file. Autoloaded when the extension is first loaded
-       |- init.rb             - Loaded when everything else is set up already
-       '- info.yml            - Metadata
 
 (All files and folders above are optional. Just use what you need!)
 

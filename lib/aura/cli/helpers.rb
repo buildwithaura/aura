@@ -14,13 +14,11 @@ module Aura::CLI::Helpers
       dirs  = files.select { |f| File.directory?(f) && !%w(. ..).include?(f) }
       files = files.select { |f| File.file?(f) }
 
-      dn = File.basename(path)
-
-      w = depth==0?what:'.'
-      status w, ("  " * (depth)) + color("#{dn}/", 30)
+      dirname = File.basename(path)
+      status :mkdir, path + '/'
 
       files.each { |f|
-        status '.', ("  " * (depth+1)) + File.basename(f)
+        status :+, path + '/' + color(File.basename(f),30)
       }
 
       dirs.each  { |d| explore[d, depth+1] }
