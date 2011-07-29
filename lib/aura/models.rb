@@ -59,17 +59,11 @@ class Aura
     # Reloads models
     #
     def reload!
+      # Unload all models
       all.each { |m| Object.send :remove_const, m.name.to_sym }
       @@all = Array.new
 
-      files  = Array.new
-      files << Aura.gem_root('app/models/**/*.rb')
-      files += Extension.active.map { |e| "#{e.path}/models/**/*.rb" }
-      files << Aura.root('app/models/**/*.rb')
-
-      # Find and load all
-      files = files.compact.map { |spec| Dir[spec].sort }.flatten.uniq
-      files.each { |f| load f }
+      Aura.files.glob('models/**/*.rb').each { |f| load f }
     end
 
     # Puts models in the global namespace.

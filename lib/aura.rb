@@ -12,6 +12,16 @@ require "sequel"
 # Class: Aura
 # The main class.
 #
+# #### Paths
+#
+#     Aura.root         #=> "~/myapp/root"
+#     Aura.gem_root     #=> "/usr/lib/ruby/gems.../aura-0.0.1"
+#
+# #### Files
+#
+#     Aura.files['models/book.rb']   #=> "~/myapp/app/models/book.rb"
+#     Aura.files.glob('css/**/*')    #=> #<Array>
+#
 class Aura
   PREFIX = File.dirname(__FILE__)
 
@@ -45,6 +55,7 @@ class Aura
   autoload :Editor,             gem_root("lib/aura/editor")
   autoload :Public,             gem_root("lib/aura/public")
   autoload :Rendering,          gem_root("lib/aura/rendering")
+  autoload :Files,              gem_root("lib/aura/files")
   autoload :App,                gem_root("app/main")
 
   require "#{PREFIX}/aura/version"
@@ -216,14 +227,7 @@ class Aura
   # Class method: run_migrations! (Aura)
   # Runs migrations for everything.
   def self.run_migrations!
-    files  = Array.new
-    files << gem_root('app/migrations/**/*.rb')
-    files += Extension.active.map { |e| "#{e.path}/migrations/**/*.rb" }
-    files << root('app/migrations/**/*.rb')
-
-    # Find and load all
-    files = files.compact.map { |spec| Dir[spec].sort }.flatten.uniq
-    files.each { |f| load f }
+    Aura.files.glob('migrations/**/*.rb').each { |f| load f }
 
     # Reload models to ensure they get the right schemae.
     Aura.models.reload!
@@ -266,5 +270,19 @@ class Aura
   #
   def self.editor
     Editor
+  end
+
+  # Class method: files (Aura)
+  # Returns the Files module.
+  #
+  # ## Description
+  #    Returns {Aura::Editor} where you can access methods that
+  #    deal with files.
+  #
+  # ## Example
+  #     Aura.files['models/page.rb']
+  #
+  def self.files
+    Files
   end
 end
