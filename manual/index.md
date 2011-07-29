@@ -17,11 +17,11 @@ Start a new project using [aura new](aura_new.html). This creates a folder with 
 
     $ aura new myproject
        create  myproject/
-       create    config.ru
-       create    init.rb
-       create    app/
-       create      models/
-       create        page.rb.example
+       create  myproject/config.ru
+       create  myproject/init.rb
+       create  myproject/app/
+       create  myproject/app/models/
+       create  myproject/app/models/page.rb.example
        ...
 
 #### Install the needed gems
