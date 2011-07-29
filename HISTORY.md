@@ -1,3 +1,12 @@
+v0.0.1.pre7 - Jul 29, 2011
+--------------------------
+
+### Changed:
+  * default template is now 'show'
+
+### Fixed:
+  * Fix CSS load paths and default theme CSS
+
 v0.0.1.pre6 - Jul 29, 2011
 --------------------------
 
