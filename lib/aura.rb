@@ -37,6 +37,7 @@ class Aura
   PREFIX = File.dirname(__FILE__)
 
   # Class method: gem_root (Aura)
+  # Usage:        Aura.gem_root([args])
   # Returns the root path of the Aura gem.
   #
   def self.gem_root(*a)
@@ -44,6 +45,7 @@ class Aura
   end
 
   # Class method: root (Aura)
+  # Usage:        Aura.root([args])
   # Returns the root path of the application.
   #
   # ## Example
@@ -67,6 +69,7 @@ class Aura
   autoload :Public,             gem_root("lib/aura/public")
   autoload :Rendering,          gem_root("lib/aura/rendering")
   autoload :Files,              gem_root("lib/aura/files")
+  autoload :Admin,              gem_root("lib/aura/admin")
   autoload :App,                gem_root("app/main")
 
   require "#{PREFIX}/aura/version"
@@ -228,13 +231,6 @@ class Aura
     roots.select { |item| item.shown_in_menu? }.sort
   end
 
-  # Class method: admin_menu (Aura)
-  # Returns admin menu items.
-  #
-  def self.admin_menu
-    @menu ||= Menu.new
-  end
-
   # Class method: run_migrations! (Aura)
   # Runs migrations for everything.
   def self.run_migrations!
@@ -270,6 +266,8 @@ class Aura
   end
 
   # Class method: editor (Aura)
+  # Usage: Aura.editor
+  #
   # Returns the Editor module.
   #
   # ## Description
@@ -284,10 +282,12 @@ class Aura
   end
 
   # Class method: files (Aura)
+  # Usage: Aura.files
+  #
   # Returns the Files module.
   #
   # ## Description
-  #    Returns {Aura::Editor} where you can access methods that
+  #    Returns {Aura::Files} where you can access methods that
   #    deal with files.
   #
   # ## Example
@@ -295,5 +295,21 @@ class Aura
   #
   def self.files
     Files
+  end
+
+  # Class method: admin (Aura)
+  # Usage: Aura.admin
+  #
+  # Returns the Admin module.
+  #
+  # ## Description
+  #    Returns {Aura::Admin} where you can access methods that
+  #    deal with files.
+  #
+  # ## Example
+  #     Aura.admin.menu
+  #
+  def self.admin
+    Admin
   end
 end

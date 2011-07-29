@@ -1,9 +1,9 @@
 # Model: Page
+# Inherits: {AuraModel} {AuraSluggable} {AuraRenderable} {AuraEditable} {AuraHierarchy} {AuraSubtyped}
 # The page model.
 #
-# ## Description
-#    This class has these plugins in it. Refer to them for documentation.
-#
+# ## Inherits from
+#  * {AuraModel}
 #  * {AuraSluggable}
 #  * {AuraRenderable}
 #  * {AuraEditable}

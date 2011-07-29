@@ -1,4 +1,4 @@
-Aura.admin_menu.tap { |m|
+Aura.admin.menu.tap { |m|
   m.add "settings",
     :name => "Settings",
     :href => Rtopia.R(:admin, :settings),

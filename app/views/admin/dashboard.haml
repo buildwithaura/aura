@@ -14,7 +14,7 @@
   %nav
     %h3 System
     %ul
-      - Aura.admin_menu.items.each do |item|
+      - Aura.admin.menu.items.each do |item|
         %li.browse
           != link_to(item.href || '#') do
             != admin_icon(item.icon || 'generic')
