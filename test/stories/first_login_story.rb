@@ -2,6 +2,7 @@ require File.expand_path('../../stories_helper', __FILE__)
 
 class FirstLoginStory < Test::Unit::TestCase
   test "First login" do
+    visit '/logout'
     visit '/login'
 
     assert_location '/login'

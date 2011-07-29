@@ -55,9 +55,9 @@ class Aura
 
         get "#{prefix}*" do |path|
           begin
-            fname = File.realpath(File.join(dir, path))
-            pass  unless fname[0...dir.size] == dir
+            fname = File.join(dir, path)
             pass  unless File.file?(fname)
+            pass  unless Utils.in_dir?(fname, dir)
 
             send_file fname
           rescue Errno::ENOENT => e

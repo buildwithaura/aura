@@ -24,13 +24,14 @@ class Test::Unit::TestCase
   end
 
   def login!
+    visit '/logout'
     visit '/login'
-    if page.has_css?("form input[name=username]")
-      fill_in 'username', :with => Main.default_user
-      fill_in 'password', :with => Main.default_password
-      click_button 'Login'
-      assert ! page.has_content?('Login'), 'Login failed.'
-    end
+
+    fill_in 'username', :with => Main.default_user
+    fill_in 'password', :with => Main.default_password
+    click_button 'Login'
+
+    assert ! page.has_content?('Login'), 'Login failed.'
   end
 
   # Checks that the given URL is an admin area.

@@ -58,5 +58,24 @@ class Aura
     def underscorize(klass)
       klass.to_s.split('::').last.scan(/[A-Z][a-z0-9]*/).map { |s| s.downcase }.join('_')
     end
+
+    # Method: in_dir? (Aura::Utils)
+    # Usage:  Utils.in_dir?(file, dir)
+    #
+    # Checks if a given `file` is inside `dir`.
+    #
+    def in_dir?(file, dir)
+      return false  unless File.exists?(file)
+
+      dir  = File.realdirpath(dir) # Can throw Errno:ENOENT
+      node = File.dirname(file)
+
+      while true
+        parent = File.realdirpath(File.join(node, '..'))
+        return false  if parent == node
+        return true   if node == dir
+        node = parent
+      end
+    end
   end
 end
