@@ -1,3 +1,15 @@
+# Model: Page
+# The page model.
+#
+# ## Description
+#    This class has these plugins in it. Refer to them for documentation.
+#
+#  * {AuraSluggable}
+#  * {AuraRenderable}
+#  * {AuraEditable}
+#  * {AuraHierarchy}
+#  * {AuraSubtyped}
+#
 class Page < Sequel::Model
   plugin :aura_sluggable      # Accessible via slug: /about-us/services
   plugin :aura_renderable     # Can show a page when accessed by that URL
@@ -40,7 +52,21 @@ class Page < Sequel::Model
     self.class.form subtype._id
   end
 
+  # Class method: custom_field (Page)
   # Creates a custom field and adds getters/setters for it.
+  #
+  # ##  Example
+  #
+  # #### Creating custom fields
+  #
+  #     [app/models/page-ext.rb (rb)]
+  #     class Page
+  #       custom_field :recipe
+  #     end
+  #
+  #     p = Page.new
+  #     p.recipe = "Chili Con Carne"
+  #
   def self.custom_field(name)
     name = name.to_sym
     self.send(:define_method, name) do
