@@ -6,6 +6,7 @@ class ExtensionsTest < Test::Unit::TestCase
     real_names   = Aura::Extension.active.map { |ext| ext.name }
     needed_names = Main.additional_extensions
 
+    p real_names
     assert_equal real_names.sort, needed_names.sort
   end
 

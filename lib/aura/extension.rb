@@ -154,8 +154,7 @@ class Aura
     #  * {Aura::Extension.all}
     #
     def self.active
-      return @actives  unless @actives.nil?
-      @actives ||= self.active_names.map { |ext| self[ext] }.compact
+      self.active_names.map { |ext| self[ext] }.compact
     end
 
     # Class method: active_names (Aura::Extension)
