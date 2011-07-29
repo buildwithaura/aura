@@ -1,3 +1,13 @@
+v0.0.1.pre8 - Jul 29, 2011
+--------------------------
+
+### Fixed:
+  * Fix 'aura' not being executable
+
+### Changed:
+  * 'aura new' has a new output style
+  * Include dotfiles in 'aura new' output
+
 v0.0.1.pre7 - Jul 29, 2011
 --------------------------
 
