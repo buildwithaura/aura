@@ -22,6 +22,17 @@ require "sequel"
 #     Aura.files['models/book.rb']   #=> "~/myapp/app/models/book.rb"
 #     Aura.files.glob('css/**/*')    #=> #<Array>
 #
+# #### Settings
+#
+#     Aura.set 'site.name', 'Othello'
+#     Aura.get('site.name')          #=> "Othello"
+#   
+#     # Attempts to set the default site.name, but fails because it was
+#     # already set previously.
+#     Aura.default 'site.name', 'Talamasca'
+#     puts Aura.get('site.name').inspect
+#     #=> "Othello"
+#
 class Aura
   PREFIX = File.dirname(__FILE__)
 

@@ -1,3 +1,12 @@
+# Model: Setting
+# A setting.
+#
+# ## Description
+# You don't need to use this model directly. Just use:
+#
+#  * {Aura.set}
+#  * {Aura.get}
+#
 class Setting < Sequel::Model
   plugin :serialization, :yaml, :value
 
@@ -6,31 +15,19 @@ class Setting < Sequel::Model
     Aura.default :'site.name', "My Site"
   end
 
+  # Class method: get (Setting)
   # Returns the value of a certain key.
   #
   # The get, set, default and delete methods are accessible from the
   # Aura class.
   #
-  # @example
-  #
-  #   Aura.set 'site.name', 'Othello'
-  #   puts Aura.get('site.name').inspect
-  #   #=> "Othello"
-  #
-  #   # Attempts to set the default site.name, but fails because it was
-  #   # already set previously.
-  #   Aura.default 'site.name', 'Talamasca'
-  #   puts Aura.get('site.name').inspect
-  #   #=> "Othello"
-  #
-  #   Aura.delete 'site.name'
-  #
   def self.get(key)
     find(:key => key.to_s).try(:value)
   end
 
+  # Class method: del (Setting)
   # Deletes a key.
-  # See get for an example.
+  #
   def self.del(key)
     s = find(:key => key.to_s)
     return  if s.nil?
@@ -40,8 +37,9 @@ class Setting < Sequel::Model
     value
   end
 
+  # Class method: set (Setting)
   # Sets the value of a key.
-  # See get for an example.
+  #
   def self.set(key, value)
     s = find(:key => key.to_s) || new
     s.key   = key
@@ -50,8 +48,9 @@ class Setting < Sequel::Model
     value
   end
 
+  # Class method: default (Setting)
   # Sets the default value of a key.
-  # See get for an example.
+  #
   def self.default(key, value)
     s = find(:key => key.to_s)
     return set(key, value)  if s.nil?

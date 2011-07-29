@@ -1,3 +1,6 @@
+# Model: User
+# A user.
+#
 class User < Sequel::Model
   plugin :aura_editable
 
