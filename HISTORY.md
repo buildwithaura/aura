@@ -1,3 +1,23 @@
+v0.0.1.pre9 - Jul 30, 2011
+--------------------------
+
+### Added:
+  * Show a Bundler warning in the default app.
+  * __Implement `Aura.admin.css`.__
+
+### Fixed:
+  * __Various 1.8.7 compatibility fixes.__
+
+### Changed:
+  * Relax the Rack requirement to 1.3.x.
+  * __Rename `Aura.admin_menu` to `Aura.admin.menu`.
+  * Rename manual files.
+  * Rename the recipes.md file to lowercase.
+  * Secure `/css` and `/js` against globs and dotdots.
+
+### Misc:
+  * Gemfile to use rubygems.
+
 v0.0.1.pre8 - Jul 29, 2011
 --------------------------
 
