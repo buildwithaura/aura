@@ -31,8 +31,6 @@ class PageHelpersTest < Test::Unit::TestCase
 
       link = a.link_to 'http://google.com', lambda { "Hello" }
       assert_equal '<a href="http://google.com">Hello</a>', link
-
-      # Todo: test haml
     end
   end
 end
