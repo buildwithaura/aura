@@ -1,6 +1,6 @@
-title: Aura manual
+title: Aura
 --
-Aura is a CMS. It aims to make people's lives easier.
+Aura lets you build CMS-powered sites in Ruby.
 
 #### Installation
 Assuming you have Ruby installed (at least 1.8.7), just install the gem.
