@@ -17,8 +17,8 @@
       - Aura.admin.menu.get('settings').items.each do |item|
         - klass = ('browse' if item.items.any?)
         %li{:class => klass}
-          != link_to (item.href || '#') do
-            != admin_icon (item.icon || 'generic')
+          != link_to(item.href || '#') do
+            != admin_icon(item.icon || 'generic')
             = item.name
 
 - content_for :tabs do
@@ -30,7 +30,7 @@
     - Aura.admin.menu.get('settings').items.each do |item|
       - klass = ('browse' if item.items.any?)
       %li{:class => klass}
-        != link_to (item.href || '#') do
+        != link_to(item.href || '#') do
           = item.name
 
 - content_for :body do
