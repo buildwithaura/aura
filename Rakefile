@@ -22,6 +22,6 @@ namespace :doc do
   desc "Updates the Aura homepage with the manual."
   task :deploy => :update do
     # http://github.com/rstacruz/git-update-ghpages
-    system "git update-ghpages aura-cms/aura-cms.github.com --branch master -i doc/"
+    system "git update-ghpages buildwithaura/buildwithaura.github.com --branch master -i doc/"
   end
 end

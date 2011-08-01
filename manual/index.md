@@ -62,4 +62,4 @@ Your app is a Rack app. Visit *http://localhost:4833* to see it. (Default user i
   * Easy-to-extend with a simple extension system.
   * Built on top of [Sinatra](http://sinatrarb.com), a tried and tested microframework.
 
-[Source code on GitHub](http://github.com/aura-cms/aura "Source code")
+[Source code on GitHub](http://github.com/buildwithaura/aura "Source code")

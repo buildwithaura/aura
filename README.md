@@ -33,7 +33,7 @@ database, see the `config/database.rb.example`.
 
 Clone the repo in your machine:
 
-    git clone http://github.com/aura-cms/aura.git
+    git clone http://github.com/buildwithaura/aura.git
     cd aura
 
 You can Rackup from the `default/` directory:
