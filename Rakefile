@@ -1,9 +1,7 @@
 # Subject to debate.
 Dir['{app,core/*,extensions/*}/tasks/**/*.rake'].each { |rb| load rb }
 
-task :default do
-  exec 'rake -s -T'
-end
+task :default => :test
 
 desc "Runs tests."
 task :test do
