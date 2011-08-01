@@ -1,3 +1,9 @@
+# Module: Fields (Terra)
+# A module that is the namespace for all types of fields.
+#
+# ## Description
+# See {Terra} for information on how to use the form builder.
+#
 module Terra
   module Fields
     def all
@@ -20,21 +26,33 @@ end
 
 module Terra
   module Fields
+    # Class: Text (Terra::Fields)
+    # Inherits: {Terra::Field}
+    # A text field.
     class Text < Field
     end
 
+    # Class: Password (Terra::Fields)
+    # Inherits: {Terra::Field}
+    # A password field.
     class Password < Field
       def input_html(val='')
         "<input id='#{h id}' type='password' name='#{h input_name}' value='#{h val}'>"
       end
     end
 
+    # Class: Textarea (Terra::Fields)
+    # Inherits: {Terra::Field}
+    # A text area field.
     class Textarea < Field
       def input_html(val='')
         "<textarea id='#{h id}' type='text' name='#{h input_name}'>#{h val}</textarea>"
       end
     end
 
+    # Class: Checkbox (Terra::Fields)
+    # Inherits: {Terra::Field}
+    # A checkbox field.
     class Checkbox < Field
       def to_html(val='')
         html_wrap [ input_html(val), label_html ].join("\n")
@@ -53,6 +71,9 @@ module Terra
       end
     end
 
+    # Class: Select (Terra::Fields)
+    # Inherits: {Terra::Field}
+    # A field for radio buttons or dropdowns.
     class Select < Field
       def input_html(val='')
         return input_html_radio(val)  if options[:type] == 'radio'
