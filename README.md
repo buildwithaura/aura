@@ -1,6 +1,5 @@
-# Aura
-
-Aura is a CMS.
+# Aura [![Build Status](http://travis-ci.org/buildwithaura/aura.png)](http://travis-ci.org/buildwithaura/aura)
+#### Aura is a CMS.
 
 ## Super easy setup
 
