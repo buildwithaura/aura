@@ -9,13 +9,11 @@ class Main
 
       @live_editable = true
 
-      { :data =>
-        { :live_editable       => true,
-          :live_editable_type  => object.class,
-          :live_editable_id    => object.id,
-          :live_editable_field => field,
-          :live_editable_src   => object.send(field)
-        }
+      { :'data-live_editable'       => true,
+        :'data-live_editable_type'  => object.class,
+        :'data-live_editable_id'    => object.id,
+        :'data-live_editable_field' => field,
+        :'data-live_editable_src'   => object.send(field)
       }
     end
   end
