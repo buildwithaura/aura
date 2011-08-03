@@ -51,7 +51,10 @@ class Main
     #
     def admin_watermark
       return  if current_user.nil?
-      partial 'watermark/watermark'
+      re = ''
+      re += partial 'liveedit/liveedit'  if @live_editable
+      re += partial 'watermark/watermark'
+      re
     end
   end
 
