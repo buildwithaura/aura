@@ -21,11 +21,17 @@ module Terra
       @fields << Field.create(type, id, title, options)
     end
 
-    # Method: to_s (Terra::Fieldset)
-    # Returns the name of the field.
-    def to_s
+    # Attribute: name (Terra::Fieldset)
+    # The name of the field.
+    #
+    # ## Description
+    #    This is also callable as `#to_s`.
+    #
+    def name
       @name || @id.to_s.capitalize
     end
+
+    alias to_s name
 
     def inspect
       "#<Fieldset #{@id.inspect} [fields: #{fields.inspect}]>"
@@ -53,7 +59,7 @@ module Terra
     # Method: fields_html (Terra::Fieldset)
     # Returns the HTML code for the fields in the fieldset.
     def fields_html(item=nil)
-      fields.map { |f| f.to_html(item.try(f.name.to_sym)) }.join("\n")
+      fields.map { |f| f.to_html(item.try(f.name.to_sym), item) }.join("\n")
     end
 
     # Method: legend_html (Terra::Fieldset)

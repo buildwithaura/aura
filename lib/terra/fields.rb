@@ -36,7 +36,7 @@ module Terra
     # Inherits: {Terra::Field}
     # A password field.
     class Password < Field
-      def input_html(val='')
+      def input_html(val='', item=nil)
         "<input id='#{h id}' type='password' name='#{h input_name}' value='#{h val}'>"
       end
     end
@@ -45,7 +45,7 @@ module Terra
     # Inherits: {Terra::Field}
     # A text area field.
     class Textarea < Field
-      def input_html(val='')
+      def input_html(val='', item=nil)
         "<textarea id='#{h id}' type='text' name='#{h input_name}'>#{h val}</textarea>"
       end
     end
@@ -54,11 +54,11 @@ module Terra
     # Inherits: {Terra::Field}
     # A checkbox field.
     class Checkbox < Field
-      def to_html(val='')
-        html_wrap [ input_html(val), label_html ].join("\n")
+      def to_html(val='', item=nil)
+        html_wrap [ input_html(val, item), label_html ].join("\n")
       end
 
-      def input_html(val='')
+      def input_html(val='', item=nil)
         truthy = val && !val.empty?
 
         selected = ''
@@ -71,24 +71,26 @@ module Terra
       end
     end
 
-    # Class: Select (Terra::Fields)
+    # Class: Options (Terra::Fields)
     # Inherits: {Terra::Field}
     # A field for radio buttons or dropdowns.
-    class Select < Field
-      def input_html(val='')
-        return input_html_radio(val)  if options[:type] == 'radio'
-        input_html_select(val)
+    class Options < Field
+      def input_html(val='', item=nil)
+        return input_html_radio(val, item)  if options[:type].to_s == 'radio'
+        input_html_select(val, item)
       end
 
-      def input_html_select(val='')
+      def input_html_select(val='', item=nil)
         opts = @options[:options] || []
+        opts = opts.call(item)  if opts.respond_to?(:call)
+
         select = [ "<select id='#{h id}' name='#{h input_name}'>" ]
         select+= opts.map { |opt|
           opt = opt.flatten  if opt.is_a? Hash
-          key, val = opt
+          key, _ = opt
 
           selected = ''
-          selected = ' selected="selected"'  if val.to_s == key.to_s
+          selected = " selected='selected'"  if val.to_s == key.to_s
 
           "<option value='#{h key}'#{selected}>#{h key}</option>"
         }
@@ -97,14 +99,14 @@ module Terra
         select.join("\n")
       end
 
-      def input_html_radio(val='')
+      def input_html_radio(val='', item=nil)
         opts = @options[:options] || []
         opts.map do |opt|
           opt = opt.flatten  if opt.is_a? Hash
-          key, val = opt
+          key, _ = opt
 
           selected = ''
-          selected = ' selected="selected"'  if val.to_s == key.to_s
+          selected = " selected='selected'"  if val.to_s == key.to_s
 
           [ "<label for='#{h id}'>",
             "<input type='radio' id='#{h id}' name='#{h input_name}' value='#{h key}'#{selected}>",

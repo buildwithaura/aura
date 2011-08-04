@@ -44,27 +44,27 @@ module Terra
     end
 
     # Method: input_html (Terra::Field)
-    # Usage:  input_html(value='')
+    # Usage:  input_html(value='', item=nil)
     # Returns the HTML code for the input value.
     #
     # ## Description
     # If a `value` is supplied, it will be used for the value of the input
     # element.
     #
-    def input_html(val='')
+    def input_html(val='', item=nil)
       "<input id='#{id}' type='text' name='#{input_name}' value='#{h val}' />"
     end
 
     # Method: to_html (Terra::Field)
-    # Usage:  to_html(value='')
+    # Usage:  to_html(value='', item=nil)
     # Returns the HTML code.
     #
     # ## Description
     # If a `value` is supplied, it will be used for the value of the input
     # element.
     #
-    def to_html(val='')
-      html_wrap [ label_html, input_html(val) ].join("\n")
+    def to_html(val='', item=nil)
+      html_wrap [ label_html, input_html(val, item=nil) ].join("\n")
     end
 
     # Method: html_wrap (Terra::Field)

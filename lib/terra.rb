@@ -11,7 +11,7 @@
 # 
 #       fieldset :options, "Options" {
 #         textarea :body, "Body", :class => "hello"
-#         select   :type, "Type",
+#         options  :type, "Type",
 #           :options => {
 #             :red => "Red",
 #             :blue => "Blue"
@@ -58,13 +58,13 @@
 # Where `text` is the type of field, `:id` is the name of the
 # field, `"Field name"` is what's to be displayed, and
 # `{ options_hash }` is an optional list of settings. The field
-# type can be any of `text`|`textarea`|`select`|`checkbox`.
+# type can be any of `text`|`textarea`|`options`|`checkbox`.
 # 
 #     form {
 #       text :id, "Field name", { options_hash }
 #
 #       textarea :body, "Body text"
-#       select :category, "Category"
+#       options :category, "Category"
 #     }
 # 
 # #### View example
@@ -134,6 +134,47 @@
 #     = form.fieldset(:default).field(:name).to_html
 #     = form.fieldset(:default).field(:name).to_html("Hello") # value
 # 
+# ## Fields
+#
+# #### Text
+# Text fields
+#
+#     form.configure {
+#       text :name
+#       text :name, "First name"
+#       text :name, "First name", :class => 'title'
+#     }
+#
+# #### Options
+# For dropdowns and radio buttons and such
+#
+#     form.configure {
+#       options :category, "Category"
+#
+#       # Choosing how to render it
+#       options :category, "Category", :type => 'radio'
+#       options :category, "Category", :type => 'dropdown'
+#
+#       # Giving an options hash
+#       options :category, "Category", :options =>
+#         { 'a' => 'Apple', 'b' => 'Banana' }
+#
+#       # Or a hash array
+#       options :category, "Category", :options =>
+#         [{ 'a' => 'Apple'},
+#          { 'b' => 'Banana' }
+#         ].to_hash_array
+#
+#       # Or lambda
+#       options :category, "Category", :options =>
+#         lambda { |record|
+#           Categories.all.map { |c| { c.id => c.name } }.to_hash_array
+#         }
+#
+#       # Not implemented yet
+#       options :category, "Category", :multi => true
+#     }
+#
 module Terra
   PREFIX = File.dirname(__FILE__)
   autoload :Field,    "#{PREFIX}/terra/field"

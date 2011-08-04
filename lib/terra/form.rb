@@ -11,7 +11,15 @@ module Terra
       fieldset(:default) { }
     end
 
-    alias configure instance_eval
+    # Method: configure (Terra::Form)
+    # Usage:  form.configure { ... }
+    #
+    # Adds fields to a form.
+    #
+    def configure(*a, &blk)
+      instance_eval *a, &blk
+      self
+    end
 
     # Method: fieldset (Terra::Form)
     # Usage:  fieldset(id, name=nil, options={}, &block)
