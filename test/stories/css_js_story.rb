@@ -13,7 +13,7 @@ class CssJsStory < Test::Unit::TestCase
 
   test "admin.css" do
     visit '/css/admin.css'
-    assert page.body.include?("section")
+    assert page.body.include?("background")
     assert page.body.include?("margin")
   end
 
