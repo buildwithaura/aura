@@ -6,7 +6,7 @@ class Main
   end
 end
 
-class VisitStory < Test::Unit::TestCase
+class VisitStory < Story
   test "Pages should not have errors" do
     Main.seed :sample
 
@@ -14,7 +14,9 @@ class VisitStory < Test::Unit::TestCase
     # We're just here to verify that these URLs don't throw errors or
     # do anything funny.
     s = Capybara::Session.new(:rack_test, Main)
+    s.reset!
 
+    s.visit '/logout'
     s.visit '/login'
     s.fill_in 'username', :with => Main.default_user
     s.fill_in 'password', :with => Main.default_password

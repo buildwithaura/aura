@@ -1,6 +1,6 @@
 require File.expand_path('../../stories_helper', __FILE__)
 
-class CssJsStory < Test::Unit::TestCase
+class CssJsStory < Story
   test "Raw" do
     visit '/css/test_raw.css'
     assert page.body.strip == "div { color: red }"
@@ -13,7 +13,7 @@ class CssJsStory < Test::Unit::TestCase
 
   test "admin.css" do
     visit '/css/admin.css'
-    assert page.body.include?("background")
+    assert page.body.include?("display")
     assert page.body.include?("margin")
   end
 

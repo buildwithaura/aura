@@ -1,6 +1,6 @@
 require File.expand_path('../../stories_helper', __FILE__)
 
-class AdminCssStory < Test::Unit::TestCase
+class AdminCssStory < Story
   test "x" do
     login!
 

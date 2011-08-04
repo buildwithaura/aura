@@ -12,8 +12,11 @@ if ENV['driver'] == 'chrome'
   end
 end
 
-class Test::Unit::TestCase
+class Story < Test::Unit::TestCase
   include Capybara
+
+  setup do
+  end
 
   def status
     p "Current path", current_path

@@ -7,7 +7,9 @@ desc "Runs tests."
 task :test do
   $:.unshift File.join(File.dirname(__FILE__), 'test')
 
-  Dir['test/{unit,stories}/*.rb'].each { |file| load file }
+  ( Dir['test/unit/*.rb'].sort +
+    Dir['test/stories/*.rb'].sort
+  ).each { |file| load file }
 end
 
 namespace :doc do
