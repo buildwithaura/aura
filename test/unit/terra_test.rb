@@ -4,6 +4,7 @@ require 'terra'
 class TerraTest < Test::Unit::TestCase
   setup do
     @form = Terra::Form.new
+    @form.root_name 'editor'
   end
 
   test "default fieldsets" do
@@ -60,6 +61,7 @@ class TerraTest < Test::Unit::TestCase
   test "many ways to define select options" do
     forms = [
       Terra::Form.new.configure {
+        root_name 'editor'
         options :category, "Categories", :options =>
           [ { :a => "Apple" },
             { :b => "Banana" }
@@ -67,11 +69,13 @@ class TerraTest < Test::Unit::TestCase
       },
 
       Terra::Form.new.configure {
+        root_name 'editor'
         options :category, "Categories", :options =>
           { :a => "Apple", :b => "Banana" }
       },
 
       Terra::Form.new.configure {
+        root_name 'editor'
         options :category, "Categories", :options =>
           lambda { |x|
             [ { :a => "Apple" },
@@ -87,5 +91,35 @@ class TerraTest < Test::Unit::TestCase
 
       assert form.fieldset(:default).field(:category)
     end
+  end
+
+  test "traversion" do
+    @form.configure {
+      text :name
+    }
+
+    assert @form.field(:name).form === @form
+    assert @form.field(:name).fieldset === @form.fieldset(:default)
+    assert @form.fieldset(:default).form === @form
+  end
+
+  test "root name" do
+    @form.root_name 'editor'
+    assert @form.name_for('email') == "editor[email]"
+  end
+
+  test "root name 2" do
+    @form.root_name ['editor']
+    assert @form.name_for('email') == "editor[email]"
+  end
+
+  test "root name 3" do
+    @form.root_name ['editor', 'user']
+    assert @form.name_for('email') == "editor[user][email]"
+  end
+
+  test "root name 3" do
+    @form.root_name []
+    assert @form.name_for('email') == "email"
   end
 end

@@ -18,7 +18,7 @@ module Terra
     #
     def field(type, id=nil, title=nil, options={})
       return @fields.detect { |f| f.name == type }  if id.nil?
-      @fields << Field.create(type, id, title, options)
+      @fields << Field.create(self, type, id, title, options)
     end
 
     # Attribute: name (Terra::Fieldset)
@@ -75,6 +75,10 @@ module Terra
     # Attribute: id (Terra::Fieldset)
     # The symbol name of the field.
     attr_reader :id
+
+    # Attribute: form (Terra::Fieldset)
+    # The parent Form.
+    attr_reader :form
 
     # Shortcuts for text, textarea, password..
     def method_missing(meth, *args, &blk)

@@ -30,6 +30,7 @@ module Sequel
           return @forms[type]  unless block_given?
 
           @forms[type] = ::Terra::Form.new
+          @forms[type].root_name 'editor'
           @forms[type].configure &block
         end
       end

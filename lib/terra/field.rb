@@ -10,15 +10,26 @@ module Terra
     attr_accessor :title
     attr_accessor :options
 
-    def self.create(type, name, title, options)
+    def self.create(fieldset, type, name, title, options)
       klass = Fields::get(type) || Fields::Text
-      klass.new(name, title, options)
+      klass.new(fieldset, name, title, options)
     end
 
-    def initialize(name, title, options={})
-      @name = name
-      @title = title
-      @options = options
+    def initialize(fieldset, name, title, options={})
+      @fieldset = fieldset
+      @name     = name
+      @title    = title
+      @options  = options
+    end
+
+    # Attribute: fieldset (Terra::Field)
+    # Returns the fieldset parent.
+    attr_reader :fieldset
+
+    # Attribute: form (Terra::Field)
+    # Returns the parent Form.
+    def form
+      fieldset.form
     end
 
     def inspect
@@ -40,7 +51,7 @@ module Terra
     # Method: input_name (Terra::Field)
     # Returns the HTML name attribute for the field's input element.
     def input_name
-      "editor[#{name}]"
+      form.name_for name
     end
 
     # Method: input_html (Terra::Field)
@@ -80,7 +91,7 @@ module Terra
 
   protected
     def h(str)
-      Rack::Utils.escape_html str
+      Rack::Utils.escape_html str.to_s
     end
   end
 end

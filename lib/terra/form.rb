@@ -53,6 +53,51 @@ module Terra
       field meth, *args
     end
 
+    # Method: name_root (Terra::Form)
+    # Usage:  name_root str
+    #
+    # Changes the root name to the given string.
+    #
+    # ## Description
+    # The root name is the prefix for the `name` attributes.
+    #
+    #  * When invoked with a string, it changes the root name.
+    #    Example: (`root_name 'editor'` => `<input name='editor[name]'>`)
+    #
+    #  * When invoked with an array, it changes the root names.
+    #    Example: (`root_name %w(form user)` => `<input name='form[user][name]'>`)
+    #
+    #  * When invoked without arguments, it returns the root name.
+    #
+    def root_name(str=nil)
+      @root_name ||= Array.new
+
+      if str.is_a?(Array)
+        @root_name = str
+      elsif !str.nil?
+        @root_name = [str]
+      end
+
+      @root_name
+    end
+
+    # Method: name_for (Terra::Form)
+    # Usage:  name_for(string)
+    #
+    # Returns the name for a given field name.
+    #
+    # ##  Example
+    #     root_name 'editor'
+    #     name_for('email')    #=> 'editor[email]'
+    #
+    def name_for(str)
+      names = (root_name + [*str])
+      one = names[0]
+      two = names[1..-1].map { |s| "[#{s}]" }.join('')
+
+      "#{one}#{two}"
+    end
+
     # Method: fieldsets (Terra::Form)
     # Usage:  fieldsets
     #
