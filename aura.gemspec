@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Aura is a CMS."
   s.authors = ["Rico Sta. Cruz"]
   s.email = ["rico@sinefunc.com"]
-  s.homepage = "http://aura-cms.github.com"
+  s.homepage = "http://buildwithaura.github.com/"
   s.files = `git ls-files`.strip.split("\n")
   s.executables = Dir["bin/*"].map { |f| File.basename(f) }
 
