@@ -29,7 +29,8 @@
       top  = $('section.crumbs').outerHeight();
     }
 
-    $area.animate({ scrollTop: top });
+    if ($area.scrollTop() < top)
+      $area.animate({ scrollTop: top });
   });
 
   $.fn.auraWysiwyg = function () {
