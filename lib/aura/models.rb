@@ -56,14 +56,10 @@ class Aura
     end
 
     # Class method: reload! (Aura::Models)
-    # Reloads models
+    # Ensures that models will get new columns the next time it's loaded.
     #
     def reload!
-      # Unload all models
-      all.each { |m| Object.send :remove_const, m.name.to_sym }
-      @@all = Array.new
-
-      Aura.files.glob('models/**/*.rb').each { |f| load f }
+      Aura.models.each { |m| m.send :set_columns, nil }
     end
 
     # Puts models in the global namespace.
