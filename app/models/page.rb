@@ -41,10 +41,18 @@ class Page < Sequel::Model
     !! self.shown_in_menu
   end
 
-  def subtypes
+  # Method: child_subtypes (Page)
+  # Returns an array of Subtypes allowed for its children.
+  def child_subtypes
     types = self.class.subtypes
     types.select! { |t| self.subtype.allowed_subtypes.include? t.id.to_sym }  if self.try(:subtype).try(:allowed_subtypes).is_a?(Array)
     types
+  end
+
+  # Method: subtypes (Page)
+  # Returns an array of Subtypes allowed for this page.
+  def subtypes
+    parent? ? parent.child_subtypes : self.class.subtypes
   end
 
   # Method: parentable? (Page)
