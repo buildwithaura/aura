@@ -66,7 +66,7 @@ class Main < Sinatra::Base
   set :login_success_message, nil
 
   set :multi_views,     [root('app/views')]
-  set :app_files,       Dir[root('init.rb'), root('**/*.rb') + approot('**/*.rb')]
+  set :app_files,       [ENV['APP_FILE']] + Dir[root('**/*.rb')] + Dir[approot('**/*.rb')]
   set :extensions_path, [root('extensions'), approot('extensions')]
 
   # Heroku - override the DB config with this env var.

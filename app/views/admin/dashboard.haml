@@ -15,7 +15,7 @@
     %h3 System
     %ul
       - Aura.admin.menu.items.each do |item|
-        %li.browse
+        %li{class: ('browse'  if item.items.any?)}
           != link_to(item.href || '#') do
             != admin_icon(item.icon || 'generic')
             = item.name

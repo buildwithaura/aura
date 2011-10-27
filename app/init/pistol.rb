@@ -5,7 +5,7 @@ class Main
     FileUtils.touch Aura.root('tmp/restart.txt')
 
     use(Pistol, app_files + [Aura.root('tmp/restart.txt')]) {
-      reset! and load($0)
+      reset! and load(ENV['APP_FILE'])
     }
   end
 end
