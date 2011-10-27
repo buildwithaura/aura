@@ -41,6 +41,11 @@ class Page < Sequel::Model
     !! self.shown_in_menu
   end
 
+  def parentable?
+    return false  if self.subtype && self.subtype.parentable? == false
+    true
+  end
+
   def validate
     super
     validates_presence :title

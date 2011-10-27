@@ -6,8 +6,21 @@ require 'ostruct'
 # ## Description
 #    This is an OpenStruct. See {AuraSubtyped} for details.
 #
+# ## Allowed options
+#
+#  * `name`
+#  * `template`
+#  * `parentable`
+#
 class Aura
 class Subtype < OpenStruct
+  def parentable
+    r = @table[:parentable]
+    r.nil? ? true : r
+  end
+
+  alias parentable? parentable
+
   def to_s
     name
   end
