@@ -1,4 +1,4 @@
-class Aura::App
+class Main
   get '/special' do
     show :hello
   end
