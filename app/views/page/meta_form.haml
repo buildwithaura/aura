@@ -13,7 +13,7 @@
       %dt Type:
       %dd
         %select#subtype_select.neutral{:name => 'editor[subtype]'}
-          != select_options(item.class.subtypes, item.subtype, :_id)
+          != select_options(item.subtypes, item.subtype, :_id)
     %dl
       %dt
         %dt Show:

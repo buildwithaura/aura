@@ -41,6 +41,12 @@ class Page < Sequel::Model
     !! self.shown_in_menu
   end
 
+  def subtypes
+    types = self.class.subtypes
+    types.select! { |t| self.subtype.allowed_subtypes.include? t.id.to_sym }  if self.try(:subtype).try(:allowed_subtypes).is_a?(Array)
+    types
+  end
+
   # Method: parentable? (Page)
   # Checks if a given page can have children from the admin interface.
   def parentable?

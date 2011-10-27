@@ -12,6 +12,7 @@ require 'ostruct'
 #  * `template`
 #  * `parentable`
 #  * `deletable`
+#  * `allowed_subtypes` - Array of symbols of subtypes permitted for its children
 #
 class Aura
 class Subtype < OpenStruct
