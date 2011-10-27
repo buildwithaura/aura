@@ -41,8 +41,17 @@ class Page < Sequel::Model
     !! self.shown_in_menu
   end
 
+  # Method: parentable? (Page)
+  # Checks if a given page can have children from the admin interface.
   def parentable?
     return false  if self.subtype && self.subtype.parentable? == false
+    true
+  end
+
+  # Method: deletable? (Page)
+  # Checks if a given page can be deleted from the admin interface.
+  def deletable?
+    return false  if self.subtype && self.subtype.deletable? == false
     true
   end
 

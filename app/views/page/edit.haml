@@ -16,9 +16,10 @@
 
         %p.submit
           %span.right
-            %a{:href => item.path(:delete)} Delete this
-            - if item.try(:renderable?)
+            - if item.try(:deletable?)
+              %a{:href => item.path(:delete)} Delete this
               != "&nbsp; | &nbsp;"
+            - if item.try(:renderable?)
               %a{:href => item.path, :target => 'preview'} View this
 
           %button{:type => 'submit'}

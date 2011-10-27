@@ -11,15 +11,21 @@ require 'ostruct'
 #  * `name`
 #  * `template`
 #  * `parentable`
+#  * `deletable`
 #
 class Aura
 class Subtype < OpenStruct
   def parentable
-    r = @table[:parentable]
-    r.nil? ? true : r
+    r = @table[:parentable]; r.nil? ? true : r
   end
 
   alias parentable? parentable
+
+  def deletable
+    r = @table[:deletable]; r.nil? ? true : r
+  end
+
+  alias deletable? deletable
 
   def to_s
     name
