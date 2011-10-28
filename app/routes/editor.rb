@@ -96,7 +96,7 @@ class Main
 
     show_admin @model, 'new',
       :model  => @model,
-      :item   => @model.new(:parent => @item),
+      :item   => @model.new(:parent => @parent),
       :parent => @parent,
       :action => @parent.path(:new)
   end

@@ -14,9 +14,9 @@
       %dd
         %select#subtype_select.neutral{:name => 'editor[subtype]'}
           != select_options(item.subtypes, item.subtype, :_id)
-    %dl
-      %dt
-        %dt Show:
-        %dd
-          != labeled_checkbox("Show in menus", 'editor[shown_in_menu]', item.shown_in_menu)
+    -# %dl
+    -#   %dt
+    -#     %dt Show:
+    -#     %dd
+    -#       != labeled_checkbox("Show in menus", 'editor[shown_in_menu]', item.shown_in_menu)
 
