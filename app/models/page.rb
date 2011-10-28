@@ -40,7 +40,7 @@ class Page < Sequel::Model
   def shown_in_menu?
     !! self.shown_in_menu
   end
-
+  
   # Method: child_subtypes (Page)
   # Returns an array of Subtypes allowed for its children.
   def child_subtypes
@@ -109,4 +109,8 @@ class Page < Sequel::Model
 
   def self.content?; true; end
   def self.show_on_sidebar?; true; end
+
+  # Class method: root_creatable? (Page)
+  # Returns 'true' if the "Add new page" should be shown.
+  def self.root_creatable?; true; end
 end
